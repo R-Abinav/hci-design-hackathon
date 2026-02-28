@@ -226,8 +226,21 @@ Practo provides \textbf{no onboarding experience} for first-time users. New user
 \end{hcibox}
 
 \begin{solutionbox}
-\textit{Solution to be implemented}: A \textbf{3-step guided onboarding tour} (``Find Doctors'' $\rightarrow$ ``Book Instantly'' $\rightarrow$ ``Get Care'') with progress dots and a skip button (respecting User Control).
+We implemented a \textbf{3-step guided onboarding tour} that appears as a modal overlay on first login:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Step 1}: ``Find Trusted Doctors'' --- explains the search feature
+    \item \textbf{Step 2}: ``Book Instantly'' --- explains the 3-step booking
+    \item \textbf{Step 3}: ``Get Care, Your Way'' --- explains video consult \& prescriptions
+\end{itemize}
+Features: animated progress dots, gradient illustrations, and a \textbf{``Skip'' button} always visible (respecting User Control / Shneiderman \#7).
 \end{solutionbox}
+
+% TODO: Uncomment when screenshot is taken
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{our_onboarding.png}
+%     \caption{Better Practo --- 3-step onboarding tour with skip option}
+% \end{figure}
 
 \newpage
 
@@ -541,7 +554,7 @@ L7--8 & Tesler's Law & System absorbs complexity \\
 V1 & Footer 50+ links & Miller's 7$\pm$2, Hick's, Tesler's & Collapsible, $\leq$7/group \\
 V2 & Dual search bar & Tesler's, Zipf's, Asimov's 2nd & Unified + auto-location \\
 V3 & Cluttered doctor cards & Inverted Pyramid, Nielsen \#8 & Progressive disclosure \\
-V4 & No onboarding & Learnability, Power Law & \textit{3-step tour (TBD)} \\
+V4 & No onboarding & Learnability, Power Law & 3-step guided tour \\
 V5 & Weak booking feedback & Closure, Shneiderman \#3/\#4 & Progress bar + animation \\
 V6 & No contextual help & Nielsen \#10, Shneiderman \#8 & In-app searchable FAQ \\
 V7 & Small secondary text & Accessibility, Observability & Min 14px, contrast \\
