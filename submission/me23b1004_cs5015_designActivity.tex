@@ -52,7 +52,7 @@
 
 \newtcolorbox{solutionbox}{
     colback=solution!5, colframe=solution!60!black,
-    title={\textbf{Our Solution in Better Practo}},
+    title={\textbf{My Solution in Better Practo}},
     fonttitle=\bfseries\color{white}, coltitle=white,
     colbacktitle=solution!80!black, sharp corners=south
 }
@@ -105,7 +105,7 @@
 % ================================================================
 \section{Violations Identified \& Solutions}
 
-We conducted a literature survey of \textbf{Practo.com} and identified \textbf{14 usability violations}. For each violation, we built a targeted solution in our \textbf{React + Tailwind CSS} prototype (\textit{Better Practo}), applying HCI principles from Lectures 1--8.
+I conducted a literature survey of \textbf{Practo.com} and identified \textbf{14 usability violations}. For each violation, I built a targeted solution in my \textbf{React + Tailwind CSS} prototype (\textit{Better Practo}), applying HCI principles from Lectures 1--8.
 
 \vspace{0.5cm}
 
@@ -129,7 +129,7 @@ Practo's footer contains \textbf{50+ links} spread across 6 columns. The ``For P
 \end{hcibox}
 
 \begin{solutionbox}
-Our footer uses \textbf{4 collapsible sections} with $\leq$7 items each. On mobile, sections are \textbf{accordion-style} (tap to expand). Total visible links reduced from 50+ to a manageable set.
+My footer uses \textbf{4 collapsible sections} with $\leq$7 items each. On mobile, sections are \textbf{accordion-style} (tap to expand). Total visible links reduced from 50+ to a manageable set.
 \end{solutionbox}
 
 \begin{figure}[H]
@@ -160,7 +160,7 @@ Practo's homepage has \textbf{two separate search inputs} side-by-side: one for 
 \end{hcibox}
 
 \begin{solutionbox}
-We provide a \textbf{single unified search bar} for doctors, specialties, or symptoms. Location is \textbf{auto-detected} and displayed as a changeable chip (``Chennai''). One input, zero friction.
+I provide a \textbf{single unified search bar} for doctors, specialties, or symptoms. Location is \textbf{auto-detected} and displayed as a changeable chip (``Chennai''). One input, zero friction.
 \end{solutionbox}
 
 \begin{figure}[H]
@@ -191,7 +191,7 @@ Practo's doctor cards show \textbf{everything at once}: name, specialty, experie
 \end{hcibox}
 
 \begin{solutionbox}
-Our cards show only \textbf{essentials} upfront: name, specialty, rating, availability. Additional details (education, hospital, about) are behind a \textbf{``More details''} expand button --- tighter progressive disclosure.
+My cards show only \textbf{essentials} upfront: name, specialty, rating, availability. Additional details (education, hospital, about) are behind a \textbf{``More details''} expand button --- tighter progressive disclosure.
 \end{solutionbox}
 
 \begin{figure}[H]
@@ -224,7 +224,7 @@ Practo provides \textbf{no onboarding experience} for first-time users. New user
 \end{hcibox}
 
 \begin{solutionbox}
-We implemented a \textbf{3-step guided onboarding tour} that appears as a modal overlay on first login:
+I implemented a \textbf{3-step guided onboarding tour} that appears as a modal overlay on first login:
 \begin{itemize}[leftmargin=*]
     \item \textbf{Step 1}: ``Find Trusted Doctors'' --- explains the search feature
     \item \textbf{Step 2}: ``Book Instantly'' --- explains the 3-step booking
@@ -269,7 +269,7 @@ Practo's booking flow has \textbf{no progress indicator} --- users don't know ho
 \end{hcibox}
 
 \begin{solutionbox}
-Our booking has a \textbf{3-step progress bar}: \textit{Select Slot $\rightarrow$ Confirm $\rightarrow$ Booked!}
+My booking has a \textbf{3-step progress bar}: \textit{Select Slot $\rightarrow$ Confirm $\rightarrow$ Booked!}
 \begin{itemize}[leftmargin=*]
     \item \textbf{Progress indicator}: Step numbers (1/3, 2/3, 3/3) with filling bar
     \item \textbf{Reversal}: ``$\leftarrow$ Change Slot'' on Step 2 goes back to Step 1
@@ -281,13 +281,22 @@ Our booking has a \textbf{3-step progress bar}: \textit{Select Slot $\rightarrow
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{our_booking_step1.png}
-    \caption{Better Practo --- Step 1 with progress bar}
+    \includegraphics[width=\textwidth]{our_booking_main.png}
+    \caption{Better Practo --- 3-step progress bar: Select Slot $\rightarrow$ Confirm $\rightarrow$ Booked!}
 \end{figure}
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{our_booking_step3.png}
-    \caption{Better Practo --- Step 3 success with confirmation (Closure)}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{our_booking_step1.png}
+        \caption{Step 1 --- Slot selection with progress bar}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{our_booking_step3.png}
+        \caption{Step 3 --- Success confirmation (Closure)}
+    \end{subfigure}
+    \caption{Better Practo --- Booking flow start and completion}
 \end{figure}
 
 \newpage
@@ -312,7 +321,7 @@ Practo's help is on a \textbf{separate subdomain} (\texttt{help.practo.com}), br
 \end{hcibox}
 
 \begin{solutionbox}
-Our Help is \textbf{built into the app} (same domain, navbar link). FAQs are \textbf{categorized by task} (Booking, Consultations, Payments, Privacy) with a \textbf{search bar}. Accordion layout with concise headings.
+My Help is \textbf{built into the app} (same domain, navbar link). FAQs are \textbf{categorized by task} (Booking, Consultations, Payments, Privacy) with a \textbf{search bar}. Accordion layout with concise headings.
 \end{solutionbox}
 
 \begin{figure}[H]
@@ -337,9 +346,9 @@ Practo uses text below 14px in footer links, secondary labels, and card metadata
 \end{hcibox}
 
 \begin{solutionbox}
-Our app enforces \textbf{minimum 14px} font size globally. Body text is 16px. We use the \textbf{Inter} font family for readability. Proper contrast ratios maintained throughout.
+My app enforces \textbf{minimum 14px} font size globally. Body text is 16px. I use the \textbf{Inter} font family for readability. Proper contrast ratios maintained throughout.
 
-\textit{This is a global design fix applied across all pages --- see any page in our prototype for verification.}
+\textit{This is a global design fix applied across all pages --- see any page in my prototype for verification.}
 \end{solutionbox}
 
 \newpage
@@ -372,7 +381,7 @@ Practo shows an active nav state (blue underline) on \textit{some} pages (e.g., 
 \end{hcibox}
 
 \begin{solutionbox}
-Our navbar \textbf{consistently highlights the active page} on every route with a blue background + bottom border. Works on Home, Find Doctors, Help --- \textbf{no exceptions}.
+My navbar \textbf{consistently highlights the active page} on every route with a blue background + bottom border. Works on Home, Find Doctors, Help --- \textbf{no exceptions}.
 \end{solutionbox}
 
 \begin{figure}[H]
@@ -403,7 +412,7 @@ Practo's login masks the password completely with no option to reveal it. Users 
 \end{hcibox}
 
 \begin{solutionbox}
-Our login has a \textbf{show/hide password toggle} (eye icon). Default: masked. Click eye to reveal. Balances security with usability.
+My login has a \textbf{show/hide password toggle} (eye icon). Default: masked. Click eye to reveal. Balances security with usability.
 \end{solutionbox}
 
 \begin{figure}[H]
@@ -430,7 +439,7 @@ Research shows \textbf{69\% of viewing time} is on the left half. The \textbf{F-
 \begin{solutionbox}
 All pages follow the \textbf{F-Pattern}: primary content left-aligned. Doctor profile: main info takes 2/3 width (left), booking CTA on right 1/3. Search bar and hero cards are centered/left-loaded. Key info always above the fold.
 
-\textit{This is a global layout principle applied across all pages --- see any page in our prototype for verification.}
+\textit{This is a global layout principle applied across all pages --- see any page in my prototype for verification.}
 \end{solutionbox}
 
 \newpage
@@ -449,7 +458,7 @@ Traditional form patterns include ``Reset'' or ``Clear All'' buttons that can ac
 \end{hcibox}
 
 \begin{solutionbox}
-Our forms have \textbf{no reset button}. Instead: individual \textbf{clear buttons ($\times$)} per field, ``$\leftarrow$ Change Slot'' for granular step reversal, and form data preserved between steps.
+My forms have \textbf{no reset button}. Instead: individual \textbf{clear buttons ($\times$)} per field, ``$\leftarrow$ Change Slot'' for granular step reversal, and form data preserved between steps.
 
 \textit{See the booking flow (Figures for V5+V14) for verification --- no reset button anywhere in the form.}
 \end{solutionbox}
@@ -470,7 +479,7 @@ Practo's search sorting criteria is opaque and inconsistent. Alphabetical orderi
 \end{hcibox}
 
 \begin{solutionbox}
-We offer \textbf{explicit sort pills}: Relevance (default), Rating, Experience, Fee. Active sort is visually highlighted. Default is \textbf{Relevance} (rating $\times$ reviews). No alphabetical option.
+I offer \textbf{explicit sort pills}: Relevance (default), Rating, Experience, Fee. Active sort is visually highlighted. Default is \textbf{Relevance} (rating $\times$ reviews). No alphabetical option.
 
 \textit{See the Find Doctors page (Figure for V8 navbar) --- sort pills visible at top of results.}
 \end{solutionbox}
@@ -497,7 +506,7 @@ Practo's Lab Tests page forces a \textbf{city selection modal} before showing an
 \end{hcibox}
 
 \begin{solutionbox}
-Our app \textbf{auto-detects the city} (shown as a chip in the search bar) and lets users change with a single tap. No blocking modals. Content loads immediately.
+My app \textbf{auto-detects the city} (shown as a chip in the search bar) and lets users change with a single tap. No blocking modals. Content loads immediately.
 \end{solutionbox}
 
 \begin{figure}[H]
@@ -577,7 +586,7 @@ L7--8 & Tesler's Law & System absorbs complexity \\
 \renewcommand{\arraystretch}{1.3}
 \begin{tabularx}{\textwidth}{|c|X|X|X|}
 \hline
-\textbf{V\#} & \textbf{Practo Violation} & \textbf{HCI Principles} & \textbf{Our Fix} \\
+\textbf{V\#} & \textbf{Practo Violation} & \textbf{HCI Principles} & \textbf{My Fix} \\
 \hline
 V1 & Footer 50+ links & Miller's 7$\pm$2, Hick's, Tesler's & Collapsible, $\leq$7/group \\
 V2 & Dual search bar & Tesler's, Zipf's, Asimov's 2nd & Unified + auto-location \\
