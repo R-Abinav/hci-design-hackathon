@@ -1,0 +1,264 @@
+﻿Based on the two PDFs, here are the relevant HCI concepts you should cover in your assignment:
+From Lecture 1:
+* HCI definition: Study of Usability and Its Practice
+* Key aspects: Functionality and Usability, and the balance between them (Effectiveness)
+* Three components: User, Computer, Interface
+* Goals of HCI: Usable, Safe and Functional Systems — "Put people first"
+* Usability's 5 E's: Easy to Learn, Easy to Remember, Effective, Efficient, Enjoyable
+* Affordance (Don Norman) — design should indicate possible operations
+* Visibility — mapping between control and its effect
+* Blame the Design, Not the User (Golden Theory)
+* Factors affecting Usability: Format of Input, Feedback, Visibility, Affordance
+* Disciplines contributing to HCI (Cognitive Psychology, Ergonomics, AI, etc.)
+* Issues/Factors in HCI: Organisation, Environmental, User, Task, Constraints, System Functionality, Productivity
+From Lecture 2:
+* Mental Models — users' beliefs about the system built over time
+* Mental Model Inertia — resistance to change
+* Mismatched mental models (Windows 8 failure example)
+* Nielsen's observation: what users believe about UI strongly impacts how they use it
+* Design Challenge: bridging the gap between designers' and users' mental models
+* Jakob's Law: users bring expectations from other websites
+* Skeuomorphism — mirroring real-world counterparts to reduce cognitive load
+* QWERTY/DVORAK — example of mental model inertia and resistance to change
+* Design is a Journey of Discovery
+Based on Lecture 3 and Lecture 4, here are the relevant HCI concepts for your assignment:
+________________
+
+
+LECTURE 3 – Golden Rules of Interface Design
+Shneiderman's 8 Golden Rules:
+1. Strive for Consistency — consistent actions, sequences, layouts, commands. Users become familiar with the digital landscape and achieve goals more easily.
+
+2. Enable Frequent Users to Use Shortcuts — special key sequences, macros for regular functions. Advanced users navigate more quickly and effortlessly.
+
+3. Offer Informative Feedback — for every user action, appropriate to its magnitude. User should always know where they are and what is happening.
+
+4. Design Dialogs to Yield Closure — user knows when a task is completed. Don't keep users guessing. Tell them what their action has led to. (ATM Insert and DIP Example)
+
+5. Permit Easy Reversal of Actions — relieves anxiety and promotes exploration. (e.g., CONTROL Z)
+
+6. Offer Error Prevention or Error Handling — prevent errors from occurring; clear feedback to recover. Provide simple, intuitive step-by-step instructions. Flag text fields where input was missed.
+
+7. Support Internal Locus of Control — user has full control of the system.
+
+8. Reduce Short Term Memory Load — keep displays simple, consolidate multiple page displays, give time for learning actions. Only five items in short-term memory at one time. (7+/-2 Digit Span Rule). Choose recognition over recall — recognizing is easier than recalling.
+
+________________
+
+
+Nielsen's 10 Rules for Interface Design:
+   1. Visibility of System Status — always keep users informed through appropriate feedback within reasonable time.
+
+   2. Match Between System and the Real World — speak the user's language. Follow real-world conventions; information in natural and logical order.
+
+   3. User Control and Freedom — clearly marked "emergency exit" to leave unwanted states. Support undo and redo.
+
+   4. Consistency and Standards — no confusion about whether different words, situations, or actions mean the same thing. Follow platform conventions.
+
+   5. Error Prevention — careful design which prevents problems from occurring. Present confirmation option before committing to action.
+
+   6. Recognition Rather Than Recall — minimize memory load by making objects, actions, and options visible. Instructions should be visible or easily retrievable.
+
+   7. Flexibility and Efficiency of Use — accelerators for expert users; system caters to both inexperienced and experienced users. Allow users to tailor frequent actions.
+
+   8. Aesthetic and Minimalist Design — dialogues should not contain irrelevant information. Every extra unit of information competes and diminishes relative visibility.
+
+   9. Help Users Recognize, Diagnose, and Recover from Errors — error messages in plain language, precisely indicating the problem and constructively suggesting a solution.
+
+   10. Help and Documentation — easy to search, focused on user's task, list concrete steps, not too large.
+
+________________
+
+
+Norman's Rules for Interface Design:
+      * Visibility — the more visible functions are, the more likely users will know what to do next. Functions "out of sight" are difficult to find and use.
+      * Feedback — allows the person to continue with the activity. Types: tactile, verbal, and combinations.
+      * Constraints — restricting the kind of user interaction at a given moment.
+      * Mapping — relationship between controls and their effects. (e.g., up/down arrows for cursor movement)
+      * Consistency — interfaces have similar operations and use similar elements for similar tasks.
+      * Affordance — to afford means "to give a clue." When affordances of a physical object are perceptually obvious, it is easy to know how to interact with it.
+________________
+
+
+LECTURE 4 – Principles Supporting Usability
+Usability as a Quality Attribute (Nielsen):
+      * Learnability — how easy is it for users to accomplish basic tasks the first time?
+      * Efficiency — once learned, how quickly can users perform tasks?
+      * Memorability — when users return after a period away, how easily can they reestablish proficiency?
+      * Errors — how many errors, how severe, and how easily can users recover?
+      * Satisfaction — how pleasant is it to use the design?
+Utility vs Usability vs Used:
+      * Utility = whether it provides the features you need
+      * Usability = how easy and pleasant those features are to use
+      * Useful = usability + utility
+      * 3 contexts: useful, usable, and used
+      * A product may be both useful and usable and still fail to be USED (e.g., Segway, Sir Clive's car)
+________________
+
+
+Three Principles Supporting Usability:
+1. Learnability — ease with which new users can begin effective interaction and achieve maximal performance. Sub-principles:
+      * Predictability — user's knowledge of interaction history sufficient to determine result of future interactions
+      * Synthesizability — ability of user to assess effects of past operations on current state ("Honesty" — immediate or eventual)
+      * Familiarity — correlation between user's existing knowledge and knowledge required for effective interaction. ("Guessability of the system") — Affordance enhances Familiarity
+      * Generalizability — form of consistency; specific to general cases transition support; principle of mathematical induction/inductive reasoning
+      * Consistency — likeness in behavior arising from similar situations/task objectives (e.g., QWERTY/DVORAK keyboard layouts; color-coded warning panels in aircraft)
+2. Flexibility — multiplicity of ways end user and system exchange information. Sub-principles:
+      * Dialog Initiation — system or user prompts
+      * Multi-threading — thread of a dialog as subset; interaction to support more than one task at a time (Concurrent and Interleaved)
+      * Task Migratability — transfer of control for execution of tasks between system and user
+      * Substitutivity — alternate forms for action sequences (e.g., margin setting in MS Word multiple ways; temperature graph vs digital thermometer)
+      * Customizability — modifiability of user interface. Two types: Adaptability (user's ability to adjust) and Adaptivity (automatic customization by system based on user expertise/HCI patterns)
+3. Robustness — level of support required to use in determining achievement and assessment of goals. Sub-principles:
+      * Observability — evaluate internal state of the system by means of perceivable representation at interface. Includes: Browsability, Defaults, Reachability, Persistence, Operation Visibility
+      * Recoverability — ability to reach a desired goal after recognition of some error in a previous interaction. (Backward = Undo; Forward = Acceptance of current state and negotiation to desired state). Principle of "Commensurate Effort"
+      * Responsiveness — rate of communication between system and user. Response time, short durations, instantaneous response times desirable. Stability of response time is also vital
+      * Task Conformance — task completeness addresses coverage; task adequacy addresses user's understanding of the task
+Standards and Guidelines:
+      * Principles → Abstract design rules with "high generality and low authority"
+      * Standards → Specific design rules "high in authority and low in application"
+      * Guidelines → Low in authority and high in application
+      * Standards for interactive system design are usually set by national/international bodies
+Norman's Model — Action Cycle:
+      * Establish a Goal → Execute actions → Evaluate actions
+      * Human factors: Input/Output channels — Visual, Auditory, Haptic, Movement
+      * Memory types: Short-term (structured/working), Long-term, Sensory
+      * Sensory organs/capacity: sight, hear, touch, smell, taste — key in HCI
+      * 7±2 digits/chunks remembered — leads to Closure (ATM example)
+      * Fitts' Law — target hit time = function of target size and distance to be moved
+Based on Lecture 5 and Lecture 6, here are the relevant HCI concepts for your assignment:
+________________
+
+
+LECTURE 5 – Usability Case Studies (Nielsen Norman Group)
+Case Study 1: Stop Password Masking
+      * Usability suffers when users type passwords and the only feedback they get is a row of bullets
+      * Masking passwords doesn't even increase security, but does cost business
+      * Feedback and visualizing the system's status are the most important usability measures
+      * Undifferentiated bullets for complex codes does not comply with usability principles
+      * Users make more errors when they can't see what they're typing — feel less confident
+      * Users resort to: (a) overly simple passwords or (b) copy-paste passwords — both lead to true loss of security
+      * Abandon Legacy Design — design elements that exist "only because they've always been there"
+      * Tension between security and usability — sometimes security wins
+      * Solution: Checkbox to optionally have passwords masked
+________________
+
+
+Case Study 2: Horizontal Attention Leans Left
+      * Web users spend 69% of their time viewing the left half of the page and 30% viewing the right half
+      * More than twice as much time looking at the left side
+      * Keep navigation all the way to the left
+      * Keep main content a bit further in from the left
+      * Most important stuff should be showcased between one-third and halfway across the page
+      * Priority content should be front and center
+      * Users focus their attention the most on the left
+      * Keep secondary content to the right
+      * Layouts and viewing patterns are codependent
+      * Utilize conventional top navigation or left navigation
+      * Adhering to design conventions will help maximize users' efficiency and company profits
+      * 81% fixations fall in the left half on SERPs vs. 80% on general web pages
+      * Left aligned text preferred; right aligned text acceptable only for amounts/numbers
+________________
+
+
+LECTURE 6 – HCI Case Studies (Continued)
+Vertical Dimensions – User Behavior (Scrolling & Attention)
+      * People scroll vertically more than they used to
+      * Eye-tracking data shows users still look more above the page fold than below it (the Two Fold Theory)
+      * 80% of users' viewing time was spent above the fold
+      * Larger screens and new web design trends — but no major change in user behavior
+      * 57% viewing time above the fold; 74% on first two screenfuls
+      * On SERPs, top half of first screenful received more than 75% of viewing time
+      * 65% of viewing time above the fold was concentrated in the top half of the viewport
+      * F-Pattern — many users engage in an F-pattern when reading/scanning
+      * Closer a piece of information is to the top of the page, the higher the chance it will be read
+      * Old Truth: be #1 or #2 on Google, or you hardly exist
+Recommendations:
+      * Reserve the top of the page for high-priority content: key business and user goals
+      * Use appropriate font styling to attract attention to important content
+      * Users rely on elements like headers and bold text to identify important content and locate new segments
+      * Be visually distinct and styled consistently across the site
+      * Beware of false floors — illusion of completeness can interfere with scrolling
+      * Include signifiers (such as cut-off text) to indicate content below the fold
+      * Test your design with representative users to determine ideal page length
+________________
+
+
+Alphabetical Sorting Must Also Die
+      * Only 2 benefits of alphabetical sorting: if user knows name, searching becomes easy; helps known-item problems
+      * People rarely think A–Z
+      * For most questions, users don't know the name of the thing they want — alpha sorting rendered useless
+      * Some items have an inherent logic with a different sort order — alpha sorting may hide the inherent logic
+      * Better alternatives: ordinal sequences, logical structuring, timelines, or prioritization by importance or frequency
+      * Example: shoe width sorting should go from narrowest to widest (4A, AAA, AA... 3E, 4E) rather than alphabetically
+________________
+
+
+Reset and Cancel Buttons Mostly Must Die
+      * Supports user control and freedom — "emergency exit"
+      * Undo — truly one of the greatest advances in usability
+      * Window-based GUI applications — Cancel in dialog boxes supports exploratory learning
+      * Editing systems — Undo command covers user's most recent changes; multi-level undo and redo available
+      * Reset: Don't Use — almost never helps users, but often hurts them
+      * Reset hurts users in 3 ways: (1) clicking by mistake when wanting to Submit — all work is gone; (2) two buttons clutters the interface; (3) user has to scan and decide which button is correct
+      * Make all form entries undoable
+      * Design mistake on the Web — radio buttons that initially do not have a selection; no way to select "nothing" once a choice is made
+      * Always include an explicit radio button for the default choice
+      * Always include a selectable menu entry in pull-down menus for the default choice
+      * Exception — Use Reset for Repeated Form-Filling and Revert-to-Default when: form is filled repeatedly by same user AND data differs significantly each time
+      * Cancel: Use Sparingly — the Back button is the dominant user behavior on the web
+      * Offer a Cancel button when users may fear they have committed to something they want to avoid
+      * Cancel is useful for multi-step dialogs where user has progressed past one or more pages with actions
+      * Cancel for Downloads or File Transfer Applications is a required option
+________________
+
+
+Art of Writing Headlines – Usability
+What makes a good headline (BBC News as gold standard):
+      * Precise communication in a handful of words
+      * Concise, scannable, and objective
+      * Short — people don't read much online
+      * Rich in information scent — clearly summarizing the target article
+      * Front-loaded with the most important keywords (users scan only the beginning of list items)
+      * Understandable out of context (headlines appear without articles in search results)
+      * Predictable — users know whether they'll like the full article before they click
+      * Average headline: 5 words and 34 characters
+5 Tips for Headlines Usability:
+      * Teach them something
+      * Keep it short and snappy
+      * Make a list
+      * Play to emotions
+      * Promote awards, endorsements, and rave reviews
+NNG Guidelines for Headlines:
+      1. Make sure the headline works out of context — treat headlines like microcontent
+      2. Tell readers something useful — be specific and informative
+      3. Don't succumb to cute or faddish vocabulary — use concrete, measurable language
+      4. Omit nonessential words — keep it tight
+      5. Front-load headings with strong keywords — most important keyword first
+Here is the relevant HCI design information extracted from your two lecture PDFs that applies to this assignment:
+________________
+
+
+HCI Laws & Concepts for Interactive Design Assignment
+1. Miller's Law — Digit Span (7±2 Rule)
+Short-term memory holds 7±2 chunks of information. Apply this to menu lengths, navigation options, and form fields — keep them within 5–9 items. Group related items into chunks (e.g., phone numbers split by country code, area code, provider).
+2. Primacy & Recency / Serial Position Effect
+Users recall items at the beginning (primacy — stored in LTM) and end (recency — stored in STM) of a list best. Middle items are poorly recalled. Design implication: place the most critical features/menu options at the top or bottom of lists — never bury them in the middle. First-time learning experiences must be designed carefully as they are hardest to unlearn.
+3. Fitts' Law
+Movement time to a target = f(distance/size): MT = a + b·log₂(2A/W). Make interactive buttons large (especially on mobile/touch). Keep task-related buttons close to the user's attention area. For destructive actions (like Delete), make them smaller and place them farther away to reduce accidental clicks. Increasing hover/click target size improves usability index.
+4. Hick-Hyman Law
+Decision time increases logarithmically with number of choices: T = b·log₂(n+1). Users eliminate half the choices at each step (binary search behavior). Design implication: present broad categories first, then subcategories — do not overwhelm users with all options at once. Simplify the primary action path.
+5. Pareto Principle (80/20 Rule) & Vital Few
+80% of usage comes from 20% of features. Identify the critical 20% features and make them visible, prominent, and easily accessible — not hidden in the UI. The 20% effort yields 80% results; prioritize the high-impact features. Trying to perfect all features at once yields diminishing returns.
+6. Zipf's Law / Principle of Least Effort
+The most frequently used features/commands are used far more than others (follows a power-law frequency distribution). Users want maximum outcome for minimum effort. Make the most useful actions the easiest to access. Avoid forcing users to decipher complex or unfamiliar navigation labels.
+7. Power Law of Practice (Learning Curve)
+Task completion time decreases with practice, following a power law. Learning reaches a saturation point. Design implication: a good design (Design A) reaches saturation quickly and at a low task time. When introducing a new interface, be aware users are already at saturation with the old one — switching costs are high and require significant goodwill from users.
+8. Asimov's 3 Laws (adapted by Raskin for Interaction Design)
+      * 1st Law: A computer shall not harm your work or, through inaction, allow your work to come to harm. → Implement autosave, undo, revision history, and confirmation dialogs for destructive actions (e.g., GitHub's repo deletion requiring you to type the repo name).
+      * 2nd Law: A computer shall not waste your time or require you to do more work than is strictly necessary. → Automate what can be inferred (e.g., don't ask for credit card type when it can be derived from the number). Bring information to the user in the form they need it.
+      * 3rd Law: An interface should be humane — responsive to human needs and considerate of human frailties. → Respect cognitive and physical limitations. Maintain a single locus of attention (e.g., Mac's Caps Lock indicator inside the input field, not on the keyboard).
+9. Jakob's Law of Usability
+Users spend most of their time on other sites/apps and carry mental models from those. Design to match existing conventions and patterns. Violating familiar patterns causes confusion — users will simply hit the Back button. Minimize discordance when introducing design changes by allowing users to use familiar versions during transition.
+10. Tesler's Law (Law of Conservation of Complexity)
+Every system has an irreducible amount of complexity — it can only be shifted, not eliminated. If you remove complexity from the user interface, it moves to the development team. Balance this against the Vital Few (80/20): removing user-facing complexity improves perceived usability. Nielsen's corollary: Less is More — fewer features, more user empowerment. Interface clutter forces users to hunt for features, reducing efficiency and increasing perceived difficulty.

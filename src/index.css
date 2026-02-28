@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global: V7 fix — min 14px text everywhere */
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #1e293b;
+  background-color: #f8fafc;
+}
+
+/* Ensure no text goes below 14px */
+* {
+  min-font-size: 14px;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 text-white px-6 py-3 rounded-xl font-semibold
+           hover:bg-primary-700 active:bg-primary-800
+           transition-all duration-200 ease-out
+           focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2
+           text-base;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary-600 border-2 border-primary-200 px-6 py-3 rounded-xl font-semibold
+           hover:bg-primary-50 hover:border-primary-300 active:bg-primary-100
+           transition-all duration-200 ease-out
+           focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2
+           text-base;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-sm border border-trust-200
+           hover:shadow-md hover:border-trust-300
+           transition-all duration-200 ease-out p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border border-trust-300
+           focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400
+           text-base placeholder:text-trust-400
+           transition-all duration-200;
+  }
+}
+
+/* Smooth page transitions */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+/* Loader animation */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loader {
+  width: 24px;
+  height: 24px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #1a6df5;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+/* Success checkmark animation */
+@keyframes check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes scale-in {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
