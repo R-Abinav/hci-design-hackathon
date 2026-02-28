@@ -64,10 +64,10 @@ export default function Booking() {
                     {steps.map((s, i) => (
                         <div key={s.num} className="flex items-center gap-2">
                             <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${step >= s.num
-                                    ? step === s.num && s.num === 3
-                                        ? 'bg-accent-500 text-white shadow-lg shadow-accent-200'
-                                        : 'bg-primary-600 text-white shadow-lg shadow-primary-200'
-                                    : 'bg-trust-100 text-trust-400'
+                                ? step === s.num && s.num === 3
+                                    ? 'bg-accent-500 text-white shadow-lg shadow-accent-200'
+                                    : 'bg-primary-600 text-white shadow-lg shadow-primary-200'
+                                : 'bg-trust-100 text-trust-400'
                                 }`}>
                                 {step > s.num ? '✓' : s.num}
                             </div>
@@ -88,7 +88,7 @@ export default function Booking() {
             {step === 1 && (
                 <div className="card animate-in">
                     <div className="flex items-center gap-3 mb-6">
-                        <div className="w-14 h-14 rounded-xl bg-primary-50 flex items-center justify-center text-3xl">{doctor.avatar}</div>
+                        <img src={doctor.avatar} alt={doctor.name} className="w-14 h-14 rounded-xl border border-primary-100 shrink-0" />
                         <div>
                             <h2 className="text-lg font-semibold text-trust-900">{doctor.name}</h2>
                             <p className="text-sm text-trust-500">{doctor.specialty} • ₹{doctor.fee}</p>
@@ -102,8 +102,8 @@ export default function Booking() {
                                 key={key}
                                 onClick={() => { setSelectedDay(key); setSelectedSlot(null) }}
                                 className={`flex-1 py-3 rounded-xl text-sm font-semibold transition-all ${selectedDay === key
-                                        ? 'bg-primary-600 text-white shadow-md'
-                                        : 'bg-trust-50 text-trust-600 hover:bg-trust-100 border border-trust-200'
+                                    ? 'bg-primary-600 text-white shadow-md'
+                                    : 'bg-trust-50 text-trust-600 hover:bg-trust-100 border border-trust-200'
                                     }`}
                             >
                                 {label}
@@ -124,8 +124,8 @@ export default function Booking() {
                                         key={slot}
                                         onClick={() => setSelectedSlot(slot)}
                                         className={`py-3 rounded-xl text-sm font-medium transition-all ${selectedSlot === slot
-                                                ? 'bg-primary-600 text-white shadow-md ring-2 ring-primary-300'
-                                                : 'bg-primary-50 text-primary-700 hover:bg-primary-100 border border-primary-200'
+                                            ? 'bg-primary-600 text-white shadow-md ring-2 ring-primary-300'
+                                            : 'bg-primary-50 text-primary-700 hover:bg-primary-100 border border-primary-200'
                                             }`}
                                     >
                                         {slot}
@@ -167,7 +167,7 @@ export default function Booking() {
                     {/* Appointment summary — Closure */}
                     <div className="bg-primary-50 rounded-xl p-5 mb-6 border border-primary-100">
                         <div className="flex items-center gap-3 mb-4">
-                            <span className="text-3xl">{doctor.avatar}</span>
+                            <img src={doctor.avatar} alt={doctor.name} className="w-12 h-12 rounded-xl border border-primary-100 shrink-0" />
                             <div>
                                 <p className="font-semibold text-trust-900">{doctor.name}</p>
                                 <p className="text-sm text-trust-500">{doctor.specialty}</p>
@@ -258,7 +258,7 @@ export default function Booking() {
                         </svg>
                     </div>
 
-                    <h2 className="text-2xl font-bold text-trust-900 mb-2">Appointment Booked! 🎉</h2>
+                    <h2 className="text-2xl font-bold text-trust-900 mb-2">Appointment Booked!</h2>
                     <p className="text-base text-trust-500 mb-8">Your appointment has been confirmed successfully.</p>
 
                     {/* Booking summary */}

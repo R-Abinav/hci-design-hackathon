@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import * as LucideIcons from 'lucide-react'
 
 /*
  * V6 FIX: No contextual help → In-app searchable FAQ
@@ -13,7 +14,7 @@ export default function Help() {
     const categories = [
         {
             title: 'Booking & Appointments',
-            icon: '📅',
+            icon: <LucideIcons.Calendar className="w-5 h-5 text-primary-600" />,
             faqs: [
                 { q: 'How do I book an appointment?', a: 'Search for a doctor by specialty or name, select an available time slot, confirm your details, and your appointment is booked instantly. You will receive a confirmation on screen.' },
                 { q: 'Can I reschedule my appointment?', a: 'Yes. Go to your dashboard, find the appointment, and click "Reschedule". You can pick a new date and time without losing your booking.' },
@@ -22,7 +23,7 @@ export default function Help() {
         },
         {
             title: 'Consultations',
-            icon: '🩺',
+            icon: <LucideIcons.Stethoscope className="w-5 h-5 text-emerald-600" />,
             faqs: [
                 { q: 'What is a video consultation?', a: 'A video consultation lets you speak with a verified doctor from home via a secure video call. You receive a digital prescription after the consultation.' },
                 { q: 'How long is a typical consultation?', a: 'Most consultations last 10–15 minutes. Your doctor may extend if needed at no additional cost.' },
@@ -30,7 +31,7 @@ export default function Help() {
         },
         {
             title: 'Payments & Fees',
-            icon: '💳',
+            icon: <LucideIcons.CreditCard className="w-5 h-5 text-orange-600" />,
             faqs: [
                 { q: 'What payment methods are accepted?', a: 'We accept UPI, credit/debit cards, net banking, and wallets. Payment is collected at the time of booking.' },
                 { q: 'Is there a booking fee?', a: 'No. There is no additional booking fee. You only pay the doctor\'s consultation fee.' },
@@ -38,7 +39,7 @@ export default function Help() {
         },
         {
             title: 'Account & Privacy',
-            icon: '🔒',
+            icon: <LucideIcons.Shield className="w-5 h-5 text-purple-600" />,
             faqs: [
                 { q: 'Is my health data secure?', a: 'Yes. All data is encrypted and stored securely. We comply with health data privacy regulations and never share your information without consent.' },
                 { q: 'How do I update my profile?', a: 'Go to Settings from the navigation menu. You can update your name, contact info, and health preferences at any time.' },

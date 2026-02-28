@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { specialties } from '../data/doctors'
+import * as LucideIcons from 'lucide-react'
 
 /*
  * V2 FIX: Dual search bar → Unified smart search
@@ -21,10 +22,10 @@ export default function Home({ user }) {
     }
 
     const heroCards = [
-        { icon: '📹', title: 'Video Consult', desc: 'Connect within 60 secs', color: 'from-blue-500 to-blue-600' },
-        { icon: '🔍', title: 'Find Doctors', desc: 'Verified & trusted', color: 'from-emerald-500 to-emerald-600' },
-        { icon: '🧪', title: 'Lab Tests', desc: 'Home sample pickup', color: 'from-purple-500 to-purple-600' },
-        { icon: '🏥', title: 'Surgeries', desc: 'Expert surgical care', color: 'from-orange-500 to-orange-600' },
+        { icon: <LucideIcons.Video className="w-6 h-6 text-blue-600" />, title: 'Video Consult', desc: 'Connect within 60 secs', color: 'bg-blue-50 border border-blue-100' },
+        { icon: <LucideIcons.Search className="w-6 h-6 text-emerald-600" />, title: 'Find Doctors', desc: 'Verified & trusted', color: 'bg-emerald-50 border border-emerald-100' },
+        { icon: <LucideIcons.FlaskConical className="w-6 h-6 text-purple-600" />, title: 'Lab Tests', desc: 'Home sample pickup', color: 'bg-purple-50 border border-purple-100' },
+        { icon: <LucideIcons.Activity className="w-6 h-6 text-orange-600" />, title: 'Surgeries', desc: 'Expert surgical care', color: 'bg-orange-50 border border-orange-100' },
     ]
 
     return (
@@ -34,8 +35,8 @@ export default function Home({ user }) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Greeting — Personalization */}
                     <div className="mb-8">
-                        <h1 className="text-3xl sm:text-4xl font-bold text-trust-900">
-                            Hello, <span className="text-primary-600">{user?.name || 'there'}</span> 👋
+                        <h1 className="text-3xl sm:text-4xl font-bold text-trust-900 flex items-center gap-2">
+                            Hello, <span className="text-primary-600">{user?.name || 'there'}</span>
                         </h1>
                         <p className="text-lg text-trust-500 mt-2">How can we help you today?</p>
                     </div>
@@ -58,7 +59,7 @@ export default function Home({ user }) {
                             {/* V13 FIX: Auto-detected location shown as chip, changeable */}
                             <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
                                 <span className="text-sm bg-primary-50 text-primary-700 px-3 py-1.5 rounded-full border border-primary-200 flex items-center gap-1">
-                                    📍 {detectedCity}
+                                    <LucideIcons.MapPin className="w-4 h-4" /> {detectedCity}
                                 </span>
                                 <button type="submit" className="bg-primary-600 text-white p-2.5 rounded-xl hover:bg-primary-700 transition-colors">
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -77,7 +78,7 @@ export default function Home({ user }) {
                                 onClick={() => navigate('/search')}
                                 className="card hover:scale-[1.02] active:scale-[0.98] text-left group"
                             >
-                                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center text-2xl mb-3 shadow-lg group-hover:shadow-xl transition-shadow`}>
+                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 shadow-sm group-hover:shadow-md transition-shadow ${card.color}`}>
                                     {card.icon}
                                 </div>
                                 <h3 className="text-lg font-semibold text-trust-900">{card.title}</h3>
@@ -105,17 +106,22 @@ export default function Home({ user }) {
                     </div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        {specialties.slice(0, 8).map(spec => (
-                            <button
-                                key={spec.name}
-                                onClick={() => navigate(`/search?specialty=${encodeURIComponent(spec.name)}`)}
-                                className="card text-center hover:scale-[1.02] active:scale-[0.98] group"
-                            >
-                                <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{spec.icon}</div>
-                                <h3 className="text-base font-semibold text-trust-800">{spec.name}</h3>
-                                <p className="text-sm text-trust-400 mt-1">{spec.count} doctors</p>
-                            </button>
-                        ))}
+                        {specialties.slice(0, 8).map(spec => {
+                            const IconComp = LucideIcons[spec.icon] || LucideIcons.Activity
+                            return (
+                                <button
+                                    key={spec.name}
+                                    onClick={() => navigate(`/search?specialty=${encodeURIComponent(spec.name)}`)}
+                                    className="card text-center hover:scale-[1.02] active:scale-[0.98] group flex flex-col items-center"
+                                >
+                                    <div className="w-14 h-14 rounded-full bg-primary-50 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                                        <IconComp className="w-6 h-6 text-primary-600" strokeWidth={1.5} />
+                                    </div>
+                                    <h3 className="text-base font-semibold text-trust-800">{spec.name}</h3>
+                                    <p className="text-sm text-trust-400 mt-1">{spec.count} doctors</p>
+                                </button>
+                            )
+                        })}
                     </div>
                 </div>
             </section>
@@ -126,13 +132,13 @@ export default function Home({ user }) {
                     <h2 className="text-2xl font-bold text-trust-900 mb-6 text-center">Trusted by Millions</h2>
                     <div className="grid sm:grid-cols-3 gap-6">
                         {[
-                            { stat: '20,000+', label: 'Verified Doctors', icon: '👨‍⚕️' },
-                            { stat: '1M+', label: 'Happy Patients', icon: '😊' },
-                            { stat: '25+', label: 'Specialties', icon: '🩺' },
+                            { stat: '20,000+', label: 'Verified Doctors', icon: <LucideIcons.ShieldCheck className="w-8 h-8 text-primary-500" strokeWidth={1.5} /> },
+                            { stat: '1M+', label: 'Happy Patients', icon: <LucideIcons.Smile className="w-8 h-8 text-primary-500" strokeWidth={1.5} /> },
+                            { stat: '25+', label: 'Specialties', icon: <LucideIcons.Stethoscope className="w-8 h-8 text-primary-500" strokeWidth={1.5} /> },
                         ].map(item => (
-                            <div key={item.label} className="card text-center">
-                                <div className="text-3xl mb-2">{item.icon}</div>
-                                <div className="text-3xl font-bold text-primary-600">{item.stat}</div>
+                            <div key={item.label} className="card text-center flex flex-col items-center">
+                                <div className="mb-3 p-3 bg-primary-50 rounded-2xl">{item.icon}</div>
+                                <div className="text-3xl font-bold text-primary-600 font-heading">{item.stat}</div>
                                 <div className="text-base text-trust-500 mt-1">{item.label}</div>
                             </div>
                         ))}

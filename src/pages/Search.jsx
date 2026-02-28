@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { doctors } from '../data/doctors'
+import * as LucideIcons from 'lucide-react'
 
 /*
  * V3 FIX: Cluttered doctor cards → Progressive disclosure
@@ -74,8 +75,8 @@ export default function Search() {
                         key={option.value}
                         onClick={() => setSortBy(option.value)}
                         className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${sortBy === option.value
-                                ? 'bg-primary-600 text-white shadow-md'
-                                : 'bg-white text-trust-600 border border-trust-200 hover:border-primary-300 hover:text-primary-600'
+                            ? 'bg-primary-600 text-white shadow-md'
+                            : 'bg-white text-trust-600 border border-trust-200 hover:border-primary-300 hover:text-primary-600'
                             }`}
                     >
                         {option.label}
@@ -95,9 +96,7 @@ export default function Search() {
                         {/* V3: Essential info visible first (Inverted Pyramid) */}
                         <div className="flex items-start gap-4">
                             {/* Avatar */}
-                            <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center text-3xl shrink-0">
-                                {doctor.avatar}
-                            </div>
+                            <img src={doctor.avatar} alt={doctor.name} className="w-16 h-16 rounded-2xl border border-primary-100 shrink-0 shadow-sm" />
 
                             {/* V10: Primary info left-aligned */}
                             <div className="flex-1 min-w-0">
@@ -106,8 +105,8 @@ export default function Search() {
                                         <h3 className="text-lg font-semibold text-trust-900 flex items-center gap-2">
                                             {doctor.name}
                                             {doctor.verified && (
-                                                <span className="text-xs bg-accent-100 text-accent-700 px-2 py-0.5 rounded-full font-medium">
-                                                    ✓ Verified
+                                                <span className="text-xs bg-accent-100 text-accent-700 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">
+                                                    <LucideIcons.CheckCircle2 className="w-3 h-3" /> Verified
                                                 </span>
                                             )}
                                         </h3>
@@ -117,8 +116,8 @@ export default function Search() {
 
                                     {/* Rating — Serial Position: important info at edges */}
                                     <div className="text-right shrink-0">
-                                        <div className="flex items-center gap-1 text-lg font-bold text-accent-600">
-                                            <span>⭐</span>
+                                        <div className="flex items-center gap-1 text-lg font-bold text-accent-600 justify-end">
+                                            <LucideIcons.Star className="w-4 h-4 fill-accent-500 text-accent-500" />
                                             <span>{doctor.rating}</span>
                                         </div>
                                         <p className="text-xs text-trust-400">{doctor.reviews} reviews</p>
@@ -127,13 +126,13 @@ export default function Search() {
 
                                 {/* Availability — Shneiderman #3: Feedback */}
                                 <div className="flex items-center gap-3 mt-3">
-                                    <span className={`text-sm font-medium px-3 py-1 rounded-full ${doctor.available === 'Today'
-                                            ? 'bg-accent-50 text-accent-700 border border-accent-200'
-                                            : 'bg-amber-50 text-amber-700 border border-amber-200'
+                                    <span className={`text-sm font-medium px-3 py-1 rounded-full flex items-center gap-1.5 ${doctor.available === 'Today'
+                                        ? 'bg-accent-50 text-accent-700 border border-accent-200'
+                                        : 'bg-amber-50 text-amber-700 border border-amber-200'
                                         }`}>
-                                        📅 Available {doctor.available}
+                                        <LucideIcons.Calendar className="w-4 h-4" /> Available {doctor.available}
                                     </span>
-                                    <span className="text-sm text-trust-500">📍 {doctor.location}</span>
+                                    <span className="text-sm text-trust-500 flex items-center gap-1.5"><LucideIcons.MapPin className="w-4 h-4" /> {doctor.location}</span>
                                 </div>
                             </div>
                         </div>

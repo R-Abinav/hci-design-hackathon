@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Pill, Hospital } from 'lucide-react'
 
 /*
  * V9 FIX: Password fully masked → Show/hide toggle
@@ -48,7 +49,7 @@ export default function Login({ onLogin }) {
                 <div className="w-full max-w-md">
                     {/* Logo */}
                     <div className="flex items-center gap-2 mb-8">
-                        <span className="text-3xl">💊</span>
+                        <Pill className="w-8 h-8 text-primary-600 stroke-[1.5]" />
                         <span className="text-2xl font-bold text-primary-700">Better<span className="text-primary-500">Practo</span></span>
                     </div>
 
@@ -151,7 +152,7 @@ export default function Login({ onLogin }) {
             {/* Right side — trust imagery */}
             <div className="hidden lg:flex flex-1 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 items-center justify-center p-12">
                 <div className="text-center text-white max-w-md">
-                    <div className="text-6xl mb-6">🏥</div>
+                    <Hospital className="w-20 h-20 text-primary-200 mx-auto mb-6 stroke-1" />
                     <h2 className="text-3xl font-bold mb-4">Your Health, Simplified</h2>
                     <p className="text-lg text-primary-200 leading-relaxed">
                         Book appointments, consult top doctors, and manage your health — all in one place. Designed with care for you.

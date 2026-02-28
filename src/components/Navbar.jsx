@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { Home, Search, HelpCircle, Pill } from 'lucide-react'
 
 /*
  * V8 FIX: Active nav state — underline + color change shows current section
@@ -11,9 +12,9 @@ export default function Navbar({ user, onLogout }) {
     const navigate = useNavigate()
 
     const navItems = [
-        { to: '/', label: 'Home', icon: '🏠' },
-        { to: '/search', label: 'Find Doctors', icon: '🔍' },
-        { to: '/help', label: 'Help', icon: '❓' },
+        { to: '/', label: 'Home', icon: <Home className="w-5 h-5" /> },
+        { to: '/search', label: 'Find Doctors', icon: <Search className="w-5 h-5" /> },
+        { to: '/help', label: 'Help', icon: <HelpCircle className="w-5 h-5" /> },
     ]
 
     return (
@@ -22,7 +23,7 @@ export default function Navbar({ user, onLogout }) {
                 <div className="flex items-center justify-between h-16">
                     {/* Logo — left aligned (V10: Horizontal Attention) */}
                     <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
-                        <span className="text-2xl">💊</span>
+                        <Pill className="w-8 h-8 text-primary-600 stroke-[1.5]" />
                         <span className="text-xl font-bold text-primary-700">Better<span className="text-primary-500">Practo</span></span>
                     </div>
 

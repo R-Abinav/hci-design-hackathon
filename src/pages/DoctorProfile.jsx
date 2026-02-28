@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { doctors } from '../data/doctors'
+import * as LucideIcons from 'lucide-react'
 
 /*
  * V3 FIX (continued): Clean, uncluttered profile
@@ -40,15 +41,13 @@ export default function DoctorProfile() {
                     {/* Doctor header card */}
                     <div className="card">
                         <div className="flex items-start gap-5">
-                            <div className="w-24 h-24 rounded-2xl bg-primary-50 flex items-center justify-center text-5xl shrink-0">
-                                {doctor.avatar}
-                            </div>
+                            <img src={doctor.avatar} alt={doctor.name} className="w-24 h-24 rounded-2xl bg-white border border-primary-100 shrink-0 shadow-sm" />
                             <div className="flex-1">
                                 <h1 className="text-2xl font-bold text-trust-900 flex items-center gap-2">
                                     {doctor.name}
                                     {doctor.verified && (
-                                        <span className="text-sm bg-accent-100 text-accent-700 px-2.5 py-1 rounded-full font-medium">
-                                            ✓ Verified
+                                        <span className="text-sm bg-accent-100 text-accent-700 px-2.5 py-1 rounded-full font-medium flex items-center gap-1">
+                                            <LucideIcons.CheckCircle2 className="w-4 h-4" /> Verified
                                         </span>
                                     )}
                                 </h1>
@@ -57,14 +56,14 @@ export default function DoctorProfile() {
 
                                 <div className="flex flex-wrap items-center gap-4 mt-4">
                                     <div className="flex items-center gap-1.5">
-                                        <span className="text-accent-500">⭐</span>
+                                        <LucideIcons.Star className="w-5 h-5 fill-accent-500 text-accent-500" />
                                         <span className="text-lg font-bold text-trust-800">{doctor.rating}</span>
                                         <span className="text-sm text-trust-400">({doctor.reviews} reviews)</span>
                                     </div>
                                     <div className="w-px h-5 bg-trust-200"></div>
                                     <span className="text-base text-trust-600">{doctor.experience} years exp.</span>
                                     <div className="w-px h-5 bg-trust-200"></div>
-                                    <span className="text-base text-trust-600">📍 {doctor.location}</span>
+                                    <span className="text-base text-trust-600 flex items-center gap-1.5"><LucideIcons.MapPin className="w-4 h-4 text-trust-500" /> {doctor.location}</span>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +79,9 @@ export default function DoctorProfile() {
                     <div className="card">
                         <h2 className="text-xl font-semibold text-trust-900 mb-3">Clinic & Hospital</h2>
                         <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center text-xl">🏥</div>
+                            <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center">
+                                <LucideIcons.Building2 className="w-6 h-6 text-primary-600" />
+                            </div>
                             <div>
                                 <p className="text-base font-semibold text-trust-800">{doctor.hospital}</p>
                                 <p className="text-sm text-trust-500">{doctor.location}</p>
@@ -97,11 +98,11 @@ export default function DoctorProfile() {
                         <p className="text-3xl font-bold text-primary-600 mb-4">₹{doctor.fee}</p>
 
                         <div className="mb-4">
-                            <span className={`text-sm font-medium px-3 py-1.5 rounded-full ${doctor.available === 'Today'
-                                    ? 'bg-accent-50 text-accent-700 border border-accent-200'
-                                    : 'bg-amber-50 text-amber-700 border border-amber-200'
+                            <span className={`text-sm font-medium px-3 py-1.5 rounded-full flex items-center gap-1.5 w-fit ${doctor.available === 'Today'
+                                ? 'bg-accent-50 text-accent-700 border border-accent-200'
+                                : 'bg-amber-50 text-amber-700 border border-amber-200'
                                 }`}>
-                                📅 Available {doctor.available}
+                                <LucideIcons.Calendar className="w-4 h-4" /> Available {doctor.available}
                             </span>
                         </div>
 
@@ -118,11 +119,11 @@ export default function DoctorProfile() {
                         {/* Trust indicators */}
                         <div className="mt-6 space-y-3 pt-4 border-t border-trust-100">
                             {[
-                                { icon: '🛡️', text: 'Verified & trusted doctor' },
-                                { icon: '💬', text: 'Free follow-up consultation' },
-                                { icon: '📋', text: 'Digital prescription provided' },
-                            ].map(item => (
-                                <div key={item.text} className="flex items-center gap-2 text-sm text-trust-600">
+                                { icon: <LucideIcons.ShieldCheck className="w-5 h-5 text-primary-500" />, text: 'Verified & trusted doctor' },
+                                { icon: <LucideIcons.MessageSquare className="w-5 h-5 text-emerald-500" />, text: 'Free follow-up consultation' },
+                                { icon: <LucideIcons.FileText className="w-5 h-5 text-purple-500" />, text: 'Digital prescription provided' },
+                            ].map((item, idx) => (
+                                <div key={idx} className="flex items-center gap-2 text-sm text-trust-600">
                                     <span>{item.icon}</span>
                                     <span>{item.text}</span>
                                 </div>

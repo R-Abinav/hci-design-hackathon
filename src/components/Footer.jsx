@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Pill } from 'lucide-react'
 
 /*
  * V1 FIX: Dense footer (50+ links) → Collapsible sections, ≤7 items per group
@@ -81,8 +82,8 @@ export default function Footer() {
                 {/* Bottom bar */}
                 <div className="mt-8 pt-6 border-t border-trust-700 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
-                        <span className="text-xl">💊</span>
-                        <span className="text-white font-bold">BetterPracto</span>
+                        <Pill className="w-6 h-6 stroke-[1.5]" />
+                        <span className="text-white font-bold text-lg">BetterPracto</span>
                     </div>
                     <p className="text-sm text-trust-500">© 2026 BetterPracto. Designed with HCI principles.</p>
                 </div>
