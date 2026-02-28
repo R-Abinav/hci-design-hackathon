@@ -132,12 +132,11 @@ Practo's footer contains \textbf{50+ links} spread across 6 columns. The ``For P
 Our footer uses \textbf{4 collapsible sections} with $\leq$7 items each. On mobile, sections are \textbf{accordion-style} (tap to expand). Total visible links reduced from 50+ to a manageable set.
 \end{solutionbox}
 
-% TODO: Uncomment when screenshot is taken
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=\textwidth]{our_footer.png}
-%     \caption{Better Practo --- Clean footer with 4 sections, $\leq$7 items each}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{our_footer.png}
+    \caption{Better Practo --- Clean footer with 4 sections, $\leq$7 items each}
+\end{figure}
 
 \newpage
 
@@ -164,12 +163,11 @@ Practo's homepage has \textbf{two separate search inputs} side-by-side: one for 
 We provide a \textbf{single unified search bar} for doctors, specialties, or symptoms. Location is \textbf{auto-detected} and displayed as a changeable chip (``Chennai''). One input, zero friction.
 \end{solutionbox}
 
-% TODO: Uncomment when screenshot is taken
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=\textwidth]{our_home.png}
-%     \caption{Better Practo --- Unified search with auto-detected location chip}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{our_home.png}
+    \caption{Better Practo --- Unified search with auto-detected location chip}
+\end{figure}
 
 \newpage
 
@@ -235,12 +233,11 @@ We implemented a \textbf{3-step guided onboarding tour} that appears as a modal 
 Features: animated progress dots, gradient illustrations, and a \textbf{``Skip'' button} always visible (respecting User Control / Shneiderman \#7).
 \end{solutionbox}
 
-% TODO: Uncomment when screenshot is taken
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.6\textwidth]{our_onboarding.png}
-%     \caption{Better Practo --- 3-step onboarding tour with skip option}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{our_onboarding.png}
+    \caption{Better Practo --- 3-step onboarding tour with skip option}
+\end{figure}
 
 \newpage
 
@@ -282,17 +279,16 @@ Our booking has a \textbf{3-step progress bar}: \textit{Select Slot $\rightarrow
 \end{itemize}
 \end{solutionbox}
 
-% TODO: Uncomment when screenshots are taken
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=\textwidth]{our_booking_step1.png}
-%     \caption{Better Practo --- Step 1 with progress bar}
-% \end{figure}
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=\textwidth]{our_booking_step3.png}
-%     \caption{Better Practo --- Step 3 success with confirmation (Closure)}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{our_booking_step1.png}
+    \caption{Better Practo --- Step 1 with progress bar}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{our_booking_step3.png}
+    \caption{Better Practo --- Step 3 success with confirmation (Closure)}
+\end{figure}
 
 \newpage
 
@@ -319,12 +315,11 @@ Practo's help is on a \textbf{separate subdomain} (\texttt{help.practo.com}), br
 Our Help is \textbf{built into the app} (same domain, navbar link). FAQs are \textbf{categorized by task} (Booking, Consultations, Payments, Privacy) with a \textbf{search bar}. Accordion layout with concise headings.
 \end{solutionbox}
 
-% TODO: Uncomment when screenshot is taken
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{our_help.png}
-%     \caption{Better Practo --- In-app searchable FAQ}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{our_help.png}
+    \caption{Better Practo --- In-app searchable FAQ}
+\end{figure}
 
 \newpage
 
@@ -343,6 +338,8 @@ Practo uses text below 14px in footer links, secondary labels, and card metadata
 
 \begin{solutionbox}
 Our app enforces \textbf{minimum 14px} font size globally. Body text is 16px. We use the \textbf{Inter} font family for readability. Proper contrast ratios maintained throughout.
+
+\textit{This is a global design fix applied across all pages --- see any page in our prototype for verification.}
 \end{solutionbox}
 
 \newpage
@@ -353,8 +350,22 @@ Our app enforces \textbf{minimum 14px} font size globally. Body text is 16px. We
 \subsection{V8: Inconsistent Active Navigation State}
 
 \begin{violationbox}
-Practo shows an active nav state (blue underline) on \textit{some} pages (e.g., ``Find Doctors'') but \textbf{not on others} (e.g., the homepage). This inconsistency leaves users uncertain about their location.
+Practo shows an active nav state (blue underline) on \textit{some} pages (e.g., ``Find Doctors'') but \textbf{not on others} (e.g., the homepage and login page). This inconsistency leaves users uncertain about their location.
 \end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{practo_nav_1.png}
+        \caption{Login page --- no active nav indicator}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{practo_nav_2.png}
+        \caption{Homepage --- no active nav indicator}
+    \end{subfigure}
+    \caption{Practo's inconsistent navigation --- no active state on login and homepage}
+\end{figure}
 
 \begin{hcibox}{Nielsen \#1 (Visibility of System Status), Shneiderman \#1 (Consistency)}
 \textbf{Nielsen \#1}: system should always inform users where they are. \textbf{Shneiderman \#1}: similar situations need consistent cues --- if some pages highlight nav, all should.
@@ -364,12 +375,11 @@ Practo shows an active nav state (blue underline) on \textit{some} pages (e.g., 
 Our navbar \textbf{consistently highlights the active page} on every route with a blue background + bottom border. Works on Home, Find Doctors, Help --- \textbf{no exceptions}.
 \end{solutionbox}
 
-% TODO: Uncomment when screenshot is taken
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[width=0.8\textwidth]{our_navbar_active.png}
-%     \caption{Better Practo --- Consistent active nav on every page}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{our_navbar_active.png}
+    \caption{Better Practo --- Consistent active nav on every page}
+\end{figure}
 
 \newpage
 
@@ -381,6 +391,12 @@ Our navbar \textbf{consistently highlights the active page} on every route with 
 \begin{violationbox}
 Practo's login masks the password completely with no option to reveal it. Users cannot verify what they typed, leading to errors and frustration.
 \end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{practo_password.png}
+    \caption{Practo's login --- password fully masked with no reveal option}
+\end{figure}
 
 \begin{hcibox}{Stop Password Masking (Lecture 5), Norman's Feedback, Nielsen \#5 (Error Prevention)}
 \textbf{Stop Password Masking}: masking causes more harm (typos, frustration) than good (shoulder surfing is rare). \textbf{Norman's Feedback}: users need to see effect of actions. \textbf{Nielsen \#5}: letting users see their password prevents typos.
@@ -413,6 +429,8 @@ Research shows \textbf{69\% of viewing time} is on the left half. The \textbf{F-
 
 \begin{solutionbox}
 All pages follow the \textbf{F-Pattern}: primary content left-aligned. Doctor profile: main info takes 2/3 width (left), booking CTA on right 1/3. Search bar and hero cards are centered/left-loaded. Key info always above the fold.
+
+\textit{This is a global layout principle applied across all pages --- see any page in our prototype for verification.}
 \end{solutionbox}
 
 \newpage
@@ -432,6 +450,8 @@ Traditional form patterns include ``Reset'' or ``Clear All'' buttons that can ac
 
 \begin{solutionbox}
 Our forms have \textbf{no reset button}. Instead: individual \textbf{clear buttons ($\times$)} per field, ``$\leftarrow$ Change Slot'' for granular step reversal, and form data preserved between steps.
+
+\textit{See the booking flow (Figures for V5+V14) for verification --- no reset button anywhere in the form.}
 \end{solutionbox}
 
 \newpage
@@ -451,6 +471,8 @@ Practo's search sorting criteria is opaque and inconsistent. Alphabetical orderi
 
 \begin{solutionbox}
 We offer \textbf{explicit sort pills}: Relevance (default), Rating, Experience, Fee. Active sort is visually highlighted. Default is \textbf{Relevance} (rating $\times$ reviews). No alphabetical option.
+
+\textit{See the Find Doctors page (Figure for V8 navbar) --- sort pills visible at top of results.}
 \end{solutionbox}
 
 \newpage
@@ -477,6 +499,12 @@ Practo's Lab Tests page forces a \textbf{city selection modal} before showing an
 \begin{solutionbox}
 Our app \textbf{auto-detects the city} (shown as a chip in the search bar) and lets users change with a single tap. No blocking modals. Content loads immediately.
 \end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{our_home.png}
+    \caption{Better Practo --- Auto-detected ``Chennai'' chip in search bar, no forced modal}
+\end{figure}
 
 \newpage
 
