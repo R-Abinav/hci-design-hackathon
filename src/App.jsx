@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Onboarding from './components/Onboarding'
 import ChatbotAssistant from './components/ChatbotAssistant'
+import KeyboardShortcuts from './components/KeyboardShortcuts'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Search from './pages/Search'
@@ -109,6 +110,8 @@ export default function App() {
             </main>
             {/* Block E: Chatbot Assistant — non-intrusive always-available support */}
             {isLoggedIn && <ChatbotAssistant />}
+            {/* Phase 7.5: Keyboard Shortcuts Modal */}
+            <KeyboardShortcuts isLoggedIn={isLoggedIn} />
             {isLoggedIn && <Footer />}
         </div>
     )

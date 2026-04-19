@@ -657,6 +657,18 @@ The \texttt{ChatbotAssistant} component (\texttt{src/components/ChatbotAssistant
     \end{subfigure}
 \end{figure}
 
+\subsection{H3 --- Efficiency of Use: Keyboard Shortcuts Modal}
+
+\begin{featurebox}{Efficiency of Use --- Accelerators for Experts}
+Nielsen's Heuristic \#7 (Flexibility and Efficiency of Use) states that accelerators may often speed up the interaction for the expert user. In Phase 7.5, global keyboard shortcuts were implemented: \texttt{Ctrl/Cmd + K} for Global Search, \texttt{Alt + H} for Home, and \texttt{?} to reveal the Shortcuts Modal. This provides a fast path for "Navigator" users who prefer keyboard interactions, while remaining entirely unobtrusive to novice "Explorer" users.
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.6\textwidth]{keyboard_shortcuts_modal.png}}
+    \caption{The Keyboard Shortcuts visual helper modal triggered by the \texttt{?} key, demonstrating Heuristic \#7 (Efficiency of Use). \textit{Phase 7.5 implementation.}}
+\end{figure}
+
 \vspace{0.5cm}
 
 % =================================================================
@@ -692,6 +704,31 @@ Universal Design Principle 5 (Tolerance for Error): ``minimize hazards and the a
 \begin{featurebox}{Touch Target Sizing --- Universal Design Principle 7}
 Universal Design Principle 7 (Size and Space): ``provide adequate size for touch targets regardless of the user's body size or dexterity.'' WCAG 2.5.5 recommends a minimum touch target of 44$\times$44px. In BetterPracto, time slot buttons on the Booking page use \texttt{min-h-[44px] py-3}, ensuring they meet this threshold. Small slot buttons are a known pain point on mobile health apps --- insufficient target size causes mis-taps, leading to incorrect appointment times being selected.
 \end{featurebox}
+
+\subsection{I4 --- Flexibility in Use: OTP Alternative Login}
+
+\begin{featurebox}{Flexibility in Use --- Multimodal Authentication}
+Universal Design Principle 2 (Flexibility in Use): ``accommodate a wide range of individual preferences and abilities.'' By offering both traditional Email/Password login and a Phone/OTP (One-Time Password) alternative, the system provides choice in methods of use. The OTP login flow also supports international users via a country code dropdown, and incorporates Tolerance for Error by validating the phone number before firing the SMS logic.
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.32\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{otp_login.png}}
+        \caption{Phone login mode with country code selector.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{otp_login_sms_1.png}}
+        \caption{Validation error on invalid phone format.}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.32\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{otp_login_sms_2.png}}
+        \caption{OTP verification screen indicating code sent.}
+    \end{subfigure}
+    \caption{The OTP login flow demonstrating Flexibility in Use (Universal Design). \textit{Phase 7.5 implementation.}}
+\end{figure}
 
 \vspace{0.5cm}
 
