@@ -724,8 +724,16 @@ The reCAPTCHA v2 checkbox requires zero visual puzzle-solving. The risk-engine i
 
 \begin{figure}[H]
     \centering
-    \imgborder{\includegraphics[width=\textwidth]{captcha_login.png}}
-    \caption{The Login page featuring the ``I'm not a robot'' reCAPTCHA v2 widget. The ``Sign In'' button is locked until verification is complete. The simulated UI provides a loading spinner during evaluation and a green checkmark upon success. \textit{Block K.}}
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{captcha_login.png}}
+        \caption{Unverified CAPTCHA. The ``Sign In'' button is locked. \textit{Block K.}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{captcha_solved.png}}
+        \caption{Verified CAPTCHA. The risk-engine shows a green checkmark and unlocks the sign in process. \textit{Block K.}}
+    \end{subfigure}
+    \caption{The Login page featuring the ``I'm not a robot'' reCAPTCHA v2 widget simulated UI. The button remains locked until verification is complete.}
 \end{figure}
 
 \vspace{0.5cm}
