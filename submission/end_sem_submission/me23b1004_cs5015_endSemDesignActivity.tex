@@ -577,10 +577,55 @@ The DoctorProfile and Booking pages show breadcrumbs: \texttt{Home \textrightarr
 \begin{hcibox}{Web Usability Guidelines --- Krug's ``Don't Make Me Think''}
 Steve Krug's central law: every question mark in the user's mind adds cognitive friction and undermines trust. Applied principles: \textbf{Feature Exposure} (make all capabilities visible), \textbf{Self-Evident Design} (actions and objects are immediately recognisable), \textbf{Graceful Degradation} (custom 404 page, not browser default), and \textbf{SEO Meta Tags} (OG tags, description, twitter:card --- web accessibility for search engines).
 
-\textit{Reference: End-Sem HCI Lecture Notes, lines 211--227.}
+\\textit{Reference: End-Sem HCI Lecture Notes, lines 211--227.}
 \end{hcibox}
 
-\textit{[Screenshots and detailed implementation to be added after Block H code is implemented.]}
+\subsection{H1 --- Custom 404 Page (Graceful Degradation)}
+
+\begin{featurebox}{Custom 404 Page --- Graceful Degradation}
+The Web Usability Cheat Sheet (point 1, Accessibility) explicitly states: ``custom 404 page'' as a required accessibility feature. A browser-default 404 breaks the user's mental model --- they see a blank page with an error code and no path forward, violating both Nielsen \#9 (Help Users Recover from Errors) and Krug's Law (Don't Make Me Think).
+
+The BetterPracto NotFound page (\texttt{src/pages/NotFound.jsx}) provides:
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \textbf{Visual clarity:} Large ``404'' in light grey text with an amber {\texttt{AlertTriangle}} icon overlay --- communicates the error immediately without alarming the user.
+  \item \textbf{3 recovery paths:} Go Home (blue), Find Doctors (green), Help Page (purple) --- Feature Exposure principle: all app sections are visible at the moment the user is most disoriented.
+  \item \textbf{``Go back'' link:} \texttt{navigate(-1)} takes the user to their previous page --- appropriate for users who mistyped a URL.
+  \item \textbf{Navbar preserved:} The sticky navbar is still rendered above the 404, so the user can navigate normally.
+\end{itemize}
+
+\textit{Implementation:} \texttt{src/pages/NotFound.jsx} wired to the wildcard route \texttt{path="*"} in \texttt{App.jsx}.
+\end{featurebox}
+
+\subsection{H2 --- Chatbot Assistant (In-App User Support)}
+
+\begin{featurebox}{Chatbot Assistant --- Unobtrusive Always-Available Support}
+Reference (end\_sem\_reference.txt, §4 Assistants): \textit{``Assistants passively monitor user behaviour and offer suggestions when relevant. Ideally, they're unobtrusive and under user control. The infamous example is Microsoft's Clippy, which failed because it was intrusive and its suggestions were often irrelevant.''}
+
+The \texttt{ChatbotAssistant} component (\texttt{src/components/ChatbotAssistant.jsx}) implements the \textbf{Assistants} type of user support with explicit anti-Clippy design decisions:
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \textbf{Non-intrusive FAB:} A 52$\times$52px dark-blue floating action button sits in the bottom-right corner. It never auto-opens, never interrupts, never animates beyond a single small red dot on first load.
+  \item \textbf{User-controlled opening:} Click to open; the window appears as a smooth scale animation. Click $\times$ to dismiss. The background app remains fully interactive.
+  \item \textbf{Quick-reply chips:} Each bot response includes 2--5 contextual chips for common follow-up queries --- supporting both novice users (chips) and experts (free text).
+  \item \textbf{Typing indicator:} 3-dot bounce animation gives feedback that the bot is ``thinking'' --- Nielsen \#1: Visibility of System Status.
+  \item \textbf{Keyword-matched FAQ knowledge base:} 10 intent categories (booking, cancel, payment, refund, video, account, privacy, doctors, emergency, greeting) cover the full app domain.
+  \item \textbf{Emergency escalation:} Typing ``emergency'', ``108'', or ``urgent'' immediately surfaces ambulance and health helpline numbers --- a safety-critical feature.
+  \item \textbf{\texttt{aria-live="polite"}:} Bot responses are announced to screen readers non-interruptively.
+\end{itemize}
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{web_usability_404.png}}
+        \caption{H1 Custom 404: amber triangle on faint ``404'', plain-language explanation, 3 colour-coded recovery cards, back link. Navbar still visible for orientation. \textit{Block H.}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{web_usability_chatbot_open.png}}
+        \caption{H2 Chatbot open: dark-blue header, greeting, quick-reply chips. H3 visible context: FAQ accordion and chatbot coexist without interference. \textit{Block H.}}
+    \end{subfigure}
+\end{figure}
 
 \vspace{0.5cm}
 
@@ -594,9 +639,32 @@ Universal Design creates products usable by all people, to the greatest extent p
 \textit{Reference: End-Sem HCI Lecture Notes, lines 428--617.}
 \end{hcibox}
 
-\textit{[Screenshots and detailed implementation to be added after Block I code is implemented.]}
+\subsection{I1 --- Equitable Use: ARIA Labels on All Interactive Elements}
+
+\begin{featurebox}{Equitable Use --- Screen Reader Accessibility}
+Universal Design Principle 1 (Equitable Use): ``provide the same means of use for all users.'' For keyboard and screen-reader users, interactive elements without labels are invisible. In BetterPracto:
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \texttt{Navbar.jsx} --- \texttt{aria-label="Primary navigation"} on \texttt{<nav>}, \texttt{aria-label="Toggle mobile menu"} on hamburger, \texttt{aria-expanded} dynamically set.
+  \item \texttt{Search.jsx} --- \texttt{aria-label} on filter pills and sort pills (not just icon buttons).
+  \item \texttt{ChatbotAssistant.jsx} --- \texttt{aria-label="Open chat assistant"}, \texttt{role="dialog"}, \texttt{aria-live="polite"} on bot messages, \texttt{aria-label="Chat message"} on input, \texttt{aria-label="Send message"} on button.
+  \item \texttt{Help.jsx} --- \texttt{aria-expanded} on accordion FAQ buttons (announces open/closed state).
+\end{itemize}
+\end{featurebox}
+
+\subsection{I2 --- Tolerance for Error: Booking Review Step}
+
+\begin{featurebox}{Tolerance for Error --- Review Before Confirm}
+Universal Design Principle 5 (Tolerance for Error): ``minimize hazards and the adverse consequences of accidental or unintended actions.'' The Booking flow enforces a 3-step flow --- Select Slot $\to$ Fill Details $\to$ Confirm --- where Step 2 shows all entered information before submission, giving the user an opportunity to review and correct before the irreversible ``Confirm Booking'' action. This mirrors Gmail's ``Undo Send'' pattern: a pre-commit checkpoint, not a post-error recovery.
+\end{featurebox}
+
+\subsection{I3 --- Size \& Space for Approach and Use: Touch Targets}
+
+\begin{featurebox}{Touch Target Sizing --- Universal Design Principle 7}
+Universal Design Principle 7 (Size and Space): ``provide adequate size for touch targets regardless of the user's body size or dexterity.'' WCAG 2.5.5 recommends a minimum touch target of 44$\times$44px. In BetterPracto, time slot buttons on the Booking page use \texttt{min-h-[44px] py-3}, ensuring they meet this threshold. Small slot buttons are a known pain point on mobile health apps --- insufficient target size causes mis-taps, leading to incorrect appointment times being selected.
+\end{featurebox}
 
 \vspace{0.5cm}
+
 
 % =================================================================
 \section{Block K --- CAPTCHA Design Principles}

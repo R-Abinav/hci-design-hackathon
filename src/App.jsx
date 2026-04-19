@@ -3,12 +3,14 @@ import { useState } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Onboarding from './components/Onboarding'
+import ChatbotAssistant from './components/ChatbotAssistant'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Search from './pages/Search'
 import DoctorProfile from './pages/DoctorProfile'
 import Booking from './pages/Booking'
 import Help from './pages/Help'
+import NotFound from './pages/NotFound'
 
 // Persist auth across client-side navigation and Vite HMR reloads
 // Uses sessionStorage (clears on browser close, but survives page nav)
@@ -94,9 +96,19 @@ export default function App() {
                                 : <Navigate to="/login" replace />
                         }
                     />
-                    <Route path="*" element={<Navigate to={isLoggedIn ? "/" : "/login"} replace />} />
+                    {/* Block H: Custom 404 page — Web Usability, graceful degradation */}
+                    <Route
+                        path="*"
+                        element={
+                            isLoggedIn
+                                ? <NotFound />
+                                : <Navigate to="/login" replace />
+                        }
+                    />
                 </Routes>
             </main>
+            {/* Block E: Chatbot Assistant — non-intrusive always-available support */}
+            {isLoggedIn && <ChatbotAssistant />}
             {isLoggedIn && <Footer />}
         </div>
     )
