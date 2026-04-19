@@ -6,6 +6,13 @@ export default {
     ],
     theme: {
         extend: {
+            // COLOR PSYCHOLOGY RATIONALE (end-sem HCI concept — Visual Design lecture):
+            // primary (#2A348C deep blue) → Trust, calm, authority (Facebook, VISA, NHS all use blue)
+            // accent (#14BEF0 cyan-blue) → Fresh, innovative, approachable — medical/digital feel
+            // trust (slate grey) → Neutral, professional — used for text and backgrounds
+            // Error/Destructive → red-500/600 (energy, urgency, danger — Coca-Cola, YouTube)
+            // Success → emerald-500/600 (natural, growth, health — Spotify, NHS green)
+            // Warning → amber-500/600 (optimism, caution, visibility — McDonald's, DHL)
             colors: {
                 primary: {
                     50: '#f0f4fa',

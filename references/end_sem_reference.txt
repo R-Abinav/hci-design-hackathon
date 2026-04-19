@@ -1,0 +1,746 @@
+﻿Quick revision for HCI
+
+
+Gestalts
+
+
+* Gestalts (German word for unified whole)
+* Gestalts Law - Closure, Continuity, Symmetry, Proximity, Similarity, Figure and Ground
+* Common Fate (Brain perceives things going in the same direction as a single unified object)
+
+
+Closure -> Brain perceives incomplete stuff as complete (IBM logo)
+Symmetry -> Aesthetically pleasing if logos or designs are symmetric in nature
+Proximity -> Brain grps closer objects, separating them from the far away ones
+Similarity -> Elements having similar appearance appear related 
+Figure and Ground -> Brain differentiates between object (figure) and its surroundings (ground) (Switching between them will allow u to view diff images)
+Continuity -> Brain sees objects in a straight line or a curved as related. Makes a visual connection between the items and the user’s eye. Use this principle while designing a menu!
+
+
+Case Study - Google Search
+Two types of users:
+Explorers show highly variable, unpredictable behavior with complex, long search logs. They are suited for open-ended, investigative search tasks.Navigators behave consistently — they revisit known domains and are efficient at well-defined, fact-finding tasks.
+Expert vs Novice Users -> Experts had ~5 years of computer use and ~4.5 years of web use, and browsed for ~5 hours per week. Compared to novices, experts:
+* Achieved higher search success rates
+* Spent less time to find answers
+* Reformulated queries more strategically
+* Used a depth-first / bottom-up search strategy
+* Used query format tools effectively
+Advanced vs General Users -> Advanced users (a subset distinct from "experts") behave quite differently:
+* They issue fewer queries per session but make each one longer and more precise
+* They click further down the result list (not just the top results)
+* Their search trails are shorter but more successful
+* They find more relevant results
+* For fact-finding tasks, their behavior is very systematic with small, targeted refinements
+
+
+Unsuccessful Search:
+* Formulating more question-based queries (e.g., "What is the name of...?")
+* Using advanced operators more desperately
+* Spending more time on search pages without clicking
+* The longest query appearing mid-session (not at the start or end)
+* Random query refinements with no systematic strategy
+* Scrolling up and down randomly on the results page
+* Revisiting pages
+Body Language -> body language cues during difficult search  things like leaning closer to the monitor, signs of frustration, and giving up
+Case Study - Google UX
+UX Team @ Google
+* Focus on user experience first, everything else follows
+* Bottom-up ideas culture, data-driven engineering, fast iterative web dev cycle
+* Global product perspective — designed for multiple countries
+* UX team aligns with Search, Commute, Applications
+* Skills: Interaction Design, Visual Design, User Research, Web Dev, Tech Writing
+* Located at multiple places globally
+① Bottom-Up (B/U) Ideas
+* Great ideas can come from anyone — Nooglers too
+* 20% time policy — spend on passion projects not related to primary work
+* Examples: Google News, Google Trends
+* More of a dev idea than a user need → UX team supports only mature ideas
+* Motto: "Engineers with Empathy to users — draw from lives of our users"
+② Life of a User (Training)
+* Field Fridays — attend sessions to connect with everyday problems / user delight
+* Internal Design Standards can be adopted elsewhere
+* UX team maintains a knowledge base (UX KB)
+③ Data-Driven Approach
+* Server perf monitored via metrics/dashboards
+* Web Analytics — what's happening but not why (quantitative)
+* User Analytics — qualitative; contextual factors that drive user behaviour
+* A/B Testing with random users — gather lots of data fast
+* Let experiment run long enough to get both initial + settled effect
+* Growth tracked by active users, usage over 7-day periods
+* Actuals: several times/day to once/month — variable per blocker
+④ How We Work: Rapid Web Dev Cycle
+* Desktop s/w → annual updates; Internet → updates more frequently
+* Agile testing — Guerrilla / Usability Testing, hijacked from Google Cafeteria
+* Limited number of users, short notice
+* Live instant managing between Moderator and Observer during lab testing
+* Redesign possible within a single session
+⑤ How We Work: Global Audience
+* Challenge of localisation at large scale (l10n)
+* Internationalisation Engineering (i18n) teams
+* Products depend on local content — Maps, Search, etc.
+* Finance design example: Credit card (US) vs Debit card (Germany / Hamburg)
+* Manchester → UK or US?
+* Globally diverse UX team with local awareness
+Case Study - Lost Rank
+Core Idea
+* "Not Gone, But Forgotten" — help users re-find lost web pages by identifying those likely to be lost
+* Lost Rank = rank search results by likelihood of being lost to the user
+Why Pages Get Lost
+* Hidden within difficult navigation paths / buried deeply in site structure
+* Page Rank & HITS promote credible/authoritative pages (lots of incoming links from other credible pages)
+* Our ability to formulate queries to locate specific documents decays over time
+* As time grows → doc content grows ↑, good querying ability ↓
+Ranking Components
+* Access Patterns — time of last access
+* Two pages accessed 1 month ago → equal lost rank
+* P1 (viewed at times) vs P2 (once/month over 2 yrs) → P2 has lower probability of loss → weaker lost rank
+* Pages very frequently accessed then a long lull → dormant pages
+* Dormant pages = important but user familiarity declines
+Topic Patterns (★)
+* User revisiting varies across topics
+* Code docs → Navigational style (easy to find)
+* Health docs → Exploratory style (harder to find)
+* Build an access pattern per topic, associate topical activity to each page
+* "Pages with more dormant topics → more likely to be lost"
+* Java class String (specific) = Higher Lost Rank
+* Java (generic) = Weaker Lost Rank
+Difficulty Before Original Access (★)
+* Path to reach the original page tracked
+* Specific queries → navigational style → easy to find
+* Pages after long trail of browsing + query reformulations → indicate exploratory queries → likely lost
+* User recollection of terms from pages from different tasks will be bad
+* Example: Energy-efficient buildings → passive windows (not frequently searched) → likely to be lost
+
+
+
+
+Principles of Visual Design
+Unity
+* Harmony between all elements on a page — visually or conceptually arranged together
+* Lack of unity → sense of unease and chaos
+* Use a grid for unity — elements in a grid follow orderly arrangement
+* Strike balance between boring and chaotic
+* Gestalt → separate sections distinct by increasing white space between them
+* Accidental grouping of unrelated elements → confused users
+* Designs with clear, conceptually distinct sections are easier to scan
+Hierarchy
+* Difference in importance of elements — colour, size are the most common tools
+* Items at top of page perceived as higher hierarchy
+* Font size & style establish hierarchy (large header → small subtitle)
+Balance
+* Distribute elements evenly — balanced = calm & natural, imbalanced = uneasy
+* Symmetrical balance → centralised text/images
+* Asymmetrical balance → different-sized elements arranged around an imaginary centre point
+Contrast
+* Make elements stand out via colour, size, value differences
+* Red → destructive/irreversible actions (iOS Delete)
+* Green → positive actions (Go, Accept)
+* Don't ignore cultural meaning of colours — "Is their red lucky or angry?"
+Scale
+* Relative sizes of elements — larger = more emphasis
+* Scale creates sense of depth (nearer objects appear larger)
+Dominance
+* Focus attention on a single element using colour, shape, contrast, scale, positioning
+* Websites use "hero" image for dominance — natural attraction
+* Must maintain unity and balance alongside dominance, else disorienting
+Case Study: Google Homepage
+* Dominance → large logo + search box as sole focus
+* Contrast + Colour → bright primary colours on white background
+* Negative Space → majority of page is empty, search box stands out (80/20)
+* Balance → vertically symmetrical, calm to look at
+* Shape → rectangular search box clearly delineates the input field
+Case Study: Quartz Homepage
+* Dominance → main story in large bold font immediately catches eye
+* Hierarchy → main story largest, next 4 stories smaller below it
+* Scale + Colour → full-page greyscale "Q" establishes brand identity, fades to keep focus on headline
+* Negative Space → hover reveals hero image, "content is king"
+* Unity → grid system, 4 stories equal width uniformly spaced
+
+
+Psychology of Persuasion & Color Psychology — Lecture 10)
+Cialdini's 6 Principles of Influence
+* Reciprocity — Give value upfront (free ebooks, newsletters) in exchange for user email → high benefit, low cost
+* Authority — People trust experts & high-status figures → titles (Dr., CEO), brand associations, showing big-name clients builds credibility
+* Scarcity — Limited availability = higher perceived value → FOMO ("Fear of Missing Out") → Booking.com (rooms left), Groupon (countdown timers)
+* Liking — People agree with those they like or relate to → celebrity endorsements (Turkish Airlines), social media engagement builds relatability
+* Social Proof — People look to others for validation → reviews, ratings, star counts, "customers also bought" (Amazon)
+* Commitment (implied) — Once users take a small action, they're more likely to follow through
+________________
+
+
+Psychology of Colors
+* 80% of consumers say color increases brand recognition
+* Aesthetic Usability Effect — more attractive a product looks, the more usable it's perceived to be
+Color
+	Associations
+	Example
+	Blue
+	Trust, calm, secure
+	Facebook, VISA, Ford
+	Red
+	Energy, bold, passion
+	Coca-Cola
+	Orange
+	Happy, friendly, enthusiasm
+	Nickelodeon, Fanta
+	Yellow
+	Optimism, visibility, playful
+	McDonald's, DHL
+	Pink
+	Feminine, youthful, gentle
+	Baskin-Robbins
+	Purple
+	Creative, royalty, spiritual
+	Cadbury, Yahoo, Hallmark
+	Green
+	Natural, fresh, growth
+	Whole Foods, Spotify
+	Brown
+	Earthy, honest, loyal
+	UPS
+	Black
+	Luxury, authority, formal
+	Nike, BBC, Chanel
+	White
+	Simplicity, purity
+	Apple
+	Multi-color
+	Diversity, boundless
+	Google, Olympics
+	 Web Usability Guidelines — Lecture 15
+25-Point Usability Cheat Sheet
+Accessibility — fast load time, text contrast, readable fonts, spare use of Flash, ALT tags on images, custom 404 page
+Identity — logo prominently placed, clear tagline, homepage digestible in 5 seconds, clear path to company & contact info
+Navigation — easily identifiable nav, clear labels, reasonable number of links, logo linked to home, consistent links, accessible search
+Content — clear headings, critical content above the fold, consistent styles, sparing emphasis, unobtrusive ads, concise copy, meaningful URLs, explanatory HTML titles
+10 Principles of Good Website Design
+1. Don't Make Users Think — Krug's Law: page should be obvious & self-explanatory. Clear structure + recognizable links. Users scan in F-pattern — first 3 visible elements matter most. No unnecessary question marks in the user's mind.
+2. Don't Squander Users' Patience — Keep requirements minimal. Let users explore before asking for private data. Users share email only when they know what they get in return.
+3. Manage Users' Attention — Images > text for eye-catching. Bold > plain. Human eye is non-linear. Video ads are annoying but effective for attention. Less thinking → better UX.
+4. Strive For Feature Exposure — Let users clearly see what functions are available. Visible nav options at first glance. 1-2-3 step guides are effective, not bad design.
+5. Make Use Of Effective Writing — No promotional fluff, no exaggerated language. Talk business — "Sign Up" over "Get In". Short & concise phrases. Scannable layout. Plain, objective language.
+6. Strive For Simplicity — KISS principle. Users aren't there to enjoy design. More content, less ads = good site. No overcrowding.
+7. Don't Be Afraid Of White Space — Reduces cognitive load. Helps users scan and digest content. Simon's Law: better visual hierarchy → easier to perceive content.
+8. Communicate With "Visible Language" — 3 principles: Organize (clear consistent structure), Economize (most with least elements, avoid ambiguity), Communicate (match to user capability). Max 3 typefaces, max 3 font sizes, 50–80 chars per line.
+9. Conventions Are Our Friends — Reduces learning curve, builds trust. Best test: a foreign-language user should still be able to navigate your site.
+10. Test Early, Test Often (TETO) — Usability tests reveal critical issues. Testing 1 user early >> testing 50 near the end (Steve Krug). Testing is iterative. Weinberg's Law: developers are poor judges of their own code.
+
+
+
+
+
+
+Interaction Design Styles — Lecture 14
+4 Types of Interaction Styles Command Language, Form Fill-in, Menu Selection, Direct Manipulation
+________________
+
+
+1. Command Language (CLI)
+* Earliest interaction style — still used on Linux/Unix
+* Relies on recall (not recognition) → high cognitive burden
+* Commands abbreviated (e.g. ls) to minimize keystrokes
+* Examples: MS-DOS, CP/M, Apple DOS, UNIX $prompt
+Pros — Flexible, fast for experts, supports scripts/macros, low RAM, low bandwidth, no Windows needed Cons — Poor learnability, poor error handling, high error rates, not for novices, start from scratch on mistakes
+________________
+
+
+2. Form Fill-in
+* "Fill in the blanks" — aimed at non-experts
+* TAB to switch fields, ENTER to submit — no mouse needed originally
+* Field separation allows input validation
+* Still used in: payroll, financial, video rental systems
+Pros — Simplifies data entry, recognition not recall, guides user, fast with no training needed, data validation possible Cons — Consumes screen space, limited options, not for complex apps, accessibility issues for visually impaired
+________________
+
+
+3. Menu Selection
+* User picks from a predefined set of commands → causes state change
+* Recognition over recall → minimal learning needed
+* Items clustered in pull-down or pop-up menus to save space
+* Used for familiar, limited, uniform set of functions
+Pros — Ideal for novices, low cognitive load, easy error handling, familiar across platforms, intuitive, structures decision making Cons — Limited options, sub-menus hard to find, can clutter screen, slow for expert users, bad for small displays, too many menus → overload
+________________
+
+
+4. Direct Manipulation
+* Introduced by Ben Shneiderman, 1982 (traced to Sutherland's Sketchpad, 1963)
+* Objects visible in UI, manipulated directly with physical reversible actions + immediate feedback
+* WYSIWYG — "What You See Is What You Get"
+* Examples: pinch to zoom (mobile), drag file to folder (macOS)
+Characteristics — Visibility of object, rapid/reversible/incremental actions, no complex command syntax
+Pros — Easy to learn, error avoidance, encourages exploration, high user satisfaction, recognition memory Cons — Hard to program, needs graphical display, RSI risk from repetitive actions, metaphors can mislead, bad for small screens, expert users may prefer compact notation
+________________
+
+
+Summary Comparison Table
+Style
+	Best For
+	Key Weakness
+	CLI
+	Experts
+	Poor learnability
+	Form Fill-in
+	Routine data entry
+	Screen space, rigid
+	Menu Selection
+	Novices
+	Slow for experts
+	Direct Manipulation
+	General users
+	Hard to program
+	Natural Language
+	Hands-free
+	Ambiguous, unpredictable
+	
+
+
+
+User Support Systems in Human-Computer Interaction
+
+
+1. What is User Support?
+User support refers to any system or mechanism that helps users understand and effectively use a software application. It encompasses both help (problem-oriented and specific) and documentation (system-oriented and general), and the same design principles apply to both.
+The core challenge is that different users need different kinds of support at different times — a beginner needs step-by-step guidance, while an expert just needs a quick reminder. Both implementation and presentation must be carefully designed.
+________________
+
+
+2. Types of User Support
+Quick Reference
+This is aimed at users who already know the system but need a fast reminder — for instance, forgetting a keyboard shortcut or command syntax. It's not meant to teach; it just jogs memory. Examples include cheat sheets, tooltips, and command references.
+Task-Specific Help
+This kicks in when a user is stuck on a particular task. The help offered is directly tied to what the user is currently doing — so it's contextual and targeted rather than general. For example, clicking "Help" while inside a dialog box gives you help about that dialog specifically.
+Full Explanation
+Aimed at more experienced or curious users who want a deeper understanding of how something works. This kind of support goes beyond immediate needs and often includes information the user doesn't strictly need right now. It's more like reading a manual chapter than looking something up.
+Tutorial
+Designed primarily for beginners. It provides step-by-step instructions, often working through examples, to teach the user how to use the tool from scratch. The focus is on learning through doing.
+________________
+
+
+3. Requirements of User Support (Features)
+A good user support system must meet the following criteria:
+Feature
+	Meaning
+	Availability
+	Accessible at any time without leaving the main application
+	Accuracy & Completeness
+	Help must correctly reflect how the system actually works
+	Consistency
+	Help content must match across all parts, including paper documentation
+	Robustness
+	Must handle errors gracefully and behave predictably
+	Flexibility
+	Should accommodate users of varying skill levels and task types
+	Unobtrusiveness
+	Should not interrupt or block the user's primary work
+	________________
+
+
+4. Approaches to User Support
+Command Assistance
+The user explicitly requests help on a specific command (e.g., UNIX man, DOS help). Good for experienced users who know what they're looking for, but useless if the user doesn't know the command name in the first place.
+Command Prompts
+When a user makes a syntactic error, the system provides a prompt explaining correct usage. This helps with simple mistakes but still assumes the user knows the command — it just helps with proper syntax.
+Context-Sensitive Help
+Help is automatically interpreted based on what the user is currently doing. A classic example is tooltips — hover over a button and a description appears. This is much more intuitive because it removes the burden of knowing where to look.
+Online Tutorials
+Users work through the basics of an application in a guided, test-safe environment. Useful for learning, but often criticized for being inflexible — they usually follow a fixed path and don't adapt to the learner.
+Online Documentation
+The traditional paper manual is digitized and made available on screen at all times. The advantage is constant availability in a familiar medium, but it can be hard to browse. Hypertext links help by allowing users to jump between related sections rather than reading linearly.
+Wizards
+A wizard is a step-by-step guide for a specific task. It asks the user questions and uses the answers to complete the task on their behalf. They're particularly useful for complex or infrequent tasks (like setting up a mail merge or configuring a printer). However, they constrain the user to a fixed path, limiting flexibility. Good wizard design always allows the user to go back and change answers.
+Assistants
+Assistants passively monitor user behavior and offer suggestions when relevant. Ideally, they're unobtrusive and under user control. The infamous example is Microsoft's Clippy, which failed because it was intrusive and its suggestions were often irrelevant. A better example is MS Office Smart Tags, which appear near the object of interest without demanding attention.
+________________
+
+
+5. Adaptive Help Systems
+Adaptive help goes further than static help by personalizing the support based on knowledge of the user, their current task, the domain, and the context.
+Problems with Adaptive Help
+* Requires a lot of background knowledge to function well
+* Raises questions about who controls the interaction (user or system?)
+* Difficult to decide what should be adapted and to what extent
+Knowledge Representation: User Modelling
+Every help system has some model of the user. These range from simple to sophisticated:
+* Single generic user (non-intelligent): One-size-fits-all. No real user modelling.
+* User-configured model (adaptable): The user sets their own preferences and experience level.
+* System-configured model (adaptive): The system figures out the user's level on its own.
+Three main approaches to building user models:
+1. Quantification — The user's expertise is measured numerically, and they move between levels (beginner → intermediate → expert) based on this score.
+2. Stereotypes — The user is classified into a predefined category (e.g., "novice", "expert"), and help is tailored to that category.
+3. Overlay — An ideal expert model is constructed, and the actual user's behavior is compared to it. The gap shows what the user doesn't know yet. A special case of this compares user behavior against a known error catalogue to identify common mistake patterns.
+Knowledge Representation: Domain and Task Modelling
+This involves the system understanding:
+* What common errors and tasks look like
+* What the user is currently trying to do
+Usually done by analyzing command sequences. Key challenges include representing tasks formally, handling interleaved tasks (when the user switches between activities), and inferring user intention from behavior.
+Knowledge Representation: Advisory Strategy
+Even when the system knows the user's problem, it must choose the right kind of advice — a reminder? A full tutorial? An example? Matching the advisory style to the situation is important, though few help systems actually model this explicitly.
+Techniques for Knowledge Representation
+Technique
+	Description
+	Scope
+	Rule-based
+	Knowledge as rules and facts, interpreted by an inference engine
+	Relatively large domains
+	Frame-based
+	Knowledge stored in structured templates with slots
+	Small domains
+	Network-based
+	Knowledge as relationships between facts; can link frames
+	Medium domains
+	Example-based
+	Learns from examples and classifies situations; no explicit rules needed
+	Flexible, but needs training data
+	Issues in Adaptive Help
+Three key design tensions:
+1. Initiative — Who controls the interaction? Can the system interrupt the user to offer help, or must the user always ask first?
+2. Effect — What gets adapted? Only model what is actually needed to avoid unnecessary complexity.
+3. Scope — Is the model at the application level (knows how you use Word) or system level (knows how you use all software)? System-level is much harder because expertise varies between applications.
+________________
+
+
+6. Designing User Support
+A critical principle: user support is not an add-on. It must be designed from the beginning as an integral part of the system, not bolted on at the end.
+Focus on content and context rather than just technology.
+Presentation Issues
+Designers must decide:
+* How is help requested? Via a command, a button, a function key, or a separate help application?
+* How is help displayed? New window, whole screen, split screen, pop-up boxes, or icon hints?
+Effective presentation requires:
+* Clear, familiar, and consistent language
+* Instructional language ("Click here to...") rather than purely descriptive language ("This button...")
+* Avoiding dense blocks of text
+* Clearly distinguishing between summaries and detailed examples
+Implementation Issues
+Practical considerations include:
+* Is help implemented as an OS command, a meta-command, or built into the application?
+* How is help data structured — a single file, a file hierarchy, or a database?
+* What resources are available — screen space, memory, processing speed?
+* Does the system support browsing, extensibility, and printing (hard copy)?
+________________
+
+
+Summary
+User support is a fundamental part of good HCI design. Users need different kinds of help at different times, and the system should be able to provide it in a way that is available, accurate, consistent, robust, flexible, and unobtrusive. Support ranges from simple command references to sophisticated adaptive systems that build personalized models of each user's knowledge and behavior. Good design considers both what the help says and how it's presented and implemented.
+
+
+Universal Design — Full Explanation
+1. What is Universal Design?
+Universal Design is a design philosophy and strategy aimed at creating products, environments, and communications that are usable by all people, to the greatest extent possible, without the need for adaptation or specialized design. It spans a wide range of disciplines — architecture, product design, web design, and communication design.
+The two cornerstones of Universal Design are Accessibility (can the person reach and use it?) and Usability (can they use it effectively and comfortably?). Critically, Universal Design should not introduce new usability problems for regular users while solving accessibility problems for others. A classic physical example is a staircase with a diagonally-cut ramp integrated into it — wheelchair users get a gentle slope, while other users can still use the stairs normally.
+Each of the seven principles is characterized by a name, a definition, and specific guidelines — key elements that a design must include to be considered compliant with that principle.
+________________
+
+
+2. The Seven Principles of Universal Design
+Principle 1: Equitable Use
+Definition: The design is useful and marketable to any group of users.
+This means the design should not create different experiences for different user groups that disadvantage any of them. The guidelines are:
+* Provide the same means of use for all users — identical whenever possible, and equivalent when not.
+* Avoid segregating or stigmatizing any user group (e.g., don't make disabled users use a separate entrance).
+* Provisions for privacy, security, and safety should be equally available to everyone.
+A real-world digital example is a website that offers multiple language options — all users, regardless of language, can access the same content through the same interface.
+________________
+
+
+Principle 2: Flexibility in Use
+Definition: The design accommodates a wide range of individual preferences and abilities.
+The design should not force users into a single fixed way of interacting with it. Guidelines include:
+* Provide choice in methods of use (e.g., keyboard or mouse, touch or voice).
+* Accommodate both right- and left-handed access and use.
+* Facilitate accuracy and precision — help users do things correctly, not just quickly.
+* Provide adaptability to the user's pace — don't time out prematurely or rush the user.
+A digital example is a subscription service offering both monthly and yearly payment options, or a software application that offers both keyboard shortcuts and menu-based navigation.
+________________
+
+
+Principle 3: Simple and Intuitive Use
+Definition: Use of the design is easy to understand, regardless of the user's experience, knowledge, language skills, or current concentration level.
+Good design should not require prior expertise or training. Guidelines:
+* Eliminate unnecessary complexity — keep the interface as simple as the task allows.
+* Be consistent with user expectations and intuition — don't surprise or confuse users.
+* Accommodate a wide range of literacy and language skills — use simple, clear language and icons where possible.
+* Arrange information consistent with its importance — most important things should be most prominent.
+* Provide effective prompting for sequential actions — guide the user step by step when needed.
+The Uber app is a classic example — entering a pickup location and destination and pressing a single button is intuitive for virtually anyone, regardless of technical background.
+________________
+
+
+Principle 4: Perceptible Information
+Definition: The design communicates necessary information effectively to the user, regardless of ambient conditions or the user's sensory abilities.
+Information must be accessible through multiple channels so that users with visual, hearing, or other sensory impairments still receive it. Guidelines:
+* Use different modes — pictorial, verbal, and tactile — for redundant presentation of essential information.
+* Ensure adequate contrast between essential information and its surroundings (e.g., text vs. background).
+* Maximize legibility in all sensory modalities.
+* Differentiate elements in ways that can be described verbally, so that instructions and directions can be communicated easily.
+* Provide compatibility with assistive devices used by people with sensory limitations (e.g., screen readers, hearing aids).
+An example is Trello's onboarding flow, which pairs visual previews of boards with written explanations, making the information accessible through multiple channels simultaneously.
+________________
+
+
+Principle 5: Tolerance for Error
+Definition: The design minimizes hazards and the adverse consequences of accidental or unintended actions.
+Users will make mistakes — good design anticipates this and reduces the damage. Guidelines:
+* Arrange elements to minimize hazards and errors — the most-used elements should be most accessible, while hazardous elements should be eliminated, isolated, or shielded.
+* Provide warnings of hazards and errors before they happen.
+* Provide fail-safe features — let users undo mistakes (e.g., Gmail's "Undo Send" feature).
+* Discourage unconscious action in tasks that require careful attention — don't let critical actions happen by accident.
+A great digital example is Gmail's "Message sent — Undo" notification, which gives users a brief window to reverse an accidental send.
+________________
+
+
+Principle 6: Low Physical Effort
+Definition: The design can be used effectively and comfortably and with a minimum of fatigue.
+This principle is important for both physical products and digital interfaces. Guidelines:
+* Allow users to maintain a neutral body position — no awkward reaching or stretching.
+* Use reasonable operating forces — don't require excessive pressing, turning, or clicking.
+* Minimize repetitive actions — avoid requiring the same motion over and over.
+* Minimize sustained physical effort — reduce tasks that require holding something in position for extended time.
+In software, keyboard shortcuts are a prime example — instead of repeatedly navigating menus, a single key combination achieves the same result with far less effort.
+________________
+
+
+Principle 7: Size and Space for Approach and Use
+Definition: Appropriate size and space is provided for approach, reach, manipulation, and use regardless of the user's body size, posture, or mobility.
+Guidelines:
+* Provide a clear line of sight to important elements for both seated and standing users.
+* Make reach to all components comfortable for any seated or standing user.
+* Accommodate variation in hand and grip size.
+* Provide adequate space for assistive devices or personal assistance (e.g., room for a wheelchair or a support worker).
+In web design, this translates to ensuring that touch targets (buttons, links) are large enough to be tapped comfortably regardless of finger size or dexterity.
+________________
+
+
+3. Universal Design Specifics — Disability-Focused Solutions
+The documents also go into specific challenges and solutions for different disability groups, particularly in the context of web and digital design.
+Blindness
+Users who are blind rely on screen readers and keyboard navigation rather than visual content or a mouse.
+Challenge
+	Solution
+	Images/graphics are unusable
+	Provide alt text descriptions; longer explanations where needed
+	Users listen to pages linearly
+	Create skip links to bypass repetitive menus and long lists
+	Users navigate link-to-link via Tab key
+	Ensure links make sense out of context ("click here" is problematic)
+	No mouse use
+	Supply keyboard alternatives (e.g., onFocus instead of onMouseover)
+	Data tables are confusing to navigate by ear
+	Provide <th> column/row headers; avoid spanned rows/columns
+	Complex graphs are unusable
+	Provide text summaries or descriptions as alternatives
+	Frames cause disorientation
+	Avoid frames; if used, give descriptive frame titles
+	Color-coded information is unusable
+	Never rely on color alone to convey meaning
+	Videos show events without narration
+	Provide audio descriptions for visual-only events in video
+	________________
+
+
+Color Blindness
+Color blindness affects approximately 1 in 12 men and 1 in 200 women. The most common type is deuteranomaly (difficulty distinguishing red from green).
+Challenge
+	Solution
+	Similar-contrast colors are indistinguishable
+	Ensure sufficient contrast; supplement color with text labels
+	Good design uses strong color contrast that is aesthetically pleasing to all users, not just a workaround for a minority.
+________________
+
+
+Low Vision
+Users with low vision often use screen magnification tools.
+Challenge
+	Solution
+	Screen enlargers cause excessive horizontal scrolling
+	Use relative units (percentages) rather than fixed pixels for widths
+	Text in graphics becomes pixilated when enlarged
+	Limit or eliminate text in images; use anti-aliasing
+	________________
+
+
+Deafness
+Challenge
+	Solution
+	Audio content is inaccessible
+	Provide full transcripts for audio; synchronous captions for video
+	________________
+
+
+Motor Disabilities
+Users with motor disabilities may use adaptive input methods like "puff-and-sip" devices, voice software, or may simply be unable to use a mouse.
+Challenge
+	Solution
+	Cannot use a mouse
+	Ensure all functions work from keyboard; logical tab order
+	Fatigue from adaptive technology
+	Provide skip links over long, repetitive content
+	Using voice-activated software
+	Prioritize keyboard support, as voice software maps better to keyboard events than mouse events
+	________________
+
+
+Cognitive Disabilities
+Challenge
+	Solution
+	Complex or inconsistent layouts cause confusion
+	Simplify layout; maintain consistent navigation
+	Difficulty focusing on long blocks of text
+	Group content under logical headings; break into manageable chunks
+	One method of input insufficient
+	Supplement text with visuals or other media, and vice versa
+	________________
+
+
+4. Advantages and Disadvantages of Universal Design
+Advantages
+* Increased Accessibility — more people can use the product regardless of ability.
+* Broader User Base — universal design inherently expands the potential market.
+* Improved User Experience — the focus on usability, simplicity, and flexibility improves the product for everyone.
+* Legal Compliance — helps meet accessibility laws and standards (e.g., ADA, WCAG).
+* Future-Proofing — accessible products remain usable as user populations age or needs change.
+Disadvantages
+* Design Complexity — designing for all users is harder than designing for a narrow group.
+* Balancing Trade-Offs — accommodating one group's needs may conflict with another's preferences.
+* Education and Awareness — designers and organizations need training to apply these principles effectively.
+* Testing and Validation — requires testing with genuinely diverse user groups, which is resource-intensive.
+________________
+
+
+5. Important Note on Scope
+The principles of Universal Design do not replace all criteria for good design — they address only universal usability. Other important factors such as aesthetics, cost, safety, cultural appropriateness, and gender considerations must also be taken into account alongside these principles. Universal Design is a lens applied to design decisions, not the entire framework of what makes something a good product.
+________________
+
+
+Summary
+Universal Design is the systematic effort to make products, environments, and digital experiences work for the widest possible range of people, including those with visual, auditory, motor, and cognitive disabilities, as well as those of different ages, body types, and language backgrounds. Its seven principles — Equitable Use, Flexibility in Use, Simple and Intuitive Use, Perceptible Information, Tolerance for Error, Low Physical Effort, and Size and Space for Approach and Use — provide a comprehensive checklist for evaluating and improving any design. When applied to digital products, these principles translate into specific, practical web accessibility practices that make the web genuinely usable for everyone.
+
+
+
+
+
+
+
+
+Understanding CAPTCHA — Full Explanation
+1. What is CAPTCHA?
+CAPTCHA stands for "Completely Automated Public Turing test to tell Computers and Humans Apart." The term was coined in the year 2000 at Carnegie Mellon University by Luis von Ahn, Manuel Blum, Nicholas Harper, and John Langford.
+At its core, a CAPTCHA is a challenge-response test — it presents a puzzle that a human can solve easily but that a computer program (bot) cannot. It is often described as a reverse Turing test. In the original Turing Test, a human judge tries to determine whether they are talking to a human or a machine. In a CAPTCHA, the situation is reversed: a computer program creates a test that it itself cannot pass, but that humans can. The goal is to verify that the person interacting with a web service is a real human and not an automated script.
+________________
+
+
+2. The Historical Need for CAPTCHA
+Three real incidents drove the development of CAPTCHA technology:
+AltaVista (1997): AltaVista's "add-URL" service was being flooded by bots automatically submitting thousands of spam URLs. Chief Scientist Andrei Broder and his team devised a solution — generating random strings of text and distorting them in ways that would confuse Optical Character Recognition (OCR) software while remaining readable to humans. They deliberately simulated conditions that OCR manuals flagged as causing recognition failures. After about a year of use, AltaVista reported a 95% reduction in spam-added URLs.
+Slashdot Poll Manipulation (1999): Slashdot.org ran an online poll asking users to vote for the best computer science graduate school in the US. Students at MIT and Carnegie Mellon created automated "voting bots" to repeatedly vote for their own school. MIT ended up with 21,156 votes and Carnegie Mellon with 21,032, while all other schools received fewer than 1,000 votes. This proved conclusively that online polls were meaningless without a mechanism to ensure only humans could vote.
+Yahoo! Chat Bot Invasion (2000): Yahoo! reported that bots were infiltrating their online chat rooms and redirecting legitimate users to advertising websites. Yahoo turned to Carnegie Mellon for help, and this collaboration led directly to the formal development and naming of CAPTCHA, with a US patent issued in April 2001.
+The design criteria established for CAPTCHA were:
+* Challenges should be automatically generated and graded
+* Simple enough for humans to solve quickly
+* Accept virtually all human users while rejecting very few
+* Reject virtually all machine/bot attempts
+* Remain resistant to automated attacks for many years
+________________
+
+
+3. Applications of CAPTCHA
+Today, CAPTCHAs are used across many areas of the internet to prevent what the presentation calls "online misses" — misbehavior, mischief, and misconduct. Specific uses include:
+* Preventing automatic postings on blogs, forums, and wikis (stopping spam comments)
+* Stopping ticket scalpers from bulk-purchasing event tickets via bots
+* Protecting website registrations from fake account creation
+* Protecting email addresses from scrapers (bots that harvest emails for spam lists)
+* Authenticating online polls to prevent vote manipulation
+* Preventing dictionary attacks (automated attempts to guess passwords)
+* Stopping search engine bots from accessing restricted content
+________________
+
+
+4. CAPTCHA Design Guidelines
+Accessibility
+Not all users can solve visual text-based CAPTCHAs. Visually impaired users, for instance, need audio CAPTCHAs — an audio recording of distorted spoken words or numbers that the user listens to and types. This is a direct application of Universal Design thinking: any protection mechanism must be accessible to all users, not just those without disabilities.
+Image Security
+Visual CAPTCHAs must be secure enough to defeat OCR-based attacks. The primary tool for this is randomness — introducing unpredictable variation that OCR algorithms cannot account for. Specific techniques include:
+* Making letters wiggly — irregular curves that break pattern recognition
+* Adding noise or lines — random marks overlay the characters
+* Using a messy background — cluttered visual context confuses character isolation
+* Crowding or blending letters — characters that touch or merge are harder to segment
+* Segmenting characters — splitting characters visually in misleading ways
+* Varying font thickness and color — inconsistency defeats font-recognition approaches
+Script Security
+The underlying software must also be secure:
+* Passwords should be transmitted in encrypted text
+* Sessions must be destroyed after a CAPTCHA is solved — if a session stays open, the same CAPTCHA solution could be resubmitted repeatedly
+* Use a large pool of words or images to prevent crackers from building a complete database of challenges and their answers
+* Use phonetic generators and nonsense words to make dictionary-based attacks harder
+________________
+
+
+5. Breaking CAPTCHAs
+CAPTCHA technology has faced constant attack attempts. These fall into three broad categories:
+Programming Errors (Implementation Weaknesses)
+Poorly implemented CAPTCHAs can be defeated without any AI at all:
+* Not destroying sessions after solving — a session ID and solved CAPTCHA can be reused indefinitely until the session expires
+* Allowing multiple guesses at the same image — bots can make repeated attempts using machine learning until they get it right
+* Too small a word/image pool — crackers can compile a complete database mapping challenges to their correct answers (a "rainbow table" for CAPTCHAs)
+* Weak distortion — consistent fonts, constant glyphs, low noise, and minimal distortion leave images vulnerable to standard OCR
+Human Solvers
+Some attackers bypass the AI problem entirely by using humans:
+* Sweatshop labor — challenges are relayed to human operators in low-wage regions. A typical worker solves around 720 CAPTCHAs per hour at roughly $2.50/hour, making each solution cost about one-third of a cent.
+* The Pornography Attack — a clever and disturbing exploitation method where a CAPTCHA challenge is scraped from a target site and embedded on a pornography website. The visitor is asked to solve the CAPTCHA to access content, and their answer is silently relayed back to defeat the original site's CAPTCHA in real time.
+Machine Learning Attacks
+More sophisticated attacks use AI and computer vision:
+* Pre-processing — algorithms remove distortion, blurring, background noise, and clutter to clean up the image. This is relatively easy for computers.
+* Segmentation — the image is split into regions each containing a single character. This is the hardest step — computationally expensive and complex.
+* Character Recognition — standard OCR software then identifies the cleaned, isolated characters.
+Specific Cracking Tools
+* PWNtcha ("Pretend We're Not a Turing Computer but a Human Antagonist") — targeted the Gimpy CAPTCHA by exploiting consistent fonts, weak distortions, and predictable glyphs.
+* puremango.co.uk — a script-based attack that exploited implementations that failed to destroy sessions after a challenge was solved.
+* Audio CAPTCHA cracking — works in two stages: segmentation (splitting the audio into frequency bands to separate noise from spoken words) and recognition (using Automatic Speech Recognition software to identify the words).
+________________
+
+
+6. Advancing CAPTCHA Technology
+As attacks evolved, so did CAPTCHA technology. Several major advances are covered:
+reCAPTCHA
+Founded by Luis von Ahn in 2008 and later acquired by Google, reCAPTCHA served a dual purpose — security and digitization. The idea was to use the massive human effort spent solving CAPTCHAs to help digitize scanned books and documents.
+How it worked:
+* Each challenge paired a known word (the control, from a verified database) with an unknown word (one that OCR software had failed to recognize from a scanned book)
+* Used three different distortion techniques to prevent OCR attacks
+* If the user correctly solved the control word, the unknown word was assumed to be correct too
+* When three users independently gave the same answer for the unknown word, it was accepted as correct and added to the dictionary
+* Achieved an impressive 99.1% accuracy rate at the word level
+Private Implementations (HIP — Human Interactive Proof)
+Because the original CAPTCHA acronym contains the letter "P" for "Public" (meaning the implementation is open), private implementations are called HIPs instead. Microsoft's Simard's HIP is a notable example, using 23 adjustable "hardness parameters" to tune the difficulty of each challenge.
+PARC Implementations (Pessimal Print and BaffleText)
+The Palo Alto Research Center developed two new approaches based on image degradation or obliteration — deliberately damaging text in ways that are easy for the human eye to reconstruct but extremely hard for computers to reverse-engineer and isolate. The key insight is that human pattern recognition is extraordinarily good at filling in missing information, while computers struggle greatly with this task.
+Graphic-Based CAPTCHA — Bongo
+Developed at Carnegie Mellon, Bongo presents two series of geometric shapes that share a common visual characteristic. The user is then shown four new shapes and must decide which series each one belongs to. This tests abstract visual reasoning — a capability that humans have naturally but that is very difficult to replicate in software.
+Image-Based CAPTCHAs — ESP-Pix and SQUIGL-Pix
+Both developed by Luis von Ahn and the reCAPTCHA team:
+* ESP-Pix — presents four distorted photographs and asks the user to type a word that relates to all of them. Requires semantic understanding of real-world images.
+* SQUIGL-Pix — presents distorted images and asks the user to identify the correct one by tracing it. The tracing interaction itself is difficult to fake with a bot.
+The ESP Game
+Also invented by Luis von Ahn, the ESP Game crowdsourced the labeling of images for use in CAPTCHAs. Two anonymous players are shown the same image and must independently type single words to describe it. When they match, the round ends, and the agreed-upon label is recorded. Control images validate that users are paying attention. It was estimated that 5,000 simultaneous players could label every image on Google in just 30 days.
+3-D CAPTCHAs
+Both text-based and image-based 3-D CAPTCHAs were developed:
+* Text-Based 3-D — three-dimensional rendering of text is significantly harder for machine learning to crack than flat 2-D text.
+* Image-Based 3-D (developed by Michael Kaplan) — generates a database of 3-D objects with all their parts labelled (e.g., a walking man's head, arms, legs). These objects are placed in scenes and the user is asked to identify specific attributes. This is highly resistant to both brute force and machine learning:
+   * Asking a user to identify 3 objects from a scene generates 15,600 possible combinations. Increasing to 5 objects yields over 7.8 million possibilities.
+   * Machine learning attacks are self-defeating — if a bot learns to correctly identify a flower in all images, the disproportionately high correct-answer rate for "flower" is a detectable signal, and the flower can simply be removed from the image pool and replaced.
+________________
+
+
+7. Conclusions
+The overall assessment of CAPTCHA technology from the presentation is optimistic:
+* CAPTCHA remains effective despite persistent attack attempts
+* The technology is advancing faster than attackers' ability to break it
+* Many research projects are ongoing, with new private implementations constantly being developed
+* CAPTCHAs are economically effective against attackers — human solving costs are rising, making large-scale bot operations less economically viable
+* Machine-based segmentation is expensive both computationally and in terms of human labor
+* The Pornography Attack, while clever, is not a serious threat because not enough traffic flows through such sites to cause meaningful damage to well-protected websites
+________________
+
+
+Summary
+CAPTCHA technology emerged from a real and growing need to distinguish humans from automated bots online. Starting from simple distorted text challenges, it has evolved into a rich ecosystem of text, graphic, image, audio, and 3-D challenges. The field is a classic arms race — each new attack technique spurs the development of more sophisticated defenses. The most important insight underlying all CAPTCHA design is that human perception — especially the ability to recognize patterns, understand context, and reason abstractly — is extraordinarily powerful and remarkably difficult to replicate in software.

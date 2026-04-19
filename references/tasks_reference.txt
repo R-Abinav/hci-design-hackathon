@@ -1,0 +1,103 @@
+# End-Sem HCI Implementation Tasks
+
+## Phase 0 — Pre-requisite Fixes
+- [x] Fix `index.html`: Add Poppins font to Google Fonts link
+- [x] Fix `index.html`: Add SEO meta tags (og:title, og:description, twitter:card)
+- [x] Fix `src/index.css`: Remove invalid `min-font-size` property, add shape psychology comment
+- [x] Fix `tailwind.config.js`: Add color psychology comment block
+- [x] Fix `README.md`: Update project structure to reflect new folder layout
+- [x] Create `submission/end_sem_submission/` folder (with .gitkeep)
+
+## Phase 1 — Block A: Gestalt Laws
+- [ ] Modify `src/pages/Search.jsx`: Gestalt proximity/similarity/figure+ground/continuity
+- [ ] Modify `src/pages/Search.jsx`: framer-motion Common Fate sort animation
+- [ ] Screenshot: `gestalt_search_cards.png`
+- [ ] Screenshot: `gestalt_sort_animation.png`
+- [ ] Update `.tex` with Block A content
+
+## Phase 2 — Block B: Visual Design Principles
+- [ ] Modify `src/pages/Home.jsx`: Dominance hero icon, Scale search bar, Negative space
+- [ ] Modify `src/pages/DoctorProfile.jsx`: 3-level typographic hierarchy fix
+- [ ] Screenshot: `visual_design_home.png`
+- [ ] Screenshot: `visual_design_doctor_profile.png`
+- [ ] Update `.tex` with Block B content
+
+## Phase 3 — Block C: Persuasion Psychology
+- [ ] Create `src/components/PersuasionLayer.jsx`
+- [ ] Modify `src/pages/DoctorProfile.jsx`: social proof + authority section
+- [ ] Modify `src/pages/Booking.jsx`: scarcity badge + commitment checkbox
+- [ ] Modify `src/pages/Home.jsx`: FreeConsultBadge
+- [ ] Screenshot: `persuasion_social_proof.png`
+- [ ] Screenshot: `persuasion_scarcity.png`
+- [ ] Screenshot: `persuasion_authority.png`
+- [ ] Screenshot: `persuasion_commitment.png`
+- [ ] Update `.tex` with Block C content
+
+## Phase 4 — Block D: Color & Shape Psychology
+- [ ] Comments in `tailwind.config.js` + `index.css` (done in Phase 0)
+- [ ] Screenshot: `color_psychology_demo.png`
+- [ ] Update `.tex` with Block D content
+
+## Phase 5 — Block E: User Support Systems
+- [ ] Create `src/components/ContextHelpTooltip.jsx`
+- [ ] Create `src/components/AssistantBubble.jsx`
+- [ ] Modify `src/pages/Booking.jsx`: attach tooltips + AssistantBubble
+- [ ] Modify `src/pages/Help.jsx`: Quick Reference card
+- [ ] Screenshot: `user_support_tooltip.png`
+- [ ] Screenshot: `user_support_quick_ref.png`
+- [ ] Screenshot: `user_support_assistant.png`
+- [ ] Update `.tex` with Block E content
+
+## Phase 6 — Block F: Navigation Design
+- [ ] Create `src/components/Breadcrumb.jsx`
+- [ ] Modify `src/components/Navbar.jsx`: skip nav link + aria-label + logo keyboard
+- [ ] Modify `src/pages/DoctorProfile.jsx`: use Breadcrumb component
+- [ ] Modify `src/pages/Booking.jsx`: use Breadcrumb component
+- [ ] Modify `src/App.jsx`: add id="main-content" to main element
+- [ ] Screenshot: `navigation_breadcrumb.png`
+- [ ] Update `.tex` with Block F content
+
+## Phase 7 — Block G: Interaction Design Paradigms
+- [ ] Modify `src/pages/Search.jsx`: specialty filter pills (Menu Selection)
+- [ ] Modify `src/pages/Booking.jsx`: framer-motion slot tap animation (Direct Manipulation)
+- [ ] Screenshot: `interaction_direct_manipulation.png`
+- [ ] Screenshot: `interaction_menu_filter.png`
+- [ ] Update `.tex` with Block G content
+
+## Phase 8 — Block H: Web Usability Guidelines
+- [ ] Create `src/pages/NotFound.jsx`
+- [ ] Modify `src/App.jsx`: wire up NotFound route
+- [ ] Modify `src/pages/Home.jsx`: Browse by Symptom section
+- [ ] Screenshot: `web_usability_404.png`
+- [ ] Screenshot: `web_usability_symptom_browse.png`
+- [ ] Update `.tex` with Block H content
+
+## Phase 9 — Block I: Universal Design
+- [ ] Modify `src/components/Navbar.jsx`: aria-label for mobile menu
+- [ ] Modify `src/pages/Booking.jsx`: Tolerance for Error warning + min-h slot buttons
+- [ ] Modify `src/pages/Search.jsx`: aria-label on availability badges
+- [ ] Screenshot: `universal_design_tolerance_error.png`
+- [ ] Update `.tex` with Block I content
+
+## Phase 10 — Block J: Google Search Case Studies
+- [ ] Modify `src/pages/Search.jsx`: recent searches (localStorage) + symptom chips
+- [ ] Screenshot: `search_explorer_symptoms.png`
+- [ ] Screenshot: `search_navigator_recent.png`
+- [ ] Update `.tex` with Block J content
+
+## Phase 11 — Block K: CAPTCHA Design
+- [ ] Modify `src/pages/Login.jsx`: CAPTCHA checkbox + disable submit
+- [ ] Screenshot: `captcha_login.png`
+- [ ] Update `.tex` with Block K content
+
+## Phase 12 — Block L: Enhanced Mid-Sem Features
+- [ ] Modify `src/components/Onboarding.jsx`: 4th onboarding step
+- [ ] Modify `src/components/Navbar.jsx`: logo keyboard focus
+- [ ] Screenshot: `enhanced_v4_onboarding4.png`
+- [ ] Screenshot: `enhanced_v6_quickref.png` (reuse from E)
+- [ ] Update `.tex` with Block L content + full HCI coverage table
+
+## Phase 13 — LaTeX Finalization
+- [ ] Complete all sections in `me23b1004_cs5015_endSemDesignActivity.tex`
+- [ ] Verify all screenshot filenames match `\includegraphics{}` references
+- [ ] Final review: all 12 feature blocks present with theory + screenshot

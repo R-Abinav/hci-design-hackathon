@@ -10,20 +10,33 @@ import DoctorProfile from './pages/DoctorProfile'
 import Booking from './pages/Booking'
 import Help from './pages/Help'
 
+// Persist auth across client-side navigation and Vite HMR reloads
+// Uses sessionStorage (clears on browser close, but survives page nav)
+function getSession() {
+    try {
+        const raw = sessionStorage.getItem('bp_session')
+        return raw ? JSON.parse(raw) : null
+    } catch { return null }
+}
+
 export default function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
-    const [user, setUser] = useState(null)
+    const session = getSession()
+    const [isLoggedIn, setIsLoggedIn] = useState(!!session)
+    const [user, setUser] = useState(session?.user || null)
+    // Only show onboarding if this is a fresh login (not a page reload)
     const [showOnboarding, setShowOnboarding] = useState(false)
 
     const handleLogin = (userData) => {
         setIsLoggedIn(true)
         setUser(userData)
         setShowOnboarding(true) // V4: show onboarding on first login
+        sessionStorage.setItem('bp_session', JSON.stringify({ user: userData }))
     }
 
     const handleLogout = () => {
         setIsLoggedIn(false)
         setUser(null)
+        sessionStorage.removeItem('bp_session')
     }
 
     return (
@@ -31,7 +44,7 @@ export default function App() {
             {/* V4: Onboarding overlay for first-time users */}
             {showOnboarding && <Onboarding onComplete={() => setShowOnboarding(false)} />}
             {isLoggedIn && <Navbar user={user} onLogout={handleLogout} />}
-            <main className="flex-1">
+            <main id="main-content" className="flex-1">
                 <Routes>
                     <Route
                         path="/login"

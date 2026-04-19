@@ -47,20 +47,33 @@ npm run dev
 ```
 src/
 ├── components/
-│   ├── Navbar.jsx        # V8: Consistent active nav
-│   ├── Footer.jsx        # V1: Collapsible footer
-│   └── Onboarding.jsx    # V4: 3-step guided tour
+│   ├── Navbar.jsx              # V8: Consistent active nav + skip link + keyboard focus
+│   ├── Footer.jsx              # V1: Collapsible footer
+│   ├── Onboarding.jsx          # V4: 4-step guided tour (end-sem: +Help step)
+│   ├── Breadcrumb.jsx          # [NEW end-sem] Reusable accessible breadcrumb
+│   ├── PersuasionLayer.jsx     # [NEW end-sem] Cialdini's 6 persuasion components
+│   ├── ContextHelpTooltip.jsx  # [NEW end-sem] Context-sensitive help tooltips
+│   └── AssistantBubble.jsx     # [NEW end-sem] Non-intrusive booking assistant
 ├── pages/
-│   ├── Login.jsx         # V9: Password show/hide
-│   ├── Home.jsx          # V2, V13: Unified search + auto-location
-│   ├── Search.jsx        # V3, V12: Progressive disclosure + sort pills
-│   ├── DoctorProfile.jsx # V3, V10: Clean layout + F-pattern
-│   ├── Booking.jsx       # V5, V14, V11: Progress bar + no reset
-│   └── Help.jsx          # V6: Searchable FAQ
-├── data/doctors.js       # Mock data
-├── App.jsx               # Routing + auth
+│   ├── Login.jsx               # V9: Password show/hide + CAPTCHA checkbox
+│   ├── Home.jsx                # V2, V13: Unified search + auto-location + hero + symptoms
+│   ├── Search.jsx              # V3, V12: Progressive disclosure + sort + Gestalt + filters
+│   ├── DoctorProfile.jsx       # V3, V10: Clean layout + F-pattern + persuasion
+│   ├── Booking.jsx             # V5, V14, V11: Progress bar + tooltips + scarcity
+│   ├── Help.jsx                # V6: Searchable FAQ + Quick Reference
+│   └── NotFound.jsx            # [NEW end-sem] Styled 404 page
+├── data/doctors.js             # Mock data
+├── App.jsx                     # Routing + auth
 ├── main.jsx
-└── index.css             # V7, V10: Global styles (min 14px, F-pattern)
+└── index.css                   # V7, V10: Global styles + shape/color psychology docs
 submission/
-└── me23b1004_cs5015_designActivity.tex  # LaTeX report
+├── mid_sem_submission/
+│   ├── me23b1004_cs5015_designActivity.tex   ← Mid-sem LaTeX source
+│   ├── pdf_report/
+│   │   ├── ME23B1004_CS5015_MidSemDesignActivity_Report.pdf
+│   │   └── pdf_reference.txt
+│   └── (27 violation + solution screenshot .png files)
+└── end_sem_submission/
+    ├── me23b1004_cs5015_endSemDesignActivity.tex  ← End-sem LaTeX source
+    └── (end-sem screenshot .png files)
 ```

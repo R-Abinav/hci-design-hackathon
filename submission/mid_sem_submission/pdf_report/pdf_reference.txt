@@ -1,0 +1,353 @@
+# Full Explanation: HCI Midsem Design Activity Report — R. Abinav (ME23B1004)
+
+## Overview
+
+This is an academic report submitted for CS5015 (Human Computer Interaction) at what appears to be IIT Madras (given the roll number format ME23B1004). The student, R. Abinav, conducted a usability analysis of **Practo** (practo.com), a popular Indian online doctor consultation platform, and built a redesigned prototype called **"Better Practo"** using React + Tailwind CSS. The report identifies 14 usability violations in Practo and proposes HCI-principle-driven solutions for each.
+
+The work was done in February 2026 and covers HCI concepts from Lectures 1–8 of the course.
+
+---
+
+## Structure of the Report
+
+The report has four major sections:
+
+1. **Violations Identified & Solutions** — the bulk of the report, covering 14 violations in detail
+2. **Complete HCI Concept Coverage** — a table mapping every HCI concept from lectures to specific design decisions
+3. **Summary Table** — a condensed view of all 14 violations, the principles violated, and the fixes applied
+4. **Additional Links** — GitHub source code link, tech stack info, and demo credentials
+
+---
+
+## Violation-by-Violation Explanation
+
+---
+
+### V1: Dense Footer with 50+ Links
+
+**The Problem in Practo:**
+Practo's actual footer (shown in Figure 1) is visually very cluttered. It contains more than 50 hyperlinks spread across 6 columns. The columns are labeled: Practo, For Patients, For Doctors, For Clinics, For Hospitals, For Corporates, More, and Social. The "For Patients" column alone has 12+ items including things like "Search for doctors," "Search for clinics," "Book Diagnostic Tests," "Book Full Body Checkups," "Practo Plus," "Covid Hospital listing," "Practo Care Clinics," "Read health articles," "Read about medicines," "Practo drive," and "Health app." There is also a section for downloading the app via Google Play and App Store, with a phone number input to send an SMS link. The footer is dense, text-heavy, and hard to visually parse.
+
+**HCI Principles Violated:**
+- **Miller's Law (7±2):** Human working memory can hold only 7 ± 2 chunks of information at a time. Having 50+ links vastly exceeds this cognitive limit.
+- **Hick's Law:** The time it takes to make a decision increases logarithmically with the number of choices available. More links = more decision time = worse experience.
+- **Tesler's Law (Conservation of Complexity):** Every system has an irreducible amount of complexity. Tesler's Law says the system (the designer/developer) should absorb that complexity, not push it onto the user. A 50-link footer pushes complexity onto the user.
+- **Nielsen's Heuristic #8 (Aesthetic and Minimalist Design):** Every unit of information that isn't necessary competes with the information that is necessary. Extra links degrade the signal-to-noise ratio.
+
+**The Fix in Better Practo (Figure 2):**
+The redesigned footer uses exactly **4 collapsible sections** with **at most 7 items each**. The four sections are: "For Patients" (Find Doctors, Video Consult, Book Lab Tests, Read Health Articles, Health App), "For Doctors" (Doctor Profile, Practo Consult, Practo Health Feed), "Company" (About, Blog, Careers, Contact Us), and "More" (Help, Privacy Policy, Terms & Conditions). On mobile, sections become accordion-style (tap a heading to expand). The total visible links drop from 50+ to a manageable set. Above the footer, there's a trust-signal row showing "20,000+ Verified Doctors," "1M+ Happy Patients," and "25+ Specialties." The footer also shows the BetterPracto logo and a copyright notice. The visual contrast with Practo's original footer is stark — one feels overwhelming, the other feels clean.
+
+---
+
+### V2: Dual Search Bar (Location + Query)
+
+**The Problem in Practo (Figure 3):**
+Practo's homepage has two separate search inputs sitting side by side. The left input is a **location picker** (showing "Chennai" or "Bangalore" etc.) and the right input is the actual **search query field** (showing placeholder text "Search doctors, clinics, hospitals, etc."). Users must interact with both fields before searching. The navigation bar also shows "Find Doctors | Video Consult | Lab Tests | Surgeries" options and "For Corporates" and "Security & help" dropdowns. Below the search bar are four service category cards: Instant Video Consultation (Connect within 60 secs), Find Doctors Near You (Confirmed appointments), Lab Tests (Safe and trusted), and Surgeries (Safe and trusted surgery centers).
+
+**HCI Principles Violated:**
+- **Tesler's Law:** The system is capable of auto-detecting location (via browser geolocation or IP address) but forces the user to manually do it. The system should absorb this complexity.
+- **Zipf's Law (Principle of Least Effort):** Users will always take the path of least effort. Two inputs when one would suffice adds unnecessary friction.
+- **Asimov's 2nd Law:** Don't waste the user's time. Requiring location entry when it can be auto-detected is a waste of time.
+
+**The Fix in Better Practo (Figure 4):**
+The redesigned homepage has a **single unified search bar** with the placeholder "Search doctors, specialties, symptoms..." Inside the same bar, on the right side, there is a small **location chip** showing "Chennai" with a location pin icon, and a blue search button. The location is auto-detected and can be changed by tapping the chip. This is a single-field interaction with zero friction for location. The navbar is simplified to: BetterPracto logo (left), then center navigation with icons for Home (house icon, currently active with blue underline), Find Doctors (magnifying glass), and Help (question mark circle), and on the right side an "A Abinav Logout" user badge. Below the search bar, the hero greeting reads "Hello, Abinav / How can we help you today?" and below that are 4 service cards: Video Consult (connect within 60 secs), Find Doctors (verified & trusted), Lab Tests (home sample pickup), and Surgeries (expert surgical care). Below that is a "Consult Top Specialists / Book an appointment with verified doctors" section with a "View All" button and specialty category icons (General Physician, Dentist, Gynecologist, Dermatologist).
+
+---
+
+### V3: Cluttered Doctor Cards
+
+**The Problem in Practo (Figure 5):**
+When searching for a doctor (e.g., "general physician" in Chennai), Practo shows search results as cards that display everything simultaneously: the doctor's name, specialty, years of experience, location area (e.g., "Maduravoyal, Chennai"), hospital affiliation (e.g., "Practo Assured → Neuro Life Hospital"), consultation fee (e.g., "₹600 Consultation fee at clinic"), patient rating (e.g., "94%"), and number of patient stories (e.g., "93 Patient Stories"), plus two call-to-action buttons ("Book Clinic Visit" and "Contact Hospital"). There's also a date slider showing "Today (11 Slots Available)," "Tomorrow (No Slots Available)," "Mon, 2 Mar (22 Slots Available)" and time slot buttons like "06:00 PM, 06:15 PM, 06:30 PM, 06:45 PM, 07:00 PM, 07:15 PM, 07:30 PM, 07:45 PM" visible immediately. There's also a sidebar on the right showing a map and locality filter chips (Greams Road, Anna Nagar, Kilpauk, T Nagar, Velachery). All of this is visible at once, creating information overload.
+
+**HCI Principles Violated:**
+- **Inverted Pyramid:** Journalism principle that the most important information should come first, then supporting details progressively. Practo dumps everything at once.
+- **Nielsen's Heuristic #8 (Aesthetic Minimalism):** Cluttering cards with rarely-needed info like hospital addresses and badge labels degrades the essential content.
+- **Progressive Disclosure:** A fundamental UX pattern that says to show only essential information initially, and reveal more on demand (on click or expand).
+
+**The Fix in Better Practo (Figures 6a and 6b):**
+The redesigned doctor cards have two states:
+
+**Collapsed state (Figure 6a):** Shows only the essentials — a two-letter avatar/photo placeholder (e.g., "MM" for Dr. Manoj Menon), doctor name with a "Verified" checkmark badge, specialty (e.g., "General Physician"), years of experience (e.g., "19 years experience"), an "Available Today" green badge with a calendar icon, location (e.g., "Porur, Chennai"), the star rating (e.g., "★ 4.9") and review count (e.g., "926 reviews") on the right side, the consultation fee (e.g., "₹400") and a prominent blue "Book Now" button. At the bottom is a "More details ∨" expand link. The result list header shows the search query ("3 doctors found for 'Manoj'") and sort pills: Relevance (selected/blue), Rating, Experience, Fee: Low to High.
+
+**Expanded state (Figure 6b):** Clicking "More details" reveals additional information — Education (e.g., "MBBS, MD - Internal Medicine"), Hospital (e.g., "Cloudnine Hospital"), and an About section with a brief bio. The link changes to "Show less ∧." This is tight progressive disclosure — maximum information density only when the user explicitly asks for it.
+
+---
+
+### V4: No Onboarding for First-Time Users
+
+**The Problem in Practo:**
+Practo has no onboarding flow. New users land directly on the homepage without any guidance. They are expected to figure out how to search for doctors, book appointments, use video consult, etc. This increases the learning curve, especially for older or less tech-savvy users (which is a significant demographic for a healthcare platform), and can cause user drop-offs.
+
+**HCI Principles Violated:**
+- **Learnability:** A core usability dimension — systems should be easy to learn for first-time users.
+- **Familiarity:** Onboarding should use familiar icons and language to reduce the cognitive load of learning a new system.
+- **Power Law of Practice:** Learning is fastest at the beginning. Guided onboarding dramatically accelerates initial skill acquisition.
+
+**The Fix in Better Practo (Figures 7, 8, 9):**
+A **3-step modal overlay onboarding tour** appears on first login. Each step is a centered card modal with a blurred/dimmed background showing the actual app behind it, so users have context.
+
+**Step 1 — "Find Trusted Doctors" (Figure 7):** The modal has a large magnifying glass icon in a blue gradient circle at the top. Below is the heading "Find Trusted Doctors" in bold blue. The body text reads "Search by specialty, symptom, or doctor name. We show only verified doctors with real patient reviews." At the bottom are three animated dots (progress indicators — dot 1 is filled blue, dots 2 and 3 are grey) indicating this is step 1 of 3. There are two buttons: "Skip" on the left (text link) and "Next →" in blue on the right.
+
+**Step 2 — "Book Instantly" (Figure 8):** The modal uses a green gradient, has a calendar icon at the top. Heading: "Book Instantly." Body text: "Choose a convenient time slot and book your appointment in just 3 simple steps. No phone calls needed." Progress dots show step 2 (middle dot is blue). Same Skip/Next → buttons.
+
+**Step 3 — "Get Care, Your Way" (Figure 9):** The modal uses a purple gradient, has a capsule/pill icon (representing medicine). Heading: "Get Care, Your Way." Body text: "Visit in-clinic or consult via video call. Receive digital prescriptions and follow-up reminders." Progress dots show step 3 (third dot is blue). Buttons: "Skip" and "Get Started 🚀" (final action button). The "Skip" button is always visible on all steps — respecting user control (Shneiderman's 8th golden rule: always provide an exit).
+
+---
+
+### V5 + V14: Weak Booking Feedback & No Progress Indicator
+
+**The Problem in Practo (Figure 10):**
+Practo's appointment booking flow has multiple severe usability failures shown across two screenshots:
+
+**Figure 10a (Slot Selection):** The slot selection is embedded directly in the doctor search results card, not in a dedicated booking flow. There's no progress bar or step indicator anywhere. Users don't know if booking is a 2-step or 5-step process.
+
+**Figure 10b (Details Page):** After selecting a slot, users land on a details page split into two columns. Left column shows: "In-clinic Appointment," the date ("On Feb 28, 2026"), time ("At 6:00 PM"), doctor info (Dr. A Gunasekaran, MBBS, DM - Neurology, MD - Pediatrics, Neurologist, General Physician), and hospital details (Neuro Life Hospital, 25, Alappakam Main Road, Janaki Nagar, Choolaimedu, Chennai — with a "Get Directions" link). There's also a "Go back to my results" text link at the bottom. The right column shows "Enter your mobile number" with a Mobile* field, and a greyed-out "Continue" button with no explanation of why it's disabled. Small text says "You will receive an OTP shortly. We will send appointment-related communications on this number." After booking completion, there is no meaningful success confirmation — the only escape path is "Go back to my results."
+
+**HCI Principles Violated:**
+- **Closure (Shneiderman's 4th Golden Rule):** Every sequence of actions should have a clear beginning, middle, and end. Users need to feel the task is complete.
+- **Synthesizability:** Users must be able to tell where they are in any multi-step process.
+- **Shneiderman's 3rd Golden Rule (Feedback):** Every user action must produce an informative response from the system.
+- **Shneiderman's 5th Golden Rule (Easy Reversal):** Actions must be reversible so users feel safe exploring.
+
+**The Fix in Better Practo (Figures 11, 12a, 12b):**
+
+**Figure 11 (Step 1 — Select Slot):** At the very top of the booking page is a breadcrumb trail: "Home > Dr. Priya Mehta > Book Appointment." Below this is a clear 3-step progress indicator: a blue filled circle labeled "1 Select Slot," connected by a line to a grey circle labeled "2 Confirm," connected by another line to a grey circle labeled "3 Booked!" The active step (1) is visually highlighted in blue. The booking form below shows the doctor card: "PM Dr. Priya Mehta / Dentist • ₹500." Below that is a date tab row: "Today (5 slots) | Tomorrow (3 slots) | Day After (4 slots)" — with Today selected and highlighted in blue. Below are the "Available Slots" as rounded pill buttons: 09:00 AM, 10:00 AM, 11:30 AM, 04:30 PM, 06:00 PM. At the bottom left is a "← Go Back" link and on the right is a blue "Continue →" button.
+
+**Figure 12a (Step 2 — Confirm):** The progress bar now shows step 1 with a blue checkmark (✓) and a connecting blue line leading to the step 2 circle (now blue/active, labeled "2 Confirm"), and a grey step 3. The form below is "Confirm Your Appointment" with a summary card showing: PM Dr. Priya Mehta / Dentist, Date: Today, Time: 10:00 AM, Fee: ₹500, Hospital: Sims Hospital. Below the summary are two input fields: "Patient Name" (pre-filled with "Abinav" and an × clear button on the right) and "Mobile Number" (showing "8867922745" with an × clear button). Notice there is NO reset button — only individual field clear buttons (×). Bottom has "← Change Slot" (granular reversal, not a global reset) and a blue "Confirm Booking" button.
+
+**Figure 12b (Step 3 — Success / Closure):** All three steps show blue checkmarks and blue connecting lines — the entire progress bar is complete and blue. Center of the page shows a large green circle with a white checkmark (✓) — the success animation. Below: "Appointment Booked!" in large bold text. Below that: "Your appointment has been confirmed successfully." Then a structured summary grid: Doctor: Dr. Priya Mehta, Date: Today, Time: 10:00 AM, Hospital: Sims Hospital, Total: ₹500 (in blue). Two action buttons: "Go to Dashboard" (blue, primary) and "Book Another" (white/outlined, secondary). This provides complete closure — the user unambiguously knows the task is done.
+
+---
+
+### V6: No Contextual Help System
+
+**The Problem in Practo (Figure 13):**
+Practo's help system is hosted on a completely separate subdomain — help.practo.com — breaking the user's context entirely. The figure shows the help page which is essentially a wall of dense text with no clear categorization. The page begins with a marketing paragraph about Practo's 20,000+ doctors, then lists "Recently Answered Questions" as inline hyperlinks without any structure, and "Topics" as a long run-on comma-separated list of 20+ items. Below that is "Specialities" again as a run-on list. The page then ends with Practo's standard footer. There's no search functionality for the FAQ, no logical grouping by user task, and the dense paragraph format makes scanning impossible.
+
+**HCI Principles Violated:**
+- **Nielsen's Heuristic #10 (Help and Documentation):** Help should be easy to search, focused on user tasks, and list concrete steps.
+- **Shneiderman's 8th Golden Rule (Reduce Short-Term Memory Load):** Users shouldn't have to memorize where to find help or scroll through walls of text.
+- **Headline Usability:** Headings should be front-loaded with the key information, concise, and task-oriented so users can scan them.
+
+**The Fix in Better Practo (Figure 14):**
+The redesigned help is accessible directly from the main navbar (the "?" icon labeled "Help"). The Help & Support page shows: a page title "Help & Support / Find answers to common questions," a **search bar** ("Search for help..."), and then categorized accordion sections:
+
+**Section 1 — "Booking & Appointments"** (with a calendar icon): Contains items like "How do I book an appointment?" (currently expanded, showing the answer: "Search for a doctor by specialty or name, select an available time slot, confirm your details, and your appointment is booked instantly. You will receive a confirmation on screen."), "Can I reschedule my appointment?" (collapsed), and "How do I cancel a booking?" (collapsed).
+
+**Section 2 — "Consultations"** (with a headset/phone icon): Contains "What is a video consultation?" (collapsed) and "How long is a typical consultation?" (collapsed).
+
+The accordion pattern means only relevant content is visible, reducing cognitive load. The search bar allows task-focused retrieval. The categories (Booking, Consultations, Payments, Privacy — implied from the text) match the user's mental model of their tasks.
+
+---
+
+### V7: Small Text in Secondary Areas
+
+**The Problem in Practo:**
+Practo uses text below 14px in footer links, secondary labels (like metadata on doctor cards), and other peripheral UI areas. This reduces readability, especially for older users or those with visual impairments — a significant concern for a healthcare app.
+
+**HCI Principles Violated:**
+- **Accessibility:** Web Content Accessibility Guidelines (WCAG) recommend a minimum body text size of 16px and at least 14px for secondary text.
+- **Observability (Robustness):** Users must be able to perceive all relevant information in the interface. Small text physically impedes this.
+
+**The Fix in Better Practo:**
+A global design fix — the app enforces a minimum font size of 14px everywhere, with body text at 16px. The Inter font family is used throughout for its excellent screen readability. Proper color contrast ratios are maintained per WCAG guidelines. This is visible across all pages of the prototype rather than being a specific isolated fix.
+
+---
+
+### V8: Inconsistent Active Navigation State
+
+**The Problem in Practo (Figure 15):**
+Practo's navigation highlights the active page inconsistently. On the search results page (Find Doctors), the "Find Doctors" nav item has a blue underline. But:
+
+**Figure 15a (Login page):** The nav shows "Find Doctors | Video Consult | Medicines | Lab Tests | Surgeries" but there's NO active state on any item — even though "Login" is selected in a secondary sub-nav (showing "Login" with an underline in the sub-nav separately). The login form on the right shows: Mobile Number / Email ID field (showing "8867922123"), Password field (shown as dots), "Remember me for 30 days" checkbox (checked), "Login with OTP instead of password" checkbox (unchecked), and a blue "Login" button.
+
+**Figure 15b (Homepage):** The nav shows "Find Doctors | Video Consult | Lab Tests | Surgeries" but there is no active state on any of these items despite the user being on the homepage. The page below shows the Bangalore location selector, the dual search bar, and category cards.
+
+This inconsistency leaves users unsure of their location within the site.
+
+**HCI Principles Violated:**
+- **Nielsen's Heuristic #1 (Visibility of System Status):** The system should always keep users informed about what is going on.
+- **Shneiderman's 1st Golden Rule (Strive for Consistency):** Similar situations must have consistent cues. If some pages highlight the active nav, all pages must.
+
+**The Fix in Better Practo (Figure 16):**
+The redesigned navbar always shows the active page with both a **blue label color** and a **blue bottom underline border**, consistently on every page:
+
+**Figure 16a (Home active):** The navbar shows "🏠 Home" with a blue underline below it, "🔍 Find Doctors" and "❓ Help" in grey. The search bar with the Chennai chip is visible below.
+
+**Figure 16b (Find Doctors active):** The navbar shows "🏠 Home" in grey, "🔍 Find Doctors" in blue with a bottom underline, and "❓ Help" in grey. The sort pills (Relevance, Rating, Experience, Fee: Low to High) are visible below.
+
+**Figure 16c (Help active):** The navbar shows "🏠 Home" and "🔍 Find Doctors" in grey, and "❓ Help" in blue with a bottom underline. The "Help & Support" page heading and search bar are visible below.
+
+---
+
+### V9: Password Fully Masked Without Toggle
+
+**The Problem in Practo (Figure 17):**
+On Practo's login page, the password field is fully masked (shown as dots "••••••••••••") with no option to toggle visibility. Users who make a typo cannot see what they've typed, leading to repeated login failures. The login form shows: "Mobile Number / Email ID" field, "Password" field (fully masked), "Remember me for 30 days" checkbox, "Login with OTP instead of password" checkbox, and a blue "Login" button. A "Forgot password?" link is visible in orange/blue but no eye icon is present.
+
+**HCI Principles Violated:**
+- **Stop Password Masking (from Lecture 5):** A specific HCI case study principle — the original argument for masking was shoulder-surfing, but research shows masking causes far more errors from typos than it prevents from eavesdroppers. Most password entry happens in private settings.
+- **Norman's Feedback:** Users need to see the effect of their actions. Typing with no visual feedback creates anxiety and errors.
+- **Nielsen's Heuristic #5 (Error Prevention):** Allowing users to see their password is one of the most effective forms of error prevention.
+
+**The Fix in Better Practo (Figure 18):**
+The redesigned login page is split into two columns. The left column contains the BetterPracto logo, "Welcome back" heading, "Sign in to access your healthcare dashboard" subheading, an "Email address" field (showing "user@betterpracto.com"), a "Password" field with a clearly visible **eye icon (👁)** on the right side of the field, a blue "Sign In" button, and at the bottom "Demo Credentials: Email: user@betterpracto.com / Password: password123" (in small text for demo purposes). The right column is a blue gradient panel with a medical cross/building icon, the tagline "Your Health, Simplified," body text about booking and managing health, and trust statistics: "20K+ Doctors | 1M+ Patients | 4.8★ Rating." The password "password123" is shown as visible text in the screenshot, demonstrating the show/hide toggle working.
+
+---
+
+### V10: Important Content Not Left-Loaded
+
+**The Problem in Practo:**
+On several Practo pages, important CTAs (like "Book Clinic Visit") and elements (like the map) are placed on the right side of the layout. Eye-tracking research shows users scan left-to-right and spend about 69% of their total viewing time on the left half of the page. By placing primary CTAs on the right, Practo puts them in the less-attended visual zone.
+
+**HCI Principles Violated:**
+- **Horizontal Attention Principle (69% Left):** From eye-tracking studies — majority of attention is spent on the left half of the page.
+- **F-Pattern:** Users scan the web in an F-shape: first horizontally across the top, then horizontally across a second line, then vertically down the left side.
+- **Above the Fold:** 80% of user time is spent above the scroll fold; key content must be immediately visible.
+
+**The Fix in Better Practo:**
+A global layout principle — all pages in BetterPracto follow the F-Pattern. Doctor listings take up 2/3 of the width on the left, with the booking CTA in the right 1/3. The search bar and hero service cards are centered or left-aligned. Key information (doctor name, rating, availability, fee) is always in the top-left of each card. This is visible across all prototype screens.
+
+---
+
+### V11: Reset Buttons on Forms
+
+**The Problem in Practo:**
+Traditional HTML forms sometimes include "Reset" or "Clear All" buttons that, when accidentally clicked, destroy all entered data. This is a classic usability anti-pattern.
+
+**HCI Principles Violated:**
+- **Reset Must Die (from Lecture 6):** A strong HCI stance — reset buttons are almost universally destructive and rarely intentionally desired. They primarily cause accidental data loss.
+- **Shneiderman's 5th Golden Rule (Easy Reversal):** Reversal should be granular (undo the last thing) not catastrophic (undo everything).
+- **Asimov's 1st Law (Don't Harm the User):** Data loss = user harm.
+
+**The Fix in Better Practo:**
+No reset button exists anywhere in the BetterPracto booking flow. Instead, each input field has an individual **× (clear) button** on the right side to clear just that field. The "← Change Slot" button on step 2 takes the user back to step 1 without losing already-entered patient details. Form data is preserved between steps. The evidence of this fix is visible in Figure 12a — only individual × buttons per field, no global reset.
+
+---
+
+### V12: Default Sort is Alphabetical / Unclear
+
+**The Problem in Practo:**
+Practo's search results are sorted in an opaque way — sometimes appearing alphabetical, sometimes by some unclear "relevance" that doesn't match user expectations. Alphabetical sorting is a system-centric ordering that doesn't match any user's mental model for finding a doctor (nobody thinks "I want a doctor whose name starts with A").
+
+**HCI Principles Violated:**
+- **Alphabetical Sorting Must Die (from Lecture 6):** Users don't think alphabetically when searching for services. They think in terms of quality (rating), cost (fee), or proximity.
+- **Hick's Law:** Even when sort options exist, if they're unclear or hidden, decision time increases.
+
+**The Fix in Better Practo:**
+The search results page shows explicit, clearly labeled **sort pills** at the top of results: "Relevance" (default, shown selected with a blue filled background), "Rating," "Experience," and "Fee: Low to High." The active sort is always visually distinguished. The default sort is "Relevance" computed as a combination of rating and number of reviews — a user-centric metric. No alphabetical option exists. This is visible in Figure 6a (the collapsed doctor card view) where the sort pills are shown at the top.
+
+---
+
+### V13: Forced City Selection Modal
+
+**The Problem in Practo (Figure 19):**
+When navigating to Practo's "Lab Tests" section, users are presented with a **blocking modal** titled "Select a City" before any content loads. The modal has a search bar ("Search for city"), a "Top Cities" section with icon buttons for Bangalore, Delhi, Mumbai, Chennai, Hyderabad, Kolkata, Pune, Ahmedabad, and then a long "All Cities" alphabetical list showing dozens of Indian cities (Agartala, Agra, Allahabad, Alwar, Amravati, Amritsar, Amroha, Aurangabad, Azamgarh, Bangalore, Bankhaman, Bareilly, Begusarai, Belgaum, Bhiwani, Bikaner, Bhopal, Bhubaneswar, Bijnor, Chennai, Coimbatore, Bhilwara, Cuttack, Darbhanga, Dehradun, Dinajpur, Deoria, Dhanbad, Dibrugarh, Durgapur, Ernakulam, Faizabad, Gandhinagar, Gaya, Gzalktpur, Gudur, Gurugram, Gauhati). The user **cannot browse lab tests at all** without first selecting a city. Content is gated behind location selection.
+
+**HCI Principles Violated:**
+- **Asimov's 2nd Law (Don't Waste User's Time):** Forcing manual city selection when the browser can auto-detect location is a waste of the user's time.
+- **Zipf's Law (Principle of Least Effort):** This modal adds an entire interaction step before the user can access any content.
+
+**The Fix in Better Practo (Figure 20):**
+Same as V2 and the location fix — the app auto-detects the city (shown as a "Chennai" chip with a location pin icon inside the search bar) and displays content immediately. The user can change the city by tapping the chip, but it's optional and non-blocking. The homepage loads with full content immediately visible. No forced modal, no content gating.
+
+---
+
+### V14: No Progress Indicator (combined with V5)
+
+This violation was addressed together with V5 above. The core issue was that Practo's booking had no visible progress indicator, so users didn't know how many steps remained. The fix was the 3-step progress bar (Select Slot → Confirm → Booked!) with numbered steps, connecting lines that fill blue as steps are completed, and checkmark icons on completed steps.
+
+---
+
+## Complete HCI Concept Coverage Table (Page 28)
+
+This table maps every HCI concept from the course lectures to specific design decisions in BetterPracto. Here's a full explanation of each row:
+
+**Lectures 1–2 (Foundations):**
+- Affordance & Visibility: Buttons look like they can be clicked, inputs look like they can be typed in — through visual styling (raised appearance, borders, placeholder text).
+- Mental Models & Jakob's Law: BetterPracto uses a familiar health app layout so users don't have to relearn patterns they know from other apps.
+
+**Lecture 3 (Shneiderman's 8 Golden Rules and Nielsen's 10 Heuristics):**
+- Consistency (S#1): Uniform color palette (blue primary, green for success, red for errors), consistent spacing, same component patterns across all pages.
+- Feedback (S#3): Loading spinners appear during API calls, progress bars during booking, toast notifications for success/error.
+- Closure (S#4): Booking confirmation animation (green checkmark + summary) on step 3.
+- Easy Reversal (S#5): Back buttons everywhere, "← Change Slot," individual field clear (×).
+- Reduce STM Load (S#8): Maximum 5 nav items, forms broken into digestible chunks.
+- Visibility of System Status (N#1): Active nav highlighting, loading states, progress bars.
+- Error Prevention (N#5): Form validation before submission, confirmation screen before final booking.
+- Recognition over Recall (N#6): Doctor photos, specialty icons — users recognize visually rather than having to remember.
+- Aesthetic Minimalism (N#8): Clean cards with whitespace, progressive disclosure.
+- Error Recovery (N#9): Plain-language error messages (not system error codes).
+- Help & Documentation (N#10): In-app searchable FAQ.
+- Norman's Constraints: Unavailable appointment slots are greyed out and unclickable.
+- Norman's Mapping: ← means go back, → means go forward — natural directional mappings.
+
+**Lecture 4 (Usability Dimensions):**
+- Learnability / Predictability: Same layouts used consistently so users can predict what will happen.
+- Learnability / Synthesizability: Breadcrumbs and step indicators so users always know where they are.
+- Flexibility / Substitutivity: Users can search by typing text OR browse by category icons.
+- Robustness / Observability: System state is always visible (active nav, loading states, progress).
+- Robustness / Recoverability: Undo/cancel options at every step.
+- Fitts's Law: Primary CTAs ("Book Now," "Confirm Booking") are large targets; destructive actions (if any) are small, hard to accidentally tap.
+
+**Lecture 5 (Specific UX Case Studies):**
+- Stop Password Masking: Show/hide toggle (V9 fix).
+- Horizontal Attention (69% Left): All primary content left-aligned (V10 fix).
+
+**Lecture 6 (Design Anti-Patterns):**
+- F-Pattern & Above the Fold: Important info always in the top-left, above the scroll.
+- Alphabetical Sorting Must Die: Default sort is Relevance (V12 fix).
+- Reset Must Die: No reset button anywhere (V11 fix).
+- Headline Usability: FAQ headings are task-focused and front-loaded (V6 fix).
+
+**Lectures 7–8 (Cognitive Psychology in HCI):**
+- Miller's 7±2: Maximum 5 nav items, maximum 7 footer items per group.
+- Serial Position Effect: Important items placed first or last in navigation (they are remembered better due to primacy/recency effects).
+- Pareto / Vital Few: The 4 hero service cards (Video Consult, Find Doctors, Lab Tests, Surgeries) represent the critical 20% of features that serve 80% of user needs.
+- Zipf's / Least Effort: Most frequently used features require the fewest clicks.
+- Asimov's 1st Law (No Harm): Destructive actions require confirmation.
+- Asimov's 2nd Law (No Waste): Auto-detect location (V2, V13 fixes).
+- Asimov's 3rd Law (Be Humane): Design respects cognitive limits — no overloading.
+- Tesler's Law: System absorbs complexity (auto-location, smart defaults).
+
+---
+
+## Summary Table (Page 29)
+
+The summary table presents all 14 violations in a condensed format:
+
+| V# | Violation | HCI Principles | Fix |
+|---|---|---|---|
+| V1 | Footer has 50+ links | Miller's 7±2, Hick's, Tesler's | Collapsible sections, ≤7 items each |
+| V2 | Dual search bar | Tesler's, Zipf's, Asimov's 2nd | Single unified search + auto-location |
+| V3 | Cluttered doctor cards | Inverted Pyramid, Nielsen #8 | Progressive disclosure cards |
+| V4 | No onboarding | Learnability, Power Law | 3-step guided modal tour |
+| V5 | Weak booking feedback | Closure, Shneiderman #3/#4 | Progress bar + success animation |
+| V6 | No contextual help | Nielsen #10, Shneiderman #8 | In-app searchable categorized FAQ |
+| V7 | Small secondary text | Accessibility, Observability | Min 14px, proper contrast |
+| V8 | Inconsistent active nav | Nielsen #1, Shneiderman #1 | Consistent blue underline on all pages |
+| V9 | Password fully masked | Stop Password Masking | Show/hide eye icon toggle |
+| V10 | Important content not left-loaded | Horizontal Attention, F-Pattern | Left-aligned primary content layout |
+| V11 | Reset buttons on forms | Reset Must Die, Shneiderman #5 | No reset; individual × clear per field |
+| V12 | Alphabetical default sort | Alphabetical Must Die | Default: Relevance; explicit sort pills |
+| V13 | Forced city modal | Asimov's 2nd, Zipf's | Auto-detect city; no blocking modal |
+| V14 | No progress indicator | Closure, Synthesizability | 3-step numbered progress bar |
+
+---
+
+## Additional Links
+
+- **GitHub Source Code:** https://github.com/R-Abinav/hci-mid-design-activity
+- **Tech Stack:** React + Tailwind CSS, built with Vite
+- **Demo Login:** user@betterpracto.com / password123
+
+---
+
+## Key Takeaways for an AI Reading This
+
+1. This is a structured HCI usability audit — identify violations, cite principles, show before/after with screenshots.
+2. Every design decision maps explicitly to named HCI laws, heuristics, or golden rules from the course.
+3. The "Better Practo" prototype is a fully functional React app, not just wireframes — it has real interactions (onboarding modal, booking flow, FAQ accordion, password toggle).
+4. The student consistently applies 3–4 HCI concepts per violation, showing cross-concept thinking rather than single-principle reasoning.
+5. The report is academically structured with figures, tables, and citations but is also technically implemented — bridging theory and practice.
+6. The student is from Chennai (visible in their prototype's auto-detected location defaulting to "Chennai").

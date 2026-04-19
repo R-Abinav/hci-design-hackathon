@@ -1,0 +1,45 @@
+Question:
+Link: Any online doctor consultation app such as practo etc.
+Develop an Interactive Design Layout / Scheme for the assigned
+application domain covering various aspects covered till Mid-sem of
+the course that enhance the usability of the product. Factors such as
+Shneiderman Design principles, Nielsen’s guidelines, Classical Design
+Laws such as Vital Few, Law of Learning, Mental
+Models, Closure, Learnability, Flexibility, Robustness, Primality,
+Recency, Serial Position Effect, Inverted Pyramid, Asimov’s Laws,
+etc.... This is only an illustrative list and you may exploit the
+concepts covered thus far to the product of assigned in an apt manner.
+(All concepts covered in the course so far..) You may depict
+your design as wireframes etc. And in a development platform of your
+choice. As explained in the class, generate a pdf of the overall work
+with screen shots and relevant explanations of HCI concepts w.r.t
+feature design and HCI / usability guidelines etc. With respect to the
+assigned application domain, cover basic features
+that would follow the 80-20 rule of HCI! [i.e for the assignment
+application domain identify the critical 20% features first and focus
+on the design of the same and supporting the rest 80% features in an
+organised fashion]. In essence your design should strike the right
+balance between Teslers and Vital Few laws of HCI. You may add new
+features that would increase the usability of the product such as help
+systems or other aspects as a HCI Designer. When you submit the final
+report as a PDF let it be a as one overall PDF. The pdf / report
+should clearly highlight the HCI concept being considered, apt screen
+shots and major points that justify the HCI concept related to the
+specific feature of the product. Upload one overall pdf to the class
+room link. In addition to the pdf uploaded; you may choose to give
+alternate image files / web links of the wireframes etc. –last page of
+the report can include such additional links.
+
+
+Comments from the Professor - POST evaluation
+DH(50): 40
+Comments: Onlien Doctor Consulation app - dense footer with redesign less 
+clutter. dual search bar and proposed desgin good - doctor cards are less 
+crowded in proposed desgin good - better onbaroding- instantly book doctors 
+solution - slot selection booking existing and proposed desings are good 
+improvement  - home page and help page with good active designs - pwd 
+maskign overcome in proposed desgin - forced chennai selection, auto 
+detection in proposed - oerall good designs and approach ./ effort. but 
+depth of more design laws, learnability, flexibility etc, heuristics in 
+full requires in depth exploration but overall good submission.
+B Sivaselvan

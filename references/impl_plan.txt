@@ -1,0 +1,1115 @@
+# End-Semester HCI Design Activity — Better Practo
+## Detailed Implementation Plan (Ready for LLM Handoff)
+
+---
+
+## 1. Project Overview
+
+**Course**: CS5015 — Human Computer Interaction  
+**Student**: R. Abinav (ME23B1004)  
+**Domain**: Online Doctor Consultation App (Practo → Better Practo redesign)  
+**Tech Stack**: React 18 + Tailwind CSS 3 + Vite 6 + Lucide-React + Framer-Motion (installed, partially used)
+
+### Repository Root
+```
+/Users/abinav/Desktop/course-work/hci/end-sem/hci-design-hackathon/
+```
+All file paths in this document are relative to that root unless stated as absolute.
+
+### Key Source Files (Existing)
+```
+index.html                                        ← Entry HTML (has file-path bug)
+src/App.jsx                                       ← Router + auth state
+src/main.jsx                                      ← React entry point
+src/index.css                                     ← Global styles + Tailwind
+tailwind.config.js                                ← Color tokens (primary, accent, trust)
+src/components/Navbar.jsx                         ← Sticky nav with active-state (V8 fix)
+src/components/Footer.jsx                         ← Collapsible accordion footer (V1 fix)
+src/components/Onboarding.jsx                     ← 3-step modal onboarding (V4 fix)
+src/pages/Login.jsx                               ← Split-panel login with eye-toggle (V9 fix)
+src/pages/Home.jsx                                ← Hero + unified search + 4 cards (V2,V13 fix)
+src/pages/Search.jsx                              ← Doctor list + progressive disclosure (V3,V12 fix)
+src/pages/DoctorProfile.jsx                       ← Doctor detail + booking CTA (V3,V10 fix)
+src/pages/Booking.jsx                             ← 3-step booking flow (V5,V11,V14 fix)
+src/pages/Help.jsx                                ← In-app searchable FAQ (V6 fix)
+src/data/doctors.js                               ← Mock doctor data (~100KB)
+```
+
+### Key Reference Files
+```
+references/end_sem_reference.txt     ← ALL end-sem HCI concepts (Gestalt, Visual Design,
+                                        Persuasion, Color, Interaction Styles, Web Usability,
+                                        Universal Design, User Support Systems, CAPTCHA)
+references/mid_sem_reference.txt     ← Mid-sem concepts (already implemented)
+question/end_sem_question.txt        ← End-sem assignment question
+question/mid_sem_question.txt        ← Mid-sem question + professor's feedback
+submission/mid_sem_submission/
+  me23b1004_cs5015_designActivity.tex         ← Mid-sem LaTeX report source
+  pdf_report/
+    ME23B1004_CS5015_MidSemDesignActivity_Report.pdf   ← Compiled mid-sem PDF
+    pdf_reference.txt                          ← Plain-text summary of mid-sem report
+  practo_footer.png       ← Screenshot: Practo footer (violation)
+  practo_homepage.png     ← Screenshot: Practo homepage (violation)
+  practo_search_results.png ← Screenshot: Practo search (violation)
+  practo_booking_slots.png  ← Screenshot: Practo booking (violation)
+  practo_booking.png        ← Screenshot: Practo booking details (violation)
+  practo_help.png           ← Screenshot: Practo help (violation)
+  practo_nav_1.png          ← Screenshot: Practo nav on login (violation)
+  practo_nav_2.png          ← Screenshot: Practo nav on home (violation)
+  practo_password.png       ← Screenshot: Practo masked password (violation)
+  practo_city_selection.png ← Screenshot: Practo forced city modal (violation)
+  practo_video_consult.png  ← Screenshot: Practo video consult page
+  our_home_b.png            ← Screenshot: Better Practo home (fix)
+  our_search_results_b.png  ← Screenshot: Better Practo search (fix)
+  our_expanded_card_b.png   ← Screenshot: Better Practo expanded card (fix)
+  our_booking_main_b.png    ← Screenshot: Better Practo booking step 1 (fix)
+  our_booking_step2_b.png   ← Screenshot: Better Practo booking step 2 (fix)
+  our_booking_step3_b.png   ← Screenshot: Better Practo booking step 3 (fix)
+  our_footer_b.png          ← Screenshot: Better Practo footer (fix)
+  our_help_b.png            ← Screenshot: Better Practo help (fix)
+  our_login_b.png           ← Screenshot: Better Practo login (fix)
+  our_navbar_active_1_b.png ← Screenshot: Navbar active state - Home
+  our_navbar_active_2_b.png ← Screenshot: Navbar active state - Find Doctors
+  our_navbar_active_3_b.png ← Screenshot: Navbar active state - Help
+  our_onboarding_1_b.png    ← Screenshot: Onboarding step 1
+  our_onboarding_2_b.png    ← Screenshot: Onboarding step 2
+  our_onboarding_3_b.png    ← Screenshot: Onboarding step 3
+
+submission/end_sem_submission/                    ← NEW folder (currently empty)
+  (all end-sem screenshots will go here)
+  (end-sem LaTeX .tex file will go here)
+```
+
+---
+
+## 2. File-Path Fixes (Do These First)
+
+### 2a. Fix `README.md`
+**File**: `README.md` (root)  
+**Problem**: Line 65 shows `submission/me23b1004_cs5015_designActivity.tex` which no longer exists at that path after the user reorganized into subdirectories.  
+**Fix**: Update the Project Structure section to reflect:
+```
+submission/
+├── mid_sem_submission/
+│   ├── me23b1004_cs5015_designActivity.tex    ← Mid-sem LaTeX source
+│   ├── pdf_report/
+│   │   ├── ME23B1004_CS5015_MidSemDesignActivity_Report.pdf
+│   │   └── pdf_reference.txt
+│   └── (27 screenshot .png files)
+└── end_sem_submission/
+    ├── me23b1004_cs5015_endSemDesignActivity.tex  ← NEW end-sem LaTeX
+    └── (new end-sem screenshot .png files)
+```
+
+### 2b. Fix `submission/mid_sem_submission/me23b1004_cs5015_designActivity.tex`
+**Problem**: The LaTeX file references images like `{practo_footer.png}` with no path prefix (line 128, 158, 190, etc.). When compiled, LaTeX looks in the same directory as the `.tex` file — since all PNGs are in `submission/mid_sem_submission/` alongside the `.tex`, this is actually **correct**. No change needed for mid-sem images.  
+
+**However**, if you compile from the Overleaf root (where you upload both `.tex` and the PNGs together), this will work as-is. Just ensure every PNG is uploaded alongside the `.tex` in the same Overleaf project folder.
+
+### 2c. Fix `index.html` — Missing Poppins Font
+**File**: `index.html` (root)  
+**Problem**: `src/index.css` line 25 declares `font-family: 'Poppins'` for headings. The Google Fonts link in `index.html` only loads `Inter`. Poppins silently falls back to `system-ui`, making headings look inconsistent.  
+**Fix**: Change the Google Fonts `<link>` from:
+```html
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+```
+To:
+```html
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+```
+
+### 2d. Fix `src/index.css` — Invalid CSS Property
+**File**: `src/index.css` line 30  
+**Problem**: `min-font-size: 14px` is **not a valid CSS property** (it has no effect). The intent is already handled by `html { font-size: 16px }`.  
+**Fix**: Remove or replace line 30 with a comment:
+```css
+/* All text inherits from html { font-size: 16px }, ensuring ≥16px base size everywhere */
+```
+
+---
+
+## 3. New Files to Create
+
+```
+src/components/PersuasionLayer.jsx      ← Cialdini's 6 persuasion UI components
+src/components/ContextHelpTooltip.jsx   ← Context-sensitive help tooltips for form fields
+src/components/AssistantBubble.jsx      ← Non-intrusive booking assistant
+src/components/Breadcrumb.jsx           ← Reusable accessible breadcrumb
+src/pages/NotFound.jsx                  ← Styled 404 page
+submission/end_sem_submission/
+  me23b1004_cs5015_endSemDesignActivity.tex   ← End-sem LaTeX report
+```
+
+---
+
+## 4. Feature Implementation Details
+
+The features are grouped into 12 HCI concept blocks, each mapping directly to material in `references/end_sem_reference.txt`. Every block includes: what to build, which existing file(s) to modify, and the exact JSX/CSS changes required.
+
+---
+
+### Block A — Gestalt Laws
+**Reference**: `references/end_sem_reference.txt` lines 4–17  
+**Laws to cover**: Proximity, Similarity, Figure & Ground, Continuity, Closure, Common Fate, Symmetry  
+**Screenshot name**: `gestalt_search_cards.png` → `submission/end_sem_submission/`
+
+#### Modify `src/pages/Search.jsx`
+
+**A1 — Gestalt Proximity** (group related info visually):  
+Inside the doctor card `<div className="card">`, wrap the name/specialty/experience cluster in a `<div className="space-y-0.5">` and the availability/location cluster in a separate `<div className="flex items-center gap-3 mt-3">`. This already exists but needs explicit `mt-3` spacing between clusters to create visible "groups" per proximity law.
+
+**A2 — Gestalt Similarity** (consistent visual language):  
+All "Verified" badges must use the exact same JSX: `<span className="text-xs bg-accent-100 text-accent-700 px-2 py-0.5 rounded-full font-medium flex items-center gap-1">`. Currently implemented — verify no variation exists. "Available Today" pills should all use `bg-accent-50 text-accent-700 border border-accent-200`; "Available Tomorrow" all use `bg-amber-50 text-amber-700 border border-amber-200`. Consistent = Similarity law applied.
+
+**A3 — Gestalt Figure & Ground**:  
+The search results page wrapper `<div>` uses `bg-trust-50` (the page background). Doctor cards are `bg-white` (card component). This creates a figure (white card) on ground (grey background). Add an explicit `<div className="bg-trust-50 min-h-screen py-8">` wrapper around the results list if not already present.
+
+**A4 — Gestalt Continuity**:  
+Add a subtle left-border stripe to each card's metadata section to guide the eye downward:
+```jsx
+<div className="border-l-2 border-primary-100 pl-3 mt-3 space-y-1">
+  {/* location, availability info */}
+</div>
+```
+
+**A5 — Common Fate (Sort Animation)**:  
+When `setSortBy` is called, wrap the results list in `framer-motion`'s `<AnimatePresence>` with each card as a `<motion.div>`. Use:
+```jsx
+import { motion, AnimatePresence } from 'framer-motion'
+// ...
+<AnimatePresence mode="popLayout">
+  {filteredDoctors.map(doctor => (
+    <motion.div
+      key={doctor.id}
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.25 }}
+    >
+      {/* existing card JSX */}
+    </motion.div>
+  ))}
+</AnimatePresence>
+```
+When sort changes, all cards animate in the same direction simultaneously — "Common Fate" law: brain perceives them as a unified group.
+
+**A6 — Gestalt Closure**:  
+The progress bar in `src/pages/Booking.jsx` already demonstrates closure (brain fills in the incomplete circle as "will become complete"). Explicitly document this in the report. No new code needed — identify and annotate it.
+
+---
+
+### Block B — Visual Design Principles
+**Reference**: `references/end_sem_reference.txt` lines 118–158  
+**Principles**: Unity, Hierarchy, Balance, Contrast, Scale, Dominance, Negative Space  
+**Screenshots**: `visual_design_home.png`, `visual_design_doctor_profile.png` → `submission/end_sem_submission/`
+
+#### Modify `src/pages/Home.jsx`
+
+**B1 — Dominance (Hero Section)**:  
+Add a dominant visual above the search bar. Use a large SVG medical illustration or the existing `public/logo/logo1.png`. Wrap in a hero container with gradient background to make it the single focal point:
+```jsx
+{/* Dominance: single dominant element above search — Visual Design Lecture */}
+<div className="flex items-center justify-center mb-8">
+  <div className="relative">
+    <div className="w-24 h-24 bg-gradient-to-br from-primary-100 to-accent-100 rounded-3xl flex items-center justify-center shadow-lg">
+      <LucideIcons.Stethoscope className="w-12 h-12 text-primary-600" strokeWidth={1.5} />
+    </div>
+    <div className="absolute -top-1 -right-1 w-6 h-6 bg-accent-400 rounded-full animate-pulse" />
+  </div>
+</div>
+```
+
+**B2 — Scale (Search Bar Prominence)**:  
+Change the search input from `py-4` to `py-5` to make it visually larger than any other interactive element on the page, signaling its primacy via scale.
+
+**B3 — Balance (Hero Cards)**:  
+The 4 hero cards grid uses `gap-4`. Change to `gap-4 md:gap-6` with equal `aspect-ratio` enforcement:
+```jsx
+<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+  {heroCards.map(card => (
+    <button className="card hover:scale-[1.02] ... flex flex-col items-start aspect-[4/3]">
+```
+
+**B4 — Negative Space**:  
+Add `pt-8 pb-4` space between the Hero section `<section>` and the Specialties `<section>`. Inside each `<section>`, ensure `py-12` vertical padding. Add `mb-2` between section heading and its subtitle.
+
+#### Modify `src/pages/DoctorProfile.jsx`
+
+**B5 — Hierarchy (3-Level Typography)**:  
+Enforce a strict typographic hierarchy:
+- Doctor name: `text-2xl font-bold` → keep as-is ✓
+- Specialty: `text-lg text-trust-500` → change to `text-base text-trust-500` (currently `text-lg`, should be one step below name)
+- Metadata (rating, experience, location): `text-sm text-trust-600` → keep as-is ✓
+- Hospital name: `text-base font-semibold` → keep as-is ✓
+
+---
+
+### Block C — Persuasion Psychology (Cialdini's 6 Principles)
+**Reference**: `references/end_sem_reference.txt` lines 161–168  
+**Principles**: Reciprocity, Authority, Scarcity, Liking, Social Proof, Commitment  
+**Screenshots**: `persuasion_social_proof.png`, `persuasion_scarcity.png`, `persuasion_authority.png` → `submission/end_sem_submission/`
+
+#### Create `src/components/PersuasionLayer.jsx`
+
+```jsx
+import * as LucideIcons from 'lucide-react'
+
+// Social Proof widget — "X people viewed this doctor today"
+export function SocialProofBadge({ doctorId }) {
+  // Deterministic "random" based on doctorId for demo consistency
+  const viewCount = (doctorId * 7 + 3) % 12 + 2  // 2-13
+  return (
+    <div className="flex items-center gap-1.5 text-xs text-trust-500">
+      <span className="w-2 h-2 rounded-full bg-accent-400 animate-pulse inline-block" />
+      {viewCount} people viewed today
+    </div>
+  )
+}
+
+// Scarcity badge — "Only X slots left!"
+export function ScarcityBadge({ slotsLeft }) {
+  if (slotsLeft > 3) return null
+  return (
+    <div className="flex items-center gap-1.5 text-xs font-semibold text-orange-600 bg-orange-50 border border-orange-200 px-2.5 py-1 rounded-full w-fit">
+      <LucideIcons.Zap className="w-3.5 h-3.5" />
+      Only {slotsLeft} slot{slotsLeft !== 1 ? 's' : ''} left today!
+    </div>
+  )
+}
+
+// Authority badge — "Top Doctor award"
+export function AuthorityBadge({ award }) {
+  return (
+    <div className="flex items-center gap-2 text-sm text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 rounded-xl">
+      <LucideIcons.Award className="w-4 h-4 text-amber-500 shrink-0" />
+      <span className="font-medium">{award}</span>
+    </div>
+  )
+}
+
+// Free Consult badge — Reciprocity
+export function FreeConsultBadge() {
+  return (
+    <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+      🎁 Free 1st Consult
+    </span>
+  )
+}
+
+// Commitment checkbox — shown on booking success
+export function CommitmentCheckbox({ checked, onChange }) {
+  return (
+    <label className="flex items-start gap-3 p-4 bg-primary-50 rounded-xl border border-primary-100 cursor-pointer mt-4 text-sm text-trust-700">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        className="mt-0.5 accent-primary-600 w-4 h-4 shrink-0"
+      />
+      <span>
+        <span className="font-semibold text-primary-700">Get health reminders</span>
+        <br />
+        Receive follow-up reminders and prescription alerts for this appointment.
+      </span>
+    </label>
+  )
+}
+```
+
+#### Modify `src/pages/DoctorProfile.jsx`
+1. Import `{ SocialProofBadge, AuthorityBadge }` from `'../components/PersuasionLayer'`
+2. Add `<SocialProofBadge doctorId={doctor.id} />` below the rating row in the doctor header card.
+3. Add an "Awards & Recognition" section between the About card and the Hospital card:
+```jsx
+{/* Authority — Cialdini: trust through credentials */}
+<div className="card">
+  <h2 className="text-xl font-semibold text-trust-900 mb-3">Awards & Recognition</h2>
+  <div className="space-y-2">
+    <AuthorityBadge award="Top Doctor 2025 — Apollo Network" />
+    <AuthorityBadge award={`Best ${doctor.specialty} — Chennai Medical Awards`} />
+  </div>
+</div>
+```
+4. Add to `src/data/doctors.js` — each doctor object needs an `award` field if not present. Add it to the first 3–4 doctors in the array for demo purposes.
+
+#### Modify `src/pages/Booking.jsx`
+1. Import `{ ScarcityBadge, CommitmentCheckbox }` from `'../components/PersuasionLayer'`
+2. In Step 1, after the day-selector buttons, compute `todaySlots = (doctor.slots['today'] || []).length` and render:
+```jsx
+{/* Scarcity — Cialdini */}
+<ScarcityBadge slotsLeft={todaySlots} />
+```
+3. In Step 3 (success screen), add state `const [healthReminders, setHealthReminders] = useState(false)` and render `<CommitmentCheckbox>` above the action buttons.
+
+#### Modify `src/pages/Home.jsx`
+1. Import `{ FreeConsultBadge }` from `'../components/PersuasionLayer'`
+2. On the first specialty card or a "Featured Doctor" mini-card below the hero grid, add `<FreeConsultBadge />`. This creates a Reciprocity hook — giving value upfront.
+
+---
+
+### Block D — Color Psychology & Shape Psychology
+**Reference**: `references/end_sem_reference.txt` lines 172–210  
+**Screenshots**: `color_psychology_demo.png` → `submission/end_sem_submission/`
+
+No new files needed. This is a design-audit block implemented via code comments and documented in the report.
+
+#### Modify `tailwind.config.js`
+Add a comment block documenting the color-psychology rationale:
+```js
+// COLOR PSYCHOLOGY RATIONALE (end-sem HCI concept):
+// primary (#2A348C deep blue) → Trust, calm, security (Facebook, VISA, Ford use blue)
+// accent (#14BEF0 cyan-blue) → Fresh, innovative, medical
+// trust (slate grey scale) → Neutral, professional backgrounds
+// Destructive actions → red-500/600 (energy, bold, danger - Coca-Cola)
+// Success states → emerald-500/600 (natural, growth, health - Spotify, Whole Foods)
+// Warnings → amber-500/600 (optimism, visibility - McDonald's, DHL)
+```
+
+#### Modify `src/index.css`
+Add a comment documenting shape psychology after the `.btn-primary` class:
+```css
+/* SHAPE PSYCHOLOGY (end-sem HCI — Visual Design lecture):
+   rounded-xl (12px) on primary buttons → "friendly, approachable, safe"
+   rounded-lg (8px) on secondary/cancel → slightly more authoritative signal
+   rounded-full on pills/badges → "soft, inclusive, non-threatening"
+   Circles used for avatars → completeness, unity (Gestalt Closure)
+*/
+```
+
+#### Verify Color Contrast (WCAG AA)
+- Primary button (`bg-primary-600 #2A348C` text white): Contrast ratio must be ≥ 4.5:1. `#2A348C` on white = ~8.5:1 ✓
+- Body text (`text-trust-800 #1e293b` on white) = ~15:1 ✓
+- Secondary text (`text-trust-500 #64748b` on white) = ~4.6:1 ✓ (barely passes — document this)
+
+---
+
+### Block E — User Support Systems
+**Reference**: `references/end_sem_reference.txt` lines 299–425  
+**Concepts**: Quick Reference, Task-Specific Help, Full Explanation, Tutorial, Context-Sensitive Help, Wizards, Assistants, Adaptive Help  
+**Screenshots**: `user_support_tooltip.png`, `user_support_quick_ref.png`, `user_support_assistant.png` → `submission/end_sem_submission/`
+
+#### Create `src/components/ContextHelpTooltip.jsx`
+
+A reusable tooltip that attaches to any form field:
+```jsx
+import { useState } from 'react'
+import { Info } from 'lucide-react'
+
+/*
+ * Context-Sensitive Help — User Support Systems (end-sem HCI concept)
+ * Task-specific: help is directly tied to what the user is currently doing
+ * Unobtrusive: appears only on hover/click, never blocks workflow
+ */
+export default function ContextHelpTooltip({ text }) {
+  const [visible, setVisible] = useState(false)
+  return (
+    <div className="relative inline-block">
+      <button
+        type="button"
+        onMouseEnter={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+        onClick={() => setVisible(v => !v)}
+        className="text-trust-400 hover:text-primary-500 transition-colors ml-1"
+        aria-label="Help"
+      >
+        <Info className="w-4 h-4" />
+      </button>
+      {visible && (
+        <div className="absolute left-6 top-1/2 -translate-y-1/2 z-50 w-56 bg-trust-900 text-white text-xs rounded-xl p-3 shadow-xl leading-relaxed">
+          {text}
+          <div className="absolute right-full top-1/2 -translate-y-1/2 border-8 border-transparent border-r-trust-900" />
+        </div>
+      )}
+    </div>
+  )
+}
+```
+
+#### Modify `src/pages/Booking.jsx`
+In Step 2 (Confirm), import and attach `ContextHelpTooltip` to each label:
+```jsx
+import ContextHelpTooltip from '../components/ContextHelpTooltip'
+
+// Patient Name label:
+<label className="block text-sm font-semibold text-trust-700 mb-1.5 flex items-center">
+  Patient Name
+  <ContextHelpTooltip text="Enter the patient's full name as it appears on their Aadhaar or health ID card." />
+</label>
+
+// Mobile Number label:
+<label className="block text-sm font-semibold text-trust-700 mb-1.5 flex items-center">
+  Mobile Number
+  <ContextHelpTooltip text="You will receive a confirmation SMS and OTP on this number. Include country code if abroad (+91 for India)." />
+</label>
+```
+
+#### Create `src/components/AssistantBubble.jsx`
+
+```jsx
+import { useState } from 'react'
+import { HelpCircle, X, ChevronRight } from 'lucide-react'
+
+/*
+ * Non-intrusive Assistant — User Support Systems (end-sem HCI)
+ * Contrast with Clippy: unobtrusive, under user control, relevant to context
+ * Only shown on /booking route. Does not interrupt primary flow.
+ */
+export default function AssistantBubble() {
+  const [open, setOpen] = useState(false)
+
+  const steps = [
+    { num: 1, text: 'Pick an available date and time slot.' },
+    { num: 2, text: 'Enter your name and mobile number to confirm.' },
+    { num: 3, text: 'Done! You\'ll see a confirmation with your booking summary.' },
+  ]
+
+  return (
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      {open && (
+        <div className="bg-white rounded-2xl shadow-2xl border border-trust-200 w-72 p-5 animate-in">
+          <div className="flex items-center justify-between mb-3">
+            <p className="text-sm font-semibold text-trust-900">How booking works</p>
+            <button onClick={() => setOpen(false)} className="text-trust-400 hover:text-trust-600">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <div className="space-y-3">
+            {steps.map(step => (
+              <div key={step.num} className="flex items-start gap-3">
+                <span className="w-6 h-6 rounded-full bg-primary-100 text-primary-700 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+                  {step.num}
+                </span>
+                <p className="text-sm text-trust-600 leading-snug">{step.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs text-trust-400 mt-4">Still stuck? <a href="/help" className="text-primary-600 underline">Visit Help →</a></p>
+        </div>
+      )}
+      <button
+        onClick={() => setOpen(o => !o)}
+        className="w-12 h-12 rounded-full bg-primary-600 text-white shadow-lg hover:bg-primary-700 transition-all flex items-center justify-center"
+        aria-label="Booking help"
+      >
+        {open ? <X className="w-5 h-5" /> : <HelpCircle className="w-5 h-5" />}
+      </button>
+    </div>
+  )
+}
+```
+
+#### Modify `src/pages/Booking.jsx`
+Import and render `<AssistantBubble />` at the end of the return JSX (outside the main content div, as a floating overlay):
+```jsx
+import AssistantBubble from '../components/AssistantBubble'
+// Inside return:
+<>
+  <div className="page-enter-active max-w-3xl mx-auto px-4 sm:px-6 py-8">
+    {/* ... existing content ... */}
+  </div>
+  <AssistantBubble />
+</>
+```
+
+#### Modify `src/pages/Help.jsx`
+
+Add a **Quick Reference card** at the very top (before the search bar).  
+Quick Reference = user already knows the system but needs a fast reminder — cheat sheet, not a tutorial.
+
+```jsx
+{/* Quick Reference — User Support Systems: for users who know the system */}
+<div className="mb-6 card bg-primary-50 border-primary-100">
+  <h2 className="text-base font-semibold text-primary-800 mb-3 flex items-center gap-2">
+    <LucideIcons.Zap className="w-4 h-4" /> Quick Reference
+  </h2>
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+    {[
+      { action: 'Book appointment', how: 'Find Doctors → Select slot → Confirm' },
+      { action: 'Cancel booking', how: 'Dashboard → Booking → Cancel (2h+ before)' },
+      { action: 'Start video consult', how: 'Home → Video Consult → Connect' },
+      { action: 'Update profile', how: 'Navbar avatar → Settings' },
+      { action: 'Search by symptom', how: 'Search bar → type symptom name' },
+    ].map(item => (
+      <div key={item.action} className="flex gap-2">
+        <span className="font-medium text-primary-700 shrink-0">{item.action}:</span>
+        <span className="text-trust-600">{item.how}</span>
+      </div>
+    ))}
+  </div>
+</div>
+```
+
+---
+
+### Block F — Navigation Design Guidelines
+**Reference**: `references/end_sem_reference.txt` lines 213–227 (Web Usability, Navigation section)  
+**Concepts**: Identifiable nav, consistent links, accessible search, skip links, breadcrumbs  
+**Screenshots**: `navigation_skip_link.png`, `navigation_breadcrumb.png` → `submission/end_sem_submission/`
+
+#### Create `src/components/Breadcrumb.jsx`
+
+```jsx
+import { useNavigate } from 'react-router-dom'
+import { ChevronRight } from 'lucide-react'
+
+/*
+ * Navigation Design Guideline: breadcrumbs give users their location in hierarchy
+ * Synthesizability (Lecture 4): users can assess what they've done and where they are
+ */
+export default function Breadcrumb({ items }) {
+  /* items = [{ label: 'Home', path: '/' }, { label: 'Dr. Name' }] */
+  const navigate = useNavigate()
+  return (
+    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-trust-400 mb-6 flex-wrap">
+      {items.map((item, i) => (
+        <span key={i} className="flex items-center gap-1.5">
+          {i > 0 && <ChevronRight className="w-3.5 h-3.5 text-trust-300" />}
+          {item.path ? (
+            <button
+              onClick={() => navigate(item.path)}
+              className="hover:text-primary-600 transition-colors"
+            >
+              {item.label}
+            </button>
+          ) : (
+            <span className="text-trust-700 font-medium">{item.label}</span>
+          )}
+        </span>
+      ))}
+    </nav>
+  )
+}
+```
+
+#### Modify `src/pages/DoctorProfile.jsx`
+Replace the inline breadcrumb nav (lines 30–36) with:
+```jsx
+import Breadcrumb from '../components/Breadcrumb'
+// Replace <nav>...</nav> with:
+<Breadcrumb items={[
+  { label: 'Home', path: '/' },
+  { label: 'Find Doctors', path: '/search' },
+  { label: doctor.name },
+]} />
+```
+
+#### Modify `src/pages/Booking.jsx`
+Replace the inline breadcrumb nav (lines 53–59) with `<Breadcrumb>` component similarly.
+
+#### Modify `src/components/Navbar.jsx`
+Add a skip-navigation link as the very **first child** inside the `<nav>` element:
+```jsx
+{/* Skip Navigation — Universal Design + Web Usability Guidelines */}
+{/* Visually hidden but accessible to keyboard/screen-reader users */}
+<a
+  href="#main-content"
+  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] focus:bg-primary-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold"
+>
+  Skip to main content
+</a>
+```
+
+#### Modify `src/App.jsx`
+Add `id="main-content"` to the `<main>` element so the skip link target works:
+```jsx
+<main id="main-content" className="flex-1">
+```
+
+---
+
+### Block G — Interaction Design Paradigms
+**Reference**: `references/end_sem_reference.txt` lines 234–295  
+**Styles**: Command Language, Form Fill-in, Menu Selection, Direct Manipulation  
+**Screenshots**: `interaction_direct_manipulation.png`, `interaction_menu_filter.png` → `submission/end_sem_submission/`
+
+#### Modify `src/pages/Search.jsx`
+
+**G1 — Direct Manipulation (Sort Animation)**:  
+Already covered in Block A (Common Fate). Cards animate visibly into new positions — this IS direct manipulation. WYSIWYG: what you sort is immediately what you see.
+
+**G2 — Direct Manipulation (Slot Selection Feedback)**:  
+In `src/pages/Booking.jsx` Step 1, slot buttons should give an immediate scale-up animation on click (using framer-motion):
+```jsx
+import { motion } from 'framer-motion'
+// Slot button:
+<motion.button
+  key={slot}
+  onClick={() => setSelectedSlot(slot)}
+  whileTap={{ scale: 0.92 }}
+  whileHover={{ scale: 1.05 }}
+  className={`py-3 rounded-xl text-sm font-medium transition-all ${
+    selectedSlot === slot
+      ? 'bg-primary-600 text-white shadow-md ring-2 ring-primary-300'
+      : 'bg-primary-50 text-primary-700 hover:bg-primary-100 border border-primary-200'
+  }`}
+>
+  {slot}
+</motion.button>
+```
+
+**G3 — Menu Selection (Specialty Filter)**:  
+Add a specialty filter dropdown on the Search page above the sort pills. Menu Selection paradigm: user picks from a predefined set of commands (specialties) without typing.
+```jsx
+const [selectedSpecialty, setSelectedSpecialty] = useState('All')
+// Import specialties from data:
+import { specialties } from '../data/doctors'
+
+// Add before sort pills div:
+<div className="flex items-center gap-3 mb-4 flex-wrap">
+  <span className="text-sm font-semibold text-trust-600">Specialty:</span>
+  {['All', ...specialties.slice(0, 6).map(s => s.name)].map(spec => (
+    <button
+      key={spec}
+      onClick={() => setSelectedSpecialty(spec)}
+      className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+        selectedSpecialty === spec
+          ? 'bg-primary-600 text-white border-primary-600'
+          : 'bg-white text-trust-600 border-trust-200 hover:border-primary-300'
+      }`}
+    >
+      {spec}
+    </button>
+  ))}
+</div>
+```
+Update `filteredDoctors` useMemo to also filter by `selectedSpecialty`:
+```js
+let results = doctors.filter(d =>
+  (!query || d.name.toLowerCase().includes(query.toLowerCase()) || d.specialty.toLowerCase().includes(query.toLowerCase())) &&
+  (selectedSpecialty === 'All' || d.specialty === selectedSpecialty)
+)
+```
+
+---
+
+### Block H — Web Usability Guidelines (25-Point Cheat Sheet)
+**Reference**: `references/end_sem_reference.txt` lines 211–227  
+**Principles**: Don't Make Me Think (Krug), Feature Exposure, Visible Language, Conventions, Accessibility  
+**Screenshots**: `web_usability_404.png`, `web_usability_symptom_browse.png` → `submission/end_sem_submission/`
+
+#### Create `src/pages/NotFound.jsx`
+
+```jsx
+import { useNavigate } from 'react-router-dom'
+import { Home, Search, HelpCircle } from 'lucide-react'
+
+export default function NotFound() {
+  const navigate = useNavigate()
+  return (
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="text-center max-w-md">
+        <div className="text-8xl mb-6">🏥</div>
+        <h1 className="text-4xl font-bold text-trust-900 mb-3">Page not found</h1>
+        <p className="text-base text-trust-500 mb-8">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center">
+          <button onClick={() => navigate('/')} className="btn-primary flex items-center gap-2 justify-center">
+            <Home className="w-4 h-4" /> Go Home
+          </button>
+          <button onClick={() => navigate('/search')} className="btn-secondary flex items-center gap-2 justify-center">
+            <Search className="w-4 h-4" /> Find Doctors
+          </button>
+          <button onClick={() => navigate('/help')} className="btn-secondary flex items-center gap-2 justify-center">
+            <HelpCircle className="w-4 h-4" /> Help
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+#### Modify `src/App.jsx`
+Import `NotFound` and change the catch-all route:
+```jsx
+import NotFound from './pages/NotFound'
+// Change:
+<Route path="*" element={<Navigate to={isLoggedIn ? "/" : "/login"} replace />} />
+// To:
+<Route path="*" element={isLoggedIn ? <NotFound /> : <Navigate to="/login" replace />} />
+```
+
+#### Modify `index.html`
+Add complete Open Graph + SEO meta tags:
+```html
+<meta name="description" content="Better Practo — Book verified doctors online. Video consult, lab tests, and clinic visits in one place." />
+<meta property="og:title" content="Better Practo — Online Doctor Consultation" />
+<meta property="og:description" content="Book verified doctors, video consultations, and lab tests. Redesigned for better usability." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+```
+
+#### Modify `src/pages/Home.jsx`
+**Feature Exposure (Krug's "Don't Make Me Think")**: Add a "Browse by Symptom" section below the specialty grid. This supports **Explorer-type users** (from the Google Search case study) who don't know what they want and need to browse:
+```jsx
+{/* Web Usability: Feature Exposure — make functions visible. Also: Explorer support (Google Search case study) */}
+<section className="py-8 bg-trust-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-xl font-bold text-trust-900 mb-4">Browse by Symptom</h2>
+    <div className="flex flex-wrap gap-2">
+      {['Fever', 'Headache', 'Back Pain', 'Skin Rash', 'Cough', 'Chest Pain', 'Joint Pain', 'Eye Problem'].map(symptom => (
+        <button
+          key={symptom}
+          onClick={() => navigate(`/search?q=${encodeURIComponent(symptom)}`)}
+          className="px-4 py-2 bg-white border border-trust-200 rounded-full text-sm text-trust-700 hover:border-primary-400 hover:text-primary-700 transition-colors"
+        >
+          {symptom}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+```
+
+---
+
+### Block I — Universal Design (7 Principles)
+**Reference**: `references/end_sem_reference.txt` lines 428–617  
+**Principles**: Equitable Use, Flexibility, Simple & Intuitive, Perceptible Information, Tolerance for Error, Low Physical Effort, Size & Space  
+**Screenshots**: `universal_design_aria.png` (show DevTools accessibility tree), `universal_design_touch_targets.png` → `submission/end_sem_submission/`
+
+#### Modify `src/components/Navbar.jsx`
+Add `aria-label` to all icon-only buttons. The mobile menu toggle button currently has no aria-label:
+```jsx
+<button
+  aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+  className="md:hidden p-2 rounded-lg text-trust-500 hover:bg-trust-100"
+  onClick={() => setMobileOpen(!mobileOpen)}
+>
+```
+
+#### Modify `src/pages/Login.jsx`
+The show/hide eye button already has `aria-label` ✓. Verify the email input has `autoComplete="email"` ✓ and password has `autoComplete="current-password"` ✓.
+
+#### Modify `src/pages/Search.jsx`
+- **Perceptible Information**: The "Available Today" and "Available Tomorrow" badges currently rely on color (green vs amber) + text. They already have text labels ✓. Add a brief `aria-label` to each badge:
+```jsx
+<span
+  aria-label={`Available ${doctor.available}`}
+  className={`... ${doctor.available === 'Today' ? 'bg-accent-50 text-accent-700 border-accent-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}
+>
+  <LucideIcons.Calendar className="w-4 h-4" /> Available {doctor.available}
+</span>
+```
+
+#### Modify `src/pages/Booking.jsx`
+**Tolerance for Error** — Add a confirmation prompt before the "Confirm Booking" button becomes the primary CTA. Not a blocking modal (avoids anxiety), just a subtle yellow highlight:
+```jsx
+{/* Tolerance for Error — Universal Design Principle 5 */}
+{patientName && patientPhone && (
+  <div className="bg-amber-50 border border-amber-200 rounded-xl p-3 text-sm text-amber-800 flex items-start gap-2 mb-4">
+    <LucideIcons.AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-amber-500" />
+    <span>Please review your details above before confirming. This action will send a booking confirmation.</span>
+  </div>
+)}
+```
+
+**Low Physical Effort** — All interactive slot buttons must be ≥ 44px tall (WCAG 2.5.5). Current `py-3` on a 14px base font = ~14 + 24 = 38px. Change to `py-3.5` (= 28px padding + text = ~42px) or add `min-h-[44px]`:
+```jsx
+className={`py-3.5 min-h-[44px] rounded-xl text-sm font-medium ...`}
+```
+
+**CAPTCHA Checkbox on Login** — See Block K below.
+
+---
+
+### Block J — Google Search & Lost Rank Case Studies
+**Reference**: `references/end_sem_reference.txt` lines 20–113  
+**Concepts**: Explorer vs Navigator users, Expert vs Novice search behavior, Lost Rank, Topic Patterns  
+**Screenshots**: `search_explorer_symptoms.png`, `search_navigator_recent.png` → `submission/end_sem_submission/`
+
+#### Modify `src/pages/Search.jsx`
+
+**J1 — Navigator Support (Recent Searches)**:  
+Add persistent recent search chips using `localStorage`:
+```jsx
+import { useState, useMemo, useEffect } from 'react'
+
+// In component:
+const [recentSearches, setRecentSearches] = useState(() => {
+  try { return JSON.parse(localStorage.getItem('bp_recent') || '[]') } catch { return [] }
+})
+
+const handleSearch = (term) => {
+  setQuery(term)
+  const updated = [term, ...recentSearches.filter(r => r !== term)].slice(0, 4)
+  setRecentSearches(updated)
+  localStorage.setItem('bp_recent', JSON.stringify(updated))
+}
+
+// Add above the sort pills:
+{recentSearches.length > 0 && (
+  <div className="flex items-center gap-2 mb-4 flex-wrap">
+    <span className="text-xs text-trust-400 font-medium">Recent:</span>
+    {recentSearches.map(r => (
+      <button
+        key={r}
+        onClick={() => handleSearch(r)}
+        className="text-xs px-3 py-1 bg-trust-100 text-trust-600 rounded-full hover:bg-primary-50 hover:text-primary-700 border border-trust-200 transition-colors"
+      >
+        {r}
+      </button>
+    ))}
+  </div>
+)}
+```
+Ensure the main search `<input onChange>` also calls `handleSearch` on form submit (the input itself just updates query live; recent saves on explicit search).
+
+**J2 — Explorer Support (Symptom Chips on Search Page)**:  
+Below the search bar on the Search page, if no query is entered, show symptom chips:
+```jsx
+{!query && (
+  <div className="mb-5">
+    <p className="text-sm text-trust-500 mb-2">Popular searches:</p>
+    <div className="flex flex-wrap gap-2">
+      {['Fever', 'Headache', 'Back Pain', 'Skin Rash', 'Cough'].map(s => (
+        <button
+          key={s}
+          onClick={() => { setQuery(s); handleSearch(s) }}
+          className="px-3 py-1.5 bg-primary-50 text-primary-700 border border-primary-200 rounded-full text-sm hover:bg-primary-100 transition-colors"
+        >
+          {s}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+```
+
+---
+
+### Block K — CAPTCHA Design Principles
+**Reference**: `references/end_sem_reference.txt` lines 626–746  
+**Concepts**: CAPTCHA accessibility, human-vs-bot, audio alternatives, Universal Design crossover  
+**Screenshot**: `captcha_login.png` → `submission/end_sem_submission/`
+
+#### Modify `src/pages/Login.jsx`
+
+Add a styled "I'm not a robot" checkbox between the password field and the submit button. Add state `const [notRobot, setNotRobot] = useState(false)` and:
+```jsx
+{/* CAPTCHA — end-sem HCI concept: human verification, Universal Design accessible alternative */}
+<div className="flex items-center gap-3 p-4 bg-trust-50 border border-trust-200 rounded-xl">
+  <input
+    type="checkbox"
+    id="notRobot"
+    checked={notRobot}
+    onChange={e => setNotRobot(e.target.checked)}
+    className="w-5 h-5 accent-primary-600 cursor-pointer"
+  />
+  <label htmlFor="notRobot" className="text-sm text-trust-700 cursor-pointer select-none flex-1">
+    I'm not a robot
+  </label>
+  <div className="text-right">
+    <div className="text-xs text-trust-400">reCAPTCHA</div>
+    <div className="text-xs text-trust-300">Privacy · Terms</div>
+  </div>
+</div>
+```
+Disable the "Sign In" button if `!notRobot`:
+```jsx
+<button
+  type="submit"
+  disabled={loading || !notRobot}
+  className="btn-primary w-full ... disabled:opacity-70 disabled:cursor-not-allowed"
+>
+```
+
+---
+
+### Block L — Enhanced Mid-Sem Features
+**Reference**: Mid-sem submission already in `submission/mid_sem_submission/`  
+**This section creates a named "Enhanced Midsem Features" section in the LaTeX report**  
+**Screenshots**: name as `enhanced_v3_animation.png`, `enhanced_v4_onboarding4.png`, `enhanced_v6_quickref.png` → `submission/end_sem_submission/`
+
+#### L1 — Enhanced V3 (Doctor Card Animation)
+Already covered by Block A framer-motion card animation. The expand/collapse of "More details" now uses smooth `layout` animation.
+
+#### L2 — Enhanced V4 (4th Onboarding Step)
+#### Modify `src/components/Onboarding.jsx`
+Add a 4th step to the `steps` array, covering User Support Systems — a concept not in mid-sem:
+```jsx
+{
+  icon: <LucideIcons.LifeBuoy size={64} className="text-white" strokeWidth={1.5} />,
+  title: 'Help is Always Here',
+  description: 'Access our searchable Help Centre anytime from the navigation bar. Find quick answers to booking, payments, and privacy questions.',
+  color: 'from-orange-500 to-orange-600',
+},
+```
+
+#### L3 — Enhanced V12 (Sort Animation)
+Already covered by Block A (Common Fate) framer-motion animation.
+
+#### L4 — Enhanced V8 (Keyboard Focus on Nav)
+#### Modify `src/components/Navbar.jsx`
+Add explicit `:focus-visible` styles. Tailwind's `focus:ring-2 focus:ring-primary-400` already handles this via the NavLink class. Verify it shows for keyboard users by tabbing through the nav. Add `tabIndex={0}` to the logo div if it's a `div` (not a `button`):
+```jsx
+<div
+  tabIndex={0}
+  role="button"
+  aria-label="Go to home page"
+  onKeyDown={e => e.key === 'Enter' && navigate('/')}
+  className="flex items-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 rounded-lg px-1"
+  onClick={() => navigate('/')}
+>
+```
+
+---
+
+## 5. Screenshot Workflow
+
+**Tool**: Browser agent using Google Chrome at `http://localhost:5173` (dev server via `npm run dev`)  
+**Output folder**: `submission/end_sem_submission/`  
+**Dev server command**: `npm run dev` from the project root  
+**Login credentials**: `user@betterpracto.com` / `password123`
+
+### Screenshot Naming Convention
+
+All screenshots for the end-sem report follow this pattern: `{feature}_{screen}.png`
+
+| Screenshot filename | What to capture | URL / interaction |
+|---|---|---|
+| `gestalt_search_cards.png` | Doctor cards list with Gestalt groupings visible | `/search` |
+| `gestalt_sort_animation.png` | Mid-sort (cards animating) | `/search` → click Rating pill |
+| `visual_design_home.png` | Home page showing dominance element (hero icon) | `/` |
+| `visual_design_doctor_profile.png` | Doctor profile 3-level type hierarchy | `/doctor/1` |
+| `persuasion_social_proof.png` | Doctor profile with "X people viewed" badge | `/doctor/1` |
+| `persuasion_scarcity.png` | Booking step 1 with "Only 2 slots left!" | `/booking/2` |
+| `persuasion_authority.png` | Doctor profile Awards section | `/doctor/1` |
+| `persuasion_commitment.png` | Booking step 3 success + health reminder checkbox | After completing booking |
+| `color_psychology_demo.png` | Login page left side + right blue panel (trust blue) | `/login` |
+| `user_support_tooltip.png` | Booking step 2 with tooltip open on "Patient Name ℹ" | `/booking/1` step 2 |
+| `user_support_quick_ref.png` | Help page showing Quick Reference card at top | `/help` |
+| `user_support_assistant.png` | Booking page with AssistantBubble open | `/booking/1` |
+| `navigation_skip_link.png` | Keyboard focus revealing skip-link (Tab key) | `/` |
+| `navigation_breadcrumb.png` | Doctor profile breadcrumb | `/doctor/1` |
+| `interaction_direct_manipulation.png` | Slot selected with scale animation | `/booking/1` |
+| `interaction_menu_filter.png` | Specialty filter pills on Search page | `/search` |
+| `web_usability_404.png` | Custom 404 page | `/nonexistent-page` |
+| `web_usability_symptom_browse.png` | Home "Browse by Symptom" section | `/` |
+| `universal_design_captcha.png` | Login page with CAPTCHA checkbox | `/login` |
+| `universal_design_tolerance_error.png` | Booking step 2 confirmation warning | `/booking/1` step 2 |
+| `search_explorer_symptoms.png` | Search page with symptom chips (no query) | `/search` |
+| `search_navigator_recent.png` | Search with recent searches chips | `/search` (after prior searches) |
+| `enhanced_v4_onboarding4.png` | New 4th onboarding step | `/` (just after login) |
+| `enhanced_v6_quickref.png` | Help page with quick reference | `/help` |
+| `poppins_heading_fix.png` | Login page — Poppins heading rendered | `/login` |
+
+---
+
+## 6. LaTeX End-Sem Report
+
+### File Location
+`submission/end_sem_submission/me23b1004_cs5015_endSemDesignActivity.tex`
+
+### Image Path Convention
+All screenshot images will be in `submission/end_sem_submission/`. The `.tex` file is compiled **from the same folder** in Overleaf, so image references must use just the filename (no subfolder prefix):
+```latex
+\includegraphics[width=\textwidth]{gestalt_search_cards.png}
+```
+
+In Overleaf, upload all screenshots **directly into the project root** (same level as the `.tex` file).
+
+### Report Structure
+
+```latex
+\documentclass[12pt, a4paper]{article}
+% --- same package setup as mid-sem .tex ---
+
+\begin{document}
+
+% ============================================================
+% PART 1: END SEM REPORT
+% ============================================================
+
+\begin{center}
+{\Huge\bfseries\color{primary} END SEM REPORT}
+\end{center}
+
+\section{Introduction}
+% Brief re-introduction of Better Practo, what was done at mid-sem,
+% and what this end-sem adds.
+
+\section{Feature Block A — Gestalt Laws}
+% Subsections per Gestalt law. Each: HCI box, screenshot, explanation.
+
+\section{Feature Block B — Visual Design Principles}
+\section{Feature Block C — Persuasion Psychology}
+\section{Feature Block D — Color \& Shape Psychology}
+\section{Feature Block E — User Support Systems}
+\section{Feature Block F — Navigation Design}
+\section{Feature Block G — Interaction Design Paradigms}
+\section{Feature Block H — Web Usability Guidelines}
+\section{Feature Block I — Universal Design}
+\section{Feature Block J — Google Search Case Study}
+\section{Feature Block K — CAPTCHA Design}
+
+\section{Enhanced Midsem Features}
+% Per assignment question: highlight improvements to previous mid-sem features.
+
+\section{Complete HCI Concept Coverage — End Sem}
+% Table mapping every post-mid-sem concept to a specific feature.
+
+\section{Summary}
+% Combined summary table.
+
+\section{Additional Links}
+
+\newpage
+
+% ============================================================
+% PART 2: MID SEM REPORT
+% ============================================================
+
+\begin{center}
+{\Huge\bfseries\color{primary} MID SEM REPORT}
+\end{center}
+
+\input{../mid_sem_submission/me23b1004_cs5015_designActivity}
+% OR paste mid-sem content directly below this line.
+```
+
+> **Overleaf note**: If using `\input{../mid_sem_submission/...}` won't work in Overleaf (relative paths outside project root are restricted). In that case, copy the mid-sem `.tex` content directly into the end-sem file after the caption. Alternatively, compile both separately and merge the PDFs using a tool like `pdfmerge` or Adobe Acrobat.
+
+---
+
+## 7. Complete Verification Checklist
+
+### Code Verification
+- [ ] `npm install && npm run dev` runs without errors
+- [ ] All new components import correctly (no missing module errors in console)
+- [ ] Login → Home page loads with onboarding modal (4 steps now)
+- [ ] Search page shows: specialty filter pills, recent searches, symptom chips (empty query), sort animation
+- [ ] Doctor profile shows: social proof badge, authority awards, breadcrumb, hierarchical typography
+- [ ] Booking step 1 shows: scarcity badge (when ≤3 slots), slot scale-animation on click, AssistantBubble
+- [ ] Booking step 2 shows: ContextHelpTooltip on both fields, confirmation warning banner
+- [ ] Booking step 3 shows: CommitmentCheckbox above action buttons
+- [ ] Help page shows: Quick Reference card at top, accordion categories below
+- [ ] Login page shows: CAPTCHA checkbox above Sign In button; Sign In disabled when unchecked
+- [ ] `/nonexistent` → renders NotFound page (not redirect)
+- [ ] Skip link appears on Tab keypress at top of page
+- [ ] Poppins font renders on all headings (inspect via DevTools → Computed → font-family)
+- [ ] `min-font-size` removed from `index.css`
+
+### HCI Coverage (End-Sem Reference)
+- [ ] All 6 Gestalt Laws demonstrated with screenshots
+- [ ] Visual Design: Dominance, Scale, Balance, Contrast, Hierarchy, Negative Space all present
+- [ ] All 6 Cialdini persuasion principles present in UI
+- [ ] Color: blue=trust, green=health, red=error, amber=warning — consistent
+- [ ] Shape: rounded-xl primary, rounded-full pills, circles for avatars — documented
+- [ ] User support: Quick Reference, Task-Specific (tooltip), Tutorial (onboarding), Non-intrusive Assistant
+- [ ] Navigation: skip link, reusable breadcrumb, keyboard focus all verified
+- [ ] Direct Manipulation + Menu Selection shown side-by-side in report
+- [ ] Web Usability 25-point guidelines: 404, meta tags, feature exposure, don't-make-think
+- [ ] All 7 Universal Design principles mapped to specific UI features
+- [ ] Explorer vs Navigator support demonstrated (symptom chips vs recent searches)
+- [ ] CAPTCHA checkbox on login + accessibility discussion in report
+
+### Report
+- [ ] End-sem `.tex` compiles in Overleaf with all screenshots visible
+- [ ] Every feature block has: HCI theory box, screenshot, explanation paragraph
+- [ ] "Enhanced Midsem Features" section present and captioned
+- [ ] HCI concept coverage table complete for end-sem concepts
+- [ ] Combined PDF: Part 1 = END SEM REPORT, Part 2 = MID SEM REPORT, clearly captioned
+- [ ] GitHub link updated in the Additional Links section

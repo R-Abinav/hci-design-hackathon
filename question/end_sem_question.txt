@@ -1,0 +1,20 @@
+Develop an Interactive Design Layout / Scheme for the MIDSEM assigned application domain (sent via mail) covering various aspects covered till 
+End sem of the course that enhance the usability of the product. Factors such as Shneiderman Design principles, Nielsen’s guidelines, 
+Classical Design Laws such as Vital Few, Law of Learning, Mental Models, Closure, Learnability, Flexibility, Robustness, Primality, Recency, Serial Position Effect, 
+Inverted Pyramid, Asimov’s Laws, Web Usability Guidelines, 
+Gestalt Laws, Universal Design, User Support Systems Principles, Navigation Design Guidelines, Interaction Design Paradigms, Visual Design principles of Balance, 
+Scale, Dominance etc., Persuasion Psychology principles , Shapes and Colors pscychology.  This is only an illustrative list and you may exploit the concepts covered 
+thus far to the product of assigned in an apt manner. (All concepts covered in the course so far) You may depict your design as wireframes etc. And in a development 
+platform of your choice. As explained in the class, generate a pdf of the overall work with screen shots and relevant explanations of HCI concepts w.r.t feature design and HCI 
+/ usability guidelines etc. With respect to the assigned application domain, cover basic features that would follow the 80-20 rule of HCI! You may add new features that would 
+increase the usability of the product such as help systems or other aspects as a HCI Designer.  When you submit the final report as a PDF let it be a as one overall PDF. 
+The pdf / report should clearly highlight the HCI concept being considered, apt screen shots and major points that justify the HCI concept related to the specific feature of the product.  
+Upload one overall pdf to the class room link. The entire breadth of hci features from affordance, mental model, feedback, design laws, heuristics, gestalt psychology, web usability guidelines, 
+user support systems, universal designs, hci recommendations from case studies discussed in the course etc. are to be related to the proposed designs.  
+Also in case you wish to improve upon your midsem submission with hci concepts / laws etc listed above, you can do so and highlight the same in the report in a section named 
+“Enhanced Midsem features”.
+
+
+Note: The uploaded report (pdf file) should contain both your End Sem report and Mid Sem report. Start with the End Sem report and then have the mid sem report pasted again. 
+The respective portions should be clearly captioned END SEM REPORT and MID SEM REPORT. Giving other links like figma link of the work is fine but uploading of the report in 
+PDF IS MANDATORY for evaluation.
