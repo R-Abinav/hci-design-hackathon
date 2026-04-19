@@ -28,6 +28,12 @@ export default function Onboarding({ onComplete }) {
             description: 'Visit in-clinic or consult via video call. Receive digital prescriptions and follow-up reminders.',
             color: 'from-purple-500 to-purple-600',
         },
+        {
+            icon: <LucideIcons.LifeBuoy size={64} className="text-white" strokeWidth={1.5} />,
+            title: 'Help is Always Here',
+            description: 'Got questions? Access our Quick Reference guide on the Help page, or ask our Smart Assistant chatbot anytime.',
+            color: 'from-orange-500 to-orange-600',
+        },
     ]
 
     const current = steps[step]
