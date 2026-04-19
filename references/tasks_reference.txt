@@ -29,15 +29,23 @@
 - [x] Updated `.tex` Block B section with all content + screenshots
 - [x] Git commit: `chore: implemented visual design principles (Block B)`
 
-## Phase 3 — Block C: Persuasion Psychology (🔄 IN PROGRESS)
-- [/] Already have C1 Authority (Awards) + C2 Social Proof from DoctorProfile
-- [ ] Add C3 Scarcity badge on Booking Step 1
-- [ ] Add C4 Social Proof counter on Search cards (reviews count emphasis)
-- [ ] Screenshot: `persuasion_scarcity.png`
-- [ ] Update `.tex` Block C section
+## Phase 3 — Block C: Persuasion Psychology ✅ DONE
+- [x] Already have C1 Authority (Awards) + C2 Social Proof from DoctorProfile (Phase 2)
+- [x] Add C3 Scarcity badge on Booking Step 1 (red/amber contextual badges)
+- [x] Add C5 Commitment health reminder checkbox on Booking Step 3 success
+- [x] Screenshot: `persuasion_scarcity.png`
+- [x] Screenshot: `persuasion_commitment.png` (retaken at correct zoom)
+- [x] Screenshot: `persuasion_social_proof.png`
+- [x] Updated `.tex` Block C with all 4 Cialdini principles + screenshots
+- [x] Git commit: `chore: implemented persuasion psychology (Block C)`
 
-## Phase 3 — Block C: Persuasion Psychology
-- [ ] Create `src/components/PersuasionLayer.jsx`
+## Phase 4 — Blocks E + F: User Support + Navigation (🔄 IN PROGRESS)
+- [ ] Modify `src/pages/Help.jsx`: Add Quick Reference card at top
+- [ ] Modify `src/components/Navbar.jsx`: Add skip-to-main-content link + keyboard focus ring
+- [ ] Modify `src/pages/DoctorProfile.jsx`: Verify breadcrumb has aria-label
+- [ ] Screenshot: `user_support_quickref.png`
+- [ ] Screenshot: `navigation_skip_link.png`
+- [ ] Update `.tex` Blocks E + F
 - [ ] Modify `src/pages/DoctorProfile.jsx`: social proof + authority section
 - [ ] Modify `src/pages/Booking.jsx`: scarcity badge + commitment checkbox
 - [ ] Modify `src/pages/Home.jsx`: FreeConsultBadge

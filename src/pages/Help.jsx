@@ -6,6 +6,11 @@ import * as LucideIcons from 'lucide-react'
  * Nielsen #10: Help and Documentation
  * Shneiderman #8: Reduce short-term memory load
  * Headline Usability: front-loaded, concise headings
+ *
+ * END-SEM ADDITIONS (Block E — User Support Systems):
+ *   E1 — Quick Reference: Scannable cheat-sheet at top (Dix et al., 2004)
+ *         Users who know the system want a quick reminder, not a full FAQ.
+ *         Placed first because experienced users scan from the top.
  */
 export default function Help() {
     const [searchQuery, setSearchQuery] = useState('')
@@ -61,6 +66,37 @@ export default function Help() {
         <div className="page-enter-active max-w-3xl mx-auto px-4 sm:px-6 py-8">
             <h1 className="text-3xl font-bold text-trust-900 mb-2">Help & Support</h1>
             <p className="text-base text-trust-500 mb-6">Find answers to common questions</p>
+
+            {/* ───────────────────────────────────────────────────────────────
+                E1 — QUICK REFERENCE (User Support Systems, Dix et al. 2004)
+                Quick Reference: a scannable cheat-sheet for users who already
+                know the system but need a fast reminder of key actions.
+                Placed ABOVE the FAQ search so experienced users don't scroll.
+                Serial Position Effect (Primacy): first items are remembered best.
+            ─────────────────────────────────────────────────────────────────── */}
+            <div className="mb-8 border border-primary-100 rounded-2xl overflow-hidden">
+                <div className="bg-primary-600 px-5 py-3 flex items-center gap-2">
+                    <LucideIcons.Zap className="w-4 h-4 text-white" />
+                    <span className="text-sm font-bold text-white tracking-wide">QUICK REFERENCE — Common Actions</span>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-0 bg-white divide-y sm:divide-y-0 sm:divide-x divide-trust-100">
+                    {[
+                        { icon: <LucideIcons.Search className="w-4 h-4 text-primary-500" />, action: 'Search doctors', tip: 'Home → Search bar → type specialty or symptom' },
+                        { icon: <LucideIcons.Calendar className="w-4 h-4 text-emerald-500" />, action: 'Book appointment', tip: 'Find Doctors → Card → Book → Select slot' },
+                        { icon: <LucideIcons.Video className="w-4 h-4 text-blue-500" />, action: 'Video consult', tip: 'Home → Video Consult card' },
+                        { icon: <LucideIcons.HelpCircle className="w-4 h-4 text-purple-500" />, action: 'Get help', tip: 'Nav bar → Help → search or browse FAQs' },
+                    ].map(item => (
+                        <div key={item.action} className="flex items-start gap-3 px-4 py-3 hover:bg-primary-50 transition-colors">
+                            <span className="mt-0.5 shrink-0">{item.icon}</span>
+                            <div>
+                                <p className="text-sm font-semibold text-trust-800">{item.action}</p>
+                                <p className="text-xs text-trust-500 mt-0.5">{item.tip}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
 
             {/* Searchable — Nielsen #10 */}
             <div className="relative mb-8">

@@ -471,7 +471,29 @@ User support systems are classified by the type of user need they serve (Dix et 
 \textit{Reference: End-Sem HCI Lecture Notes, lines 299--425.}
 \end{hcibox}
 
-\textit{[Screenshots and detailed implementation to be added after Block E code is implemented.]}
+\subsection{E1 --- Quick Reference Card}
+
+\begin{featurebox}{Quick Reference --- Scannable Cheat Sheet on Help Page}
+The Help page now opens with a ``QUICK REFERENCE --- Common Actions'' card \emph{above} the FAQ search bar. This implements the \textbf{Quick Reference} type of user support (Dix, 2004): a scannable, at-a-glance summary of the 4 most common user tasks with their navigation paths.
+
+\textbf{Design rationale:}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \textbf{Placed first (Primacy):} Serial Position Effect --- the first item on a page is remembered best. Experienced users who just need a reminder find it immediately without scrolling.
+  \item \textbf{2×2 grid layout:} Parallel structure (Similarity) makes the 4 action paths instantly scannable --- no reading required.
+  \item \textbf{Coloured icons:} Pre-attentive coding (Search=blue, Book=green, Video=blue, Help=purple) matches the colours used elsewhere in the app (Gestalt Similarity).
+  \item \textbf{Dark blue header:} Visual Dominance (Block B) --- the Quick Reference is the most visually prominent element on the page, ensuring it is seen first.
+\end{itemize}
+
+This contrasts sharply with Practo's help page (violation V6) which has no Quick Reference and forces all users --- including experienced ones --- to search through FAQs or use the search bar.
+
+\textit{Implementation: \texttt{src/pages/Help.jsx}, above the FAQ search bar.}
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{user_support_quickref.png}}
+    \caption{Help page with E1 Quick Reference card (dark blue header + 2×2 action grid) placed above the FAQ search. Experienced users can find common tasks without scrolling. Also visible: FAQ categories below. \textit{Block E.}}
+\end{figure}
 
 \vspace{0.5cm}
 
@@ -483,7 +505,29 @@ User support systems are classified by the type of user need they serve (Dix et 
 Key navigation principles (Web Usability lecture): every page must show the user \emph{where they are}, \emph{where they can go}, and \emph{where they have been}. Breadcrumbs satisfy all three. Skip navigation links allow keyboard and screen-reader users to bypass the repeated nav bar and jump directly to main content --- required by WCAG 2.1 Success Criterion 2.4.1.
 \end{hcibox}
 
-\textit{[Screenshots and detailed implementation to be added after Block F code is implemented.]}
+\subsection{F1 --- Skip Navigation Link (WCAG 2.4.1)}
+
+\begin{featurebox}{Skip Navigation --- WCAG 2.1 SC 2.4.1: Bypass Blocks}
+A skip navigation link is the \textbf{first focusable element} in the page (before the logo). It is \textbf{visually hidden} by default (\texttt{sr-only}) and becomes visible \emph{only} when the keyboard focus lands on it (Tab key). When clicked or activated, it scrolls the page to \texttt{\#main-content}, bypassing all 3 navigation links.
+
+\textbf{Why this matters:} A sighted mouse user never sees the navbar's nav links as an obstacle. But a keyboard-only user (motor disability, power user, screen-reader user) must Tab through every nav link on every page load before reaching content. With 3 nav links + logo + user name + logout = 6 tabs to skip on every page. The skip link reduces this to 1 Tab.
+
+\textit{Implementation:} \texttt{src/components/Navbar.jsx} --- \texttt{<a href="\#main-content" className="sr-only focus:not-sr-only ...">}
+\end{featurebox}
+
+\subsection{F2, F3 --- ARIA Labels + Keyboard-Navigable Logo}
+
+\begin{featurebox}{ARIA Labels + Keyboard Navigation}
+\textbf{F2 --- \texttt{aria-label} on \texttt{<nav>}:} The navbar element now has \texttt{aria-label="Primary navigation"}, which allows screen-readers to identify this landmark region and let users jump directly to it using landmark navigation (common screen-reader shortcut).
+
+\textbf{F3 --- Logo keyboard-navigable:} The logo div (which acts as a link to home) now has \texttt{role="link"}, \texttt{tabIndex=\{0\}}, \texttt{aria-label="Go to home page"}, and \texttt{onKeyDown} Enter handler. Previously, keyboard users could not activate the logo at all --- it was only clickable.
+\end{featurebox}
+
+\subsection{F4 --- Breadcrumb Navigation (already implemented in mid-sem)}
+
+\begin{featurebox}{Breadcrumb Navigation --- Synthesizability}
+The DoctorProfile and Booking pages show a breadcrumb: \texttt{Home › Find Doctors › Dr. [Name]} and \texttt{Home › [Doctor] › Book Appointment}. This satisfies the navigation principle that every page must show the user \textit{where they are} and \textit{where they have been}. The breadcrumb also provides an escape hatch for users who arrived via search but want to go back to browsing.
+\end{featurebox}
 
 \vspace{0.5cm}
 

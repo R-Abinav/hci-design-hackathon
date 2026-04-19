@@ -6,6 +6,12 @@ import { Home, Search, HelpCircle, Pill } from 'lucide-react'
  * V8 FIX: Active nav state — underline + color change shows current section
  * Nielsen #1: Visibility of System Status
  * Also: ≤5 nav items (Miller's 7±2)
+ *
+ * END-SEM ADDITIONS (Block F — Navigation Design Guidelines):
+ *   F1 — Skip Navigation Link: WCAG 2.1 SC 2.4.1 — visually hidden, appears on focus.
+ *         Allows keyboard/screen-reader users to bypass repeated nav and jump to main.
+ *   F2 — aria-label on <nav>: identifies this as the primary navigation region.
+ *   F3 — Logo keyboard focus ring: logo is now keyboard-navigable with visible focus.
  */
 export default function Navbar({ user, onLogout }) {
     const [mobileOpen, setMobileOpen] = useState(false)
@@ -18,11 +24,33 @@ export default function Navbar({ user, onLogout }) {
     ]
 
     return (
-        <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-trust-200 shadow-sm">
+        // F2 — aria-label identifies this as the primary navigation region
+        <nav aria-label="Primary navigation" className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-trust-200 shadow-sm">
+
+            {/* F1 — SKIP NAVIGATION LINK (Block F — Navigation Design)
+                 WCAG 2.1 Success Criterion 2.4.1: Bypass Blocks.
+                 Visually hidden by default; appears on keyboard focus.
+                 Users pressing Tab first get this link — lets them jump
+                 straight to main content without tabbing through all nav links.
+                 Critical for screen-reader and keyboard-only users. */}
+            <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg"
+            >
+                Skip to main content
+            </a>
+
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
-                    {/* Logo — left aligned (V10: Horizontal Attention) */}
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/')}>
+                    {/* Logo — F3: keyboard-navigable with visible focus ring */}
+                    <div
+                        role="link"
+                        tabIndex={0}
+                        aria-label="Go to home page"
+                        className="flex items-center gap-2 cursor-pointer rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 p-1"
+                        onClick={() => navigate('/')}
+                        onKeyDown={(e) => e.key === 'Enter' && navigate('/')}
+                    >
                         <Pill className="w-8 h-8 text-primary-600 stroke-[1.5]" />
                         <span className="text-xl font-bold text-primary-700">Better<span className="text-primary-500">Practo</span></span>
                     </div>
