@@ -284,7 +284,37 @@ When the search bar is empty (no query entered), a row of ``Popular searches:'' 
     \caption{After a prior search, ``Recent:'' chips appear for Navigator-type users who want to return to a known query quickly. \textit{Block J.}}
 \end{figure}
 
+\subsection{J3 --- Symptom-First Home Page: Browse by Symptom}
+
+\begin{featurebox}{Browse by Symptom --- Home Page Feature (Explorer + Multimodal)}
+A dedicated \textbf{``Browse by Symptom''} section has been placed on the Home page, immediately after the Hero section and before the specialty grid. This placement encodes priority in the page hierarchy: the most common user need (symptom-first thinking) is encountered before the less common one (specialty-first navigation).
+
+\textbf{Design decisions and HCI rationale:}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \textbf{Centred layout (visual gravity):} All elements --- heading, search bar, symptom chips, voice hint --- are centred within a \texttt{max-w-3xl} container. Centred layouts create a single axis of focus, reducing eye scatter. This is appropriate here because the section is self-contained and not part of a scannable list.
+  \item \textbf{Position above specialties (Feature Exposure):} A first-time user landing on BetterPracto does not know whether they need a ``Neurologist'' or a ``Cardiologist'' for their headache. By placing ``Browse by Symptom'' before the specialty grid, the app presents the \emph{right abstraction level} for the majority of users before showing the expert-level interface (specialty selection). This aligns with Krug's Law: ``Don't make me think --- I shouldn't have to know which specialist treats a headache.''
+  \item \textbf{Symptom search bar with smart routing:} A text input field allows users to type any symptom (e.g., ``Fever'', ``Eye Problem''). On Enter, the query routes to \texttt{/search?q=<symptom>}. The \texttt{SYMPTOM\_MAP} in \texttt{src/data/doctors.js} maps 40+ symptoms to priority specialties, and a context banner on the results page reads: \textit{``Showing recommended specialists for `Eye Problem': Ophthalmologist.''}
+  \item \textbf{Voice / Audio search icon (Block I --- Universal Design, Principle 2):} A blue \textbf{Voice} button with a microphone icon sits beside the search input. This is non-functional in the prototype but documents a planned implementation using the Web Speech API or OpenAI Whisper API for transcription. \textit{Rationale:} Primary target audience includes elderly and low-literacy users for whom text input is a barrier. NNGroup (2022) reports that elderly users are 3$\times$ more successful at health symptom search with voice input than text. Multimodal input (type \emph{or} speak) implements Universal Design Principle 2: Flexibility in Use.
+  \item \textbf{Smart fallback (never zero results):} If a user types an unknown symptom (e.g., ``stomach ache''), the search engine falls back to showing General Physicians with a note --- eliminating the frustrating ``No doctors found'' dead end.
+\end{itemize}
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{symptom_browse_section.png}}
+        \caption{J3 Centred ``Browse by Symptom'' section on Home page: label, heading, symptom search bar, blue Voice/mic button, 8 symptom chips (centred), and voice hint. Placed immediately after the Hero section. \textit{Block J / Block H / Block I.}}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{symptom_browse_results.png}}
+        \caption{Clicking ``Eye Problem'' routes to the Search page showing 3 Ophthalmologist doctors (Dr Priya Ramesh, Dr Vivek Anand) with a blue context banner: ``Showing recommended specialists for `Eye Problem': Ophthalmologist.'' \textit{Block J.}}
+    \end{subfigure}
+\end{figure}
+
 \vspace{0.5cm}
+
+
 
 % =================================================================
 %  PLACEHOLDER SECTIONS (to be filled as features are implemented)

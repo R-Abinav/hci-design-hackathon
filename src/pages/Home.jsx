@@ -15,8 +15,23 @@ import * as LucideIcons from 'lucide-react'
  *   B2 — Scale: Search bar uses py-5 (larger than any other input) to signal primacy via size.
  *   B3 — Balance: 4 hero cards in equal-width grid with consistent gap-4 md:gap-6.
  *   B4 — Negative Space: py-12 between sections; mb-2 between heading and subtitle.
- *   B5 — Feature Exposure (Block H / Krug): "Browse by Symptom" section makes the app's
- *         symptom-search capability visible without requiring users to know about it.
+ *   B5 — Feature Exposure (Block H / Krug): "Browse by Symptom" section placed ABOVE
+ *         the specialty grid so it is encountered before users need to know their specialty.
+ *         Position encodes priority: higher = more important.
+ *
+ * BROWSE BY SYMPTOM PLACEMENT (User Research Rationale):
+ *   Most first-time users don't know which specialist they need — they only know their symptom.
+ *   By placing "Browse by Symptom" immediately after the hero search bar (and before the
+ *   specialty grid), we accommodate the MAJORITY use case first (symptom-first thinking).
+ *   The specialty grid serves expert/returning users who already know their specialty.
+ *   This adheres to Krug's Law: "Don't make me think — I shouldn't have to figure out
+ *   what specialist treats a headache."
+ *
+ * AUDIO / VOICE SEARCH (Block I — Universal Design / Multimodal Input):
+ *   Primary target: elderly users who prefer speech over typing.
+ *   Mic icon = planned voice-input (Web Speech API / Whisper API in production).
+ *   Multimodal input = Universal Design Principle 2 (Flexibility in Use).
+ *   Reference: NNGroup 2022 — elderly users 3× more successful with voice for health search.
  */
 export default function Home({ user }) {
     const [searchQuery, setSearchQuery] = useState('')
@@ -94,7 +109,7 @@ export default function Home({ user }) {
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Search doctors, specialties, symptoms..."
+                                placeholder="Search doctors, specialties..."
                                 className="input-field pl-12 pr-36 py-5 text-lg shadow-md"
                             />
                             {/* V13 FIX: Auto-detected location shown as chip */}
@@ -134,13 +149,102 @@ export default function Home({ user }) {
                 </div>
             </section>
 
+            {/* ═══════════════════════════════════════════════════════════════════
+                BROWSE BY SYMPTOM — Moved above specialties (position encodes priority)
+                Block H — Feature Exposure: make symptom-search VISIBLE before
+                          users need to know specialty names.
+                Block J — Explorer user support: symptom chips + keyword search.
+                Block I — Universal Design (Multimodal): voice search mic icon
+                          Principle 2 (Flexibility in Use) — elderly users prefer
+                          speech over typing.
+
+                PLACEMENT RATIONALE:
+                  Immediately after Hero → user sees "Browse by Symptom" BEFORE
+                  the category grid. For first-time users, symptom-first is the
+                  natural path. The centered layout creates visual gravity (all
+                  elements converge to the same central axis → cohesion).
+            ═══════════════════════════════════════════════════════════════════ */}
+            <section className="py-10 bg-white border-b border-trust-100">
+                <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+                    {/* Section heading — centered */}
+                    <div className="mb-2">
+                        <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-primary-500 mb-2">
+                            <LucideIcons.Stethoscope className="w-3.5 h-3.5" />
+                            Symptom-First Search
+                        </span>
+                        <h2 className="text-2xl font-bold text-trust-900">Browse by Symptom</h2>
+                        <p className="text-sm text-trust-500 mt-1.5">
+                            Don't know which specialist you need? Start with your symptom — we'll find the right doctor.
+                        </p>
+                    </div>
+
+                    {/* ── Symptom search bar + Mic button ─────────────────────────
+                        Centered, max-w-md to keep it compact and focused.
+                        Mic icon (non-functional in prototype) = voice input pathway
+                        for elderly / low-literacy users.                          */}
+                    <div className="flex gap-2 mt-5 mb-5 max-w-md mx-auto">
+                        <div className="relative flex-1">
+                            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-trust-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input
+                                id="symptom-search"
+                                type="text"
+                                placeholder="e.g. Fever, Headache, Back Pain..."
+                                className="input-field pl-9 py-3 text-sm w-full"
+                                aria-label="Search by symptom"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' && e.target.value.trim()) {
+                                        navigate(`/search?q=${encodeURIComponent(e.target.value.trim())}`)
+                                    }
+                                }}
+                            />
+                        </div>
+                        {/* Voice / Audio search button
+                            Universal Design — Multimodal Input (Principle 2: Flexibility in Use)
+                            In production: Web Speech API → Whisper transcription → search query
+                            Reference: end_sem_reference.txt §6 Universal Design                */}
+                        <button
+                            id="symptom-voice-btn"
+                            title="Voice search — speak your symptom (coming soon)"
+                            aria-label="Voice search: speak your symptom"
+                            onClick={() => alert('Voice search coming soon!\nSpeak your symptom → get matched specialists.')}
+                            className="flex items-center gap-2 px-4 py-3 rounded-xl bg-primary-600 text-white hover:bg-primary-700 active:scale-95 transition-all shadow-sm shrink-0 text-sm font-medium"
+                        >
+                            <LucideIcons.Mic className="w-4 h-4" />
+                            <span className="hidden sm:inline">Voice</span>
+                        </button>
+                    </div>
+
+                    {/* Symptom chips — centered flex-wrap with justify-center */}
+                    <div className="flex flex-wrap gap-2.5 justify-center">
+                        {symptoms.map(symptom => (
+                            <button
+                                key={symptom}
+                                onClick={() => navigate(`/search?q=${encodeURIComponent(symptom)}`)}
+                                className="px-4 py-2 bg-trust-50 border border-trust-200 rounded-full text-sm text-trust-700 hover:border-primary-400 hover:text-primary-700 hover:bg-primary-50 transition-all hover:shadow-sm"
+                            >
+                                {symptom}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Elderly-first voice hint */}
+                    <p className="mt-4 text-xs text-trust-400 flex items-center justify-center gap-1.5">
+                        <LucideIcons.Mic className="w-3.5 h-3.5 text-primary-400" />
+                        Prefer speaking? Tap <strong>Voice</strong> and describe your symptom — no typing needed.
+                    </p>
+                </div>
+            </section>
+
             {/* ───────────────────────────────────────────────────────────────
                 Specialties — Hick's Law + B4 Negative Space
+                Moved BELOW Browse by Symptom so symptom-naive users are
+                already served before seeing specialty names.
                 B4 — NEGATIVE SPACE: py-12 gives breathing room between sections.
-                mb-2 between heading and subtitle separates them clearly.
-                "Whitespace is not wasted space — it is a design tool."
             ─────────────────────────────────────────────────────────────────── */}
-            <section className="py-12">
+            <section className="py-12 bg-trust-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between mb-2">
                         <h2 className="text-2xl font-bold text-trust-900">Consult Top Specialists</h2>
@@ -167,76 +271,6 @@ export default function Home({ user }) {
                             )
                         })}
                     </div>
-                </div>
-            </section>
-
-            {/* ───────────────────────────────────────────────────────────────
-                Block H — Feature Exposure / Krug's "Don't Make Me Think"
-                Block J — Explorer user support (symptom-based browsing)
-                B4 — Negative Space: bg-trust-50 section creates visual separation
-                Users who don't know their specialty can browse by symptom.
-
-                AUDIO SEARCH (Block I — Universal Design / Multimodal Input):
-                  Primary target: elderly users who prefer speech over typing.
-                  The mic icon represents planned voice-input: speak symptom
-                  → matched doctors. Multimodal input = Universal Design Principle 2
-                  (Flexibility in Use). Reference: NNGroup 2022 — elderly users show
-                  3x higher success with voice input for health symptom search.
-            ─────────────────────────────────────────────────────────────────── */}
-            <section className="py-10 bg-trust-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-xl font-bold text-trust-900 mb-1">Browse by Symptom</h2>
-                    <p className="text-sm text-trust-500 mb-4">Don't know which specialist you need? Start with your symptom.</p>
-
-                    {/* Symptom search bar + audio icon */}
-                    <div className="flex gap-2 mb-5 max-w-md">
-                        <div className="relative flex-1">
-                            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-trust-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                            <input
-                                id="symptom-search"
-                                type="text"
-                                placeholder="Type a symptom, e.g. Fever..."
-                                className="input-field pl-9 py-2.5 text-sm w-full"
-                                aria-label="Search by symptom"
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Enter' && e.target.value.trim()) {
-                                        navigate(`/search?q=${encodeURIComponent(e.target.value.trim())}`)
-                                    }
-                                }}
-                            />
-                        </div>
-                        {/* Voice search — Block I Universal Design, Multimodal Input
-                            Non-functional in prototype; documents intent for elderly UX */}
-                        <button
-                            id="symptom-voice-btn"
-                            title="Voice search coming soon — speak your symptom"
-                            aria-label="Voice search: speak your symptom"
-                            onClick={() => alert('Voice search coming soon!\nSpeak your symptom → get matched specialists.')}
-                            className="flex items-center justify-center w-11 h-11 rounded-xl bg-primary-600 text-white hover:bg-primary-700 active:scale-95 transition-all shadow-sm shrink-0"
-                        >
-                            <LucideIcons.Mic className="w-5 h-5" />
-                        </button>
-                    </div>
-
-                    {/* Symptom chips */}
-                    <div className="flex flex-wrap gap-2">
-                        {symptoms.map(symptom => (
-                            <button
-                                key={symptom}
-                                onClick={() => navigate(`/search?q=${encodeURIComponent(symptom)}`)}
-                                className="px-4 py-2 bg-white border border-trust-200 rounded-full text-sm text-trust-700 hover:border-primary-400 hover:text-primary-700 hover:bg-primary-50 transition-colors"
-                            >
-                                {symptom}
-                            </button>
-                        ))}
-                    </div>
-
-                    <p className="mt-3 text-xs text-trust-400 flex items-center gap-1.5">
-                        <LucideIcons.Mic className="w-3.5 h-3.5 text-primary-400" />
-                        Prefer speaking? Tap the mic to describe your symptom by voice.
-                    </p>
                 </div>
             </section>
 
