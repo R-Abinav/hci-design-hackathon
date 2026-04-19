@@ -1,22 +1,73 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Pill, Hospital } from 'lucide-react'
+import { Pill, Hospital, ShieldCheck, RefreshCw } from 'lucide-react'
 
 /*
  * V9 FIX: Password fully masked → Show/hide toggle
  * Case Study: Stop Password Masking (Lecture 5)
  * Also: V7 (min 14px text), V10 (left-loaded content), Feedback (loaders)
+ *
+ * BLOCK K — CAPTCHA (End-Sem Reference §6, lines 626–746)
+ * ─────────────────────────────────────────────────────────
+ * CAPTCHA chosen: reCAPTCHA v2 ("I'm not a robot" checkbox)
+ *
+ * WHY reCAPTCHA (not distorted-text / Gimpy)?
+ *   • End-Sem reference (line 705-712) identifies reCAPTCHA (founded 2008,
+ *     acquired by Google) as the major real-world evolution of CAPTCHA.
+ *   • The classic "checkbox" UX requires ZERO visual puzzle-solving by the user
+ *     → eliminates friction while still blocking bots. Google's risk-engine
+ *     silently analyses mouse-movement, timing, and browser fingerprint behind
+ *     the scenes. Humans see a single click; bots see an unsolvable challenge.
+ *   • This aligns with Web Usability Principle 2: "Don't squander users' patience"
+ *     — medical appointment booking is a high-stress flow; adding a distorted
+ *     text puzzle creates unnecessary cognitive load.
+ *   • Healthcare context: elderly users struggle with distorted-text CAPTCHAs
+ *     (Universal Design concern). reCAPTCHA is frictionless for these users.
+ *
+ * CAPTCHA UX rules applied (reference §4):
+ *   1. Submit button DISABLED until checkbox is ticked → Tolerance for Error.
+ *   2. Simulated verification delay (spinner) → Informative Feedback (Shneiderman).
+ *   3. Refresh button → allows regenerating challenge (accessibility guideline).
+ *   4. reCAPTCHA branding shown (Google logo, shield icon) → Authority + Trust.
+ *   5. Visual lock animation on verified state → Closure + immediate feedback.
+ *
+ * NOTE: This is a front-end simulation of reCAPTCHA for the prototype.
+ * In production, integrate the real @google-recaptcha library with site key.
  */
+
 export default function Login({ onLogin }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [showPassword, setShowPassword] = useState(false) // V9: toggle
+    const [showPassword, setShowPassword] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
+
+    // Block K — reCAPTCHA state
+    const [captchaChecked, setCaptchaChecked] = useState(false)
+    const [captchaVerifying, setCaptchaVerifying] = useState(false)
+    const [captchaVerified, setCaptchaVerified] = useState(false)
+
     const navigate = useNavigate()
 
     const VALID_EMAIL = 'user@betterpracto.com'
     const VALID_PASSWORD = 'password123'
+
+    // Simulate reCAPTCHA risk-engine verification delay
+    const handleCaptchaCheck = async () => {
+        if (captchaVerified) return
+        setCaptchaChecked(true)
+        setCaptchaVerifying(true)
+        // Simulate the reCAPTCHA backend risk-score evaluation (~1.2s)
+        await new Promise(r => setTimeout(r, 1200))
+        setCaptchaVerifying(false)
+        setCaptchaVerified(true)
+    }
+
+    const handleCaptchaReset = () => {
+        setCaptchaChecked(false)
+        setCaptchaVerifying(false)
+        setCaptchaVerified(false)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,9 +78,13 @@ export default function Login({ onLogin }) {
             return
         }
 
-        setLoading(true)
+        // Block K: Block submission if CAPTCHA not verified
+        if (!captchaVerified) {
+            setError('Please complete the CAPTCHA verification below before signing in.')
+            return
+        }
 
-        // Simulate network request — Shneiderman #3: Informative Feedback
+        setLoading(true)
         await new Promise(resolve => setTimeout(resolve, 1500))
 
         if (email === VALID_EMAIL && password === VALID_PASSWORD) {
@@ -37,7 +92,6 @@ export default function Login({ onLogin }) {
             navigate('/')
         } else {
             setLoading(false)
-            // Nielsen #9: Help users recognize errors — plain language
             setError('Invalid email or password. Try user@betterpracto.com / password123')
         }
     }
@@ -109,6 +163,83 @@ export default function Login({ onLogin }) {
                             </div>
                         </div>
 
+                        {/* ═══════════════════════════════════════════════════════════
+                            BLOCK K — reCAPTCHA v2 "I'm not a robot" widget
+                            Reference: end_sem_reference.txt §6, lines 705-712
+                            ═══════════════════════════════════════════════════════════
+                            The widget simulates the real Google reCAPTCHA v2 UI:
+                              1. Unchecked checkbox with label "I'm not a robot"
+                              2. On click → spinner (risk-engine evaluation phase)
+                              3. On verified → green checkmark (✓)
+                              4. reCAPTCHA branding (shield + "reCAPTCHA" wordmark + Google)
+                              5. Refresh button to reset the challenge
+                        ═══════════════════════════════════════════════════════════ */}
+                        <div>
+                            <div
+                                className={`flex items-center justify-between px-4 py-3 rounded-xl border-2 transition-all ${
+                                    captchaVerified
+                                        ? 'border-emerald-300 bg-emerald-50'
+                                        : 'border-trust-200 bg-trust-50 hover:border-trust-300'
+                                }`}
+                            >
+                                {/* Left: checkbox + label */}
+                                <div className="flex items-center gap-3">
+                                    <button
+                                        id="recaptcha-checkbox"
+                                        type="button"
+                                        onClick={handleCaptchaCheck}
+                                        disabled={captchaVerified}
+                                        aria-label="I'm not a robot CAPTCHA checkbox"
+                                        className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-all shrink-0 ${
+                                            captchaVerified
+                                                ? 'bg-emerald-500 border-emerald-500 text-white'
+                                                : captchaChecked && captchaVerifying
+                                                ? 'bg-white border-trust-300'
+                                                : 'bg-white border-trust-400 hover:border-primary-400 cursor-pointer'
+                                        }`}
+                                    >
+                                        {captchaVerifying ? (
+                                            /* Spinner during verification */
+                                            <svg className="w-4 h-4 text-primary-500 animate-spin" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                            </svg>
+                                        ) : captchaVerified ? (
+                                            /* Green checkmark on verified */
+                                            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        ) : null}
+                                    </button>
+                                    <span className={`text-sm font-medium ${captchaVerified ? 'text-emerald-700' : 'text-trust-700'}`}>
+                                        {captchaVerified ? 'Verified ✓' : "I'm not a robot"}
+                                    </span>
+                                </div>
+
+                                {/* Right: reCAPTCHA branding */}
+                                <div className="flex flex-col items-center gap-0.5">
+                                    {/* Shield icon + reCAPTCHA wordmark */}
+                                    <ShieldCheck className="w-8 h-8 text-trust-400" strokeWidth={1.5} />
+                                    <div className="text-center">
+                                        <div className="text-[9px] font-bold text-trust-500 tracking-wide leading-none">reCAPTCHA</div>
+                                        <div className="text-[8px] text-trust-400 leading-none">Privacy - Terms</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Refresh / reset button — CAPTCHA accessibility guideline */}
+                            {captchaVerified && (
+                                <button
+                                    type="button"
+                                    onClick={handleCaptchaReset}
+                                    className="mt-1.5 flex items-center gap-1 text-xs text-trust-400 hover:text-trust-600 transition-colors"
+                                >
+                                    <RefreshCw className="w-3 h-3" /> Reset verification
+                                </button>
+                            )}
+                        </div>
+                        {/* End Block K */}
+
                         {/* Error message — Nielsen #9: plain language */}
                         {error && (
                             <div className="flex items-start gap-2 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
@@ -119,11 +250,12 @@ export default function Login({ onLogin }) {
                             </div>
                         )}
 
-                        {/* Submit — Fitts's Law: large target */}
+                        {/* Submit — Fitts's Law: large target. Disabled until CAPTCHA verified */}
                         <button
                             type="submit"
-                            disabled={loading}
-                            className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-70"
+                            disabled={loading || !captchaVerified}
+                            className="btn-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                            title={!captchaVerified ? 'Please complete the CAPTCHA first' : ''}
                         >
                             {loading ? (
                                 <>

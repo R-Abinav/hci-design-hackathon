@@ -706,7 +706,27 @@ CAPTCHA (Completely Automated Public Turing test to tell Computers and Humans Ap
 \textit{Reference: End-Sem HCI Lecture Notes, lines 626--746.}
 \end{hcibox}
 
-\textit{[Screenshots and detailed implementation to be added after Block K code is implemented.]}
+\subsection{K1 --- reCAPTCHA v2 Implementation}
+
+\begin{featurebox}{reCAPTCHA ``I'm not a robot'' Checkbox (Block K)}
+Based on the end-semester reference on CAPTCHA evolution, reCAPTCHA v2 is implemented on the Login page as the optimal balance of security and accessibility. The traditional distorted-text (Gimpy) CAPTCHAs create high cognitive load and violate Universal Design Principle 1 (Equitable Use) for elderly or visually impaired users.
+
+The reCAPTCHA v2 checkbox requires zero visual puzzle-solving. The risk-engine invisibly analyses mouse movement patterns and timings.
+
+\textbf{HCI \& Usability aspects implemented:}
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \textbf{Tolerance for Error:} The ``Sign In'' button remains disabled (\texttt{disabled=true}) until the CAPTCHA is verified, preventing premature submission errors.
+  \item \textbf{Informative Feedback:} Clicking the checkbox transitions it from empty $\to$ loading spinner (simulating risk-engine evaluation) $\to$ green checkmark (verified label).
+  \item \textbf{Learnability / Flexibility:} A ``Reset verification'' button appears after verification, an accessibility requirement allowing the user to regenerate the challenge if needed.
+  \item \textbf{Authority \& Trust:} The inclusion of the recognisable reCAPTCHA branding (shield logo and wordmark) triggers the Persuasion principle of Authority, increasing user trust in the platform's security.
+\end{itemize}
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{captcha_login.png}}
+    \caption{The Login page featuring the ``I'm not a robot'' reCAPTCHA v2 widget. The ``Sign In'' button is locked until verification is complete. The simulated UI provides a loading spinner during evaluation and a green checkmark upon success. \textit{Block K.}}
+\end{figure}
 
 \vspace{0.5cm}
 
