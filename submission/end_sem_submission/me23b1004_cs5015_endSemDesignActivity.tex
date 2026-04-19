@@ -948,4 +948,589 @@ Screenshots taken & 25+ \\
 
 \hrule
 
+% --- Change Header for Appendix ---
+\fancyhf{}
+\rhead{\textcolor{gray}{ME23B1004}}
+\lhead{\textcolor{gray}{CS5015 --- HCI Midsem Design Activity}}
+\cfoot{\thepage}
+
+\newpage
+\part*{Appendix: Mid-Semester Submission}
+
+% --- Cover Page ---
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+{\Huge\bfseries\color{primary} Midsem --- Design Activity}\\[0.8cm]
+{\LARGE\color{primary!70!black} Human Computer Interaction}\\[0.3cm]
+{\large Course Code: CS5015}
+
+\vspace{1.5cm}
+
+\rule{\textwidth}{1pt}
+\vspace{0.5cm}
+
+{\Large\bfseries Domain: Online Doctor Consultation App}\\[0.3cm]
+{\large (Practo --- \url{https://www.practo.com})}
+
+\vspace{0.5cm}
+\rule{\textwidth}{1pt}
+
+\vspace{2cm}
+
+{\Large\bfseries R. Abinav}\\[0.3cm]
+{\large Roll No: \textbf{ME23B1004}}
+
+\vspace{2cm}
+
+\vfill
+{\small February 2026}
+\end{titlepage}
+
+% --- Table of Contents ---
+\tableofcontents
+\newpage
+
+% ================================================================
+\section{Violations Identified \& Solutions}
+
+I conducted a literature survey of \textbf{Practo.com} and identified \textbf{14 usability violations}. For each violation, I built a targeted solution in my \textbf{React + Tailwind CSS} prototype (\textit{Better Practo}), applying HCI principles from Lectures 1--8.
+
+\vspace{0.5cm}
+
+% ================================================================
+% V1
+% ================================================================
+\subsection{V1: Dense Footer with 50+ Links}
+
+\begin{violationbox}
+Practo's footer contains \textbf{50+ links} spread across 6 columns. The ``For Patients'' column alone has 12+ items. This overwhelms users with too many choices.
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{practo_footer.png}}
+    \caption{Practo's footer --- 50+ links across 6 columns}
+\end{figure}
+
+\begin{hcibox}{Miller's Law (7$\pm$2), Hick's Law, Tesler's Law, Nielsen \#8}
+\textbf{Miller's Law}: humans hold 7$\pm$2 chunks in working memory; 50+ links far exceeds this. \textbf{Hick's Law}: decision time increases with number of choices. \textbf{Tesler's Law}: complexity should be absorbed by the system. \textbf{Nielsen \#8}: aesthetic and minimalist design --- every extra link competes with relevant content.
+\end{hcibox}
+
+\begin{solutionbox}
+My footer uses \textbf{4 collapsible sections} with $\leq$7 items each. On mobile, sections are \textbf{accordion-style} (tap to expand). Total visible links reduced from 50+ to a manageable set.
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{our_footer_b.png}}
+    \caption{Better Practo --- Clean footer with 4 sections, $\leq$7 items each}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V2
+% ================================================================
+\subsection{V2: Dual Search Bar (Location + Query)}
+
+\begin{violationbox}
+Practo's homepage has \textbf{two separate search inputs} side-by-side: one for location and one for query. Users must fill both before searching, adding unnecessary friction.
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{practo_homepage.png}}
+    \caption{Practo's dual search bar --- two separate inputs}
+\end{figure}
+
+\begin{hcibox}{Tesler's Law, Zipf's Law (Least Effort), Asimov's 2nd Law}
+\textbf{Tesler's Law}: system should absorb complexity --- auto-detecting location is trivial. \textbf{Zipf's Law}: users follow the path of least effort --- two inputs when one suffices adds friction. \textbf{Asimov's 2nd Law}: don't waste user's time.
+\end{hcibox}
+
+\begin{solutionbox}
+I provide a \textbf{single unified search bar} for doctors, specialties, or symptoms. Location is \textbf{auto-detected} and displayed as a changeable chip (``Chennai''). One input, zero friction.
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{our_home_b.png}}
+    \caption{Better Practo --- Unified search with auto-detected location chip}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V3
+% ================================================================
+\subsection{V3: Cluttered Doctor Cards}
+
+\begin{violationbox}
+Practo's doctor cards show \textbf{everything at once}: name, specialty, experience, location, hospital, fee, rating, patient stories, badges, and two CTAs. This creates information overload.
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{practo_search_results.png}}
+    \caption{Practo's search results --- dense cards with too much information}
+\end{figure}
+
+\begin{hcibox}{Inverted Pyramid, Nielsen \#8 (Aesthetic Minimalism), Progressive Disclosure}
+\textbf{Inverted Pyramid}: most important information first, details progressively revealed. \textbf{Nielsen \#8}: don't clutter with rarely-needed info. \textbf{Progressive Disclosure}: show essentials initially, reveal details on demand.
+\end{hcibox}
+
+\begin{solutionbox}
+My cards show only \textbf{essentials} upfront: name, specialty, rating, availability. Additional details (education, hospital, about) are behind a \textbf{``More details''} expand button --- tighter progressive disclosure.
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.85\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{our_search_results_b.png}}
+        \caption{Collapsed --- essentials only}
+    \end{subfigure}
+    
+    \vspace{1.5em}
+    \begin{subfigure}[b]{0.85\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{our_expanded_card_b.png}}
+        \caption{Expanded --- full details on demand}
+    \end{subfigure}
+    \caption{Better Practo --- Progressive disclosure on doctor cards}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V4
+% ================================================================
+\subsection{V4: No Onboarding for First-Time Users}
+
+\begin{violationbox}
+Practo provides \textbf{no onboarding experience} for first-time users. New users land directly on the homepage with no guidance on how to use the platform, find doctors, or book appointments. This increases the learning curve and may cause drop-offs.
+\end{violationbox}
+
+\begin{hcibox}{Learnability, Familiarity, Power Law of Practice}
+\textbf{Learnability}: a key usability principle --- new users should quickly understand how to use the system. \textbf{Familiarity}: onboarding uses icons and language users already recognize. \textbf{Power Law of Practice}: guided onboarding accelerates the user's learning curve, reducing time-to-proficiency.
+\end{hcibox}
+
+\begin{solutionbox}
+I implemented a \textbf{3-step guided onboarding tour} that appears as a modal overlay on first login:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Step 1}: ``Find Trusted Doctors'' --- explains the search feature
+    \item \textbf{Step 2}: ``Book Instantly'' --- explains the 3-step booking
+    \item \textbf{Step 3}: ``Get Care, Your Way'' --- explains video consult \& prescriptions
+\end{itemize}
+Features: animated progress dots, gradient illustrations, and a \textbf{``Skip'' button} always visible (respecting User Control / Shneiderman \#7).
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.85\textwidth]{our_onboarding_1_b.png}}
+    \caption{Better Practo --- Onboarding Step 1: Find Trusted Doctors}
+\end{figure}
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.85\textwidth]{our_onboarding_2_b.png}}
+    \caption{Better Practo --- Onboarding Step 2: Book Instantly}
+\end{figure}
+
+\vspace{1em}
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.85\textwidth]{our_onboarding_3_b.png}}
+    \caption{Better Practo --- Onboarding Step 3: Get Care, Your Way}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V5 + V14 (combined --- both relate to booking flow)
+% ================================================================
+\subsection{V5 + V14: Weak Booking Feedback \& No Progress Indicator}
+
+\begin{violationbox}
+Practo's booking flow has \textbf{no progress indicator} --- users don't know how many steps remain. The ``Continue'' button is greyed out with no explanation. After confirming, there is no meaningful success feedback. The only escape is ``Go back to my results.''
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.85\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{practo_booking_slots.png}}
+        \caption{Slot selection --- no progress bar}
+    \end{subfigure}
+    
+    \vspace{1.5em}
+    \begin{subfigure}[b]{0.85\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{practo_booking.png}}
+        \caption{Details page --- no step count}
+    \end{subfigure}
+    \caption{Practo's booking flow --- no progress indicator, weak feedback}
+\end{figure}
+
+\begin{hcibox}{Closure (Shneiderman \#4), Synthesizability, Shneiderman \#3 (Feedback), Shneiderman \#5 (Easy Reversal)}
+\textbf{Closure}: sequences should have clear beginning, middle, and end. \textbf{Synthesizability}: users should see where they are in a process. \textbf{Shneiderman \#3}: every action needs feedback. \textbf{Shneiderman \#5}: users should be able to reverse actions easily.
+\end{hcibox}
+
+\begin{solutionbox}
+My booking has a \textbf{3-step progress bar}: \textit{Select Slot $\rightarrow$ Confirm $\rightarrow$ Booked!}
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Progress indicator}: Step numbers (1/3, 2/3, 3/3) with filling bar
+    \item \textbf{Reversal}: ``$\leftarrow$ Change Slot'' on Step 2 goes back to Step 1
+    \item \textbf{No Reset button}: Individual field clear ($\times$) instead (Reset Must Die)
+    \item \textbf{Success animation}: Green checkmark + summary on Step 3 (Closure)
+    \item \textbf{Loader}: Spinner with ``Booking...'' during submission
+\end{itemize}
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{our_booking_main_b.png}}
+    \caption{Better Practo --- 3-step progress bar: Select Slot $\rightarrow$ Confirm $\rightarrow$ Booked!}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.85\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{our_booking_step2_b.png}}
+        \caption{Step 2 --- Details input}
+    \end{subfigure}
+    
+    \vspace{1.5em}
+    \begin{subfigure}[b]{0.85\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{our_booking_step3_b.png}}
+        \caption{Step 3 --- Success confirmation (Closure)}
+    \end{subfigure}
+    \caption{Better Practo --- Booking flow progression (Step 2 and 3)}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V6
+% ================================================================
+\subsection{V6: No Contextual Help System}
+
+\begin{violationbox}
+Practo's help is on a \textbf{separate subdomain} (\texttt{help.practo.com}), breaking context. The FAQ content is dense and not categorized by user task.
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.8\textwidth]{practo_help.png}}
+    \caption{Practo's help --- separate subdomain, uncategorized FAQ}
+\end{figure}
+
+\begin{hcibox}{Nielsen \#10 (Help \& Documentation), Shneiderman \#8, Headline Usability}
+\textbf{Nielsen \#10}: help should be searchable and task-focused. \textbf{Shneiderman \#8}: reduce short-term memory load. \textbf{Headline Usability}: front-loaded, concise headings.
+\end{hcibox}
+
+\begin{solutionbox}
+My Help is \textbf{built into the app} (same domain, navbar link). FAQs are \textbf{categorized by task} (Booking, Consultations, Payments, Privacy) with a \textbf{search bar}. Accordion layout with concise headings.
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.8\textwidth]{our_help_b.png}}
+    \caption{Better Practo --- In-app searchable FAQ}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V7
+% ================================================================
+\subsection{V7: Small Text in Secondary Areas}
+
+\begin{violationbox}
+Practo uses text below 14px in footer links, secondary labels, and card metadata, reducing readability for older or visually impaired users.
+\end{violationbox}
+
+\begin{hcibox}{Accessibility, Observability (Robustness)}
+\textbf{Accessibility} standards recommend $\geq$16px body text, $\geq$14px secondary. \textbf{Observability}: users must perceive all relevant information --- small text undermines this.
+\end{hcibox}
+
+\begin{solutionbox}
+My app enforces \textbf{minimum 14px} font size globally. Body text is 16px. I use the \textbf{Inter} font family for readability. Proper contrast ratios maintained throughout.
+
+\textit{This is a global design fix applied across all pages --- see any page in my prototype for verification.}
+\end{solutionbox}
+
+\newpage
+
+% ================================================================
+% V8
+% ================================================================
+\subsection{V8: Inconsistent Active Navigation State}
+
+\begin{violationbox}
+Practo shows an active nav state (blue underline) on \textit{some} pages (e.g., ``Find Doctors'') but \textbf{not on others} (e.g., the homepage and login page). This inconsistency leaves users uncertain about their location.
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{practo_nav_1.png}}
+        \caption{Login page --- no active nav indicator}
+    \end{subfigure}
+    
+    \vspace{1.5em}
+    \begin{subfigure}[b]{\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{practo_nav_2.png}}
+        \caption{Homepage --- no active nav indicator}
+    \end{subfigure}
+    \caption{Practo's inconsistent navigation --- no active state on login and homepage}
+\end{figure}
+
+\begin{hcibox}{Nielsen \#1 (Visibility of System Status), Shneiderman \#1 (Consistency)}
+\textbf{Nielsen \#1}: system should always inform users where they are. \textbf{Shneiderman \#1}: similar situations need consistent cues --- if some pages highlight nav, all should.
+\end{hcibox}
+
+\begin{solutionbox}
+My navbar \textbf{consistently highlights the active page} on every route with a blue background + bottom border. Works on Home, Find Doctors, Help --- \textbf{no exceptions}.
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.75\textwidth]{our_navbar_active_1_b.png}}
+    \caption*{(a) Home page active}
+    
+    \vspace{0.4em}
+    \imgborder{\includegraphics[width=0.75\textwidth]{our_navbar_active_2_b.png}}
+    \caption*{(b) Find Doctors page active}
+    
+    \vspace{0.4em}
+    \imgborder{\includegraphics[width=0.75\textwidth]{our_navbar_active_3_b.png}}
+    \caption*{(c) Help page active}
+    \caption{Better Practo --- Consistent active nav on every page (Home, Doctors, Help)}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V9
+% ================================================================
+\subsection{V9: Password Fully Masked Without Toggle}
+
+\begin{violationbox}
+Practo's login masks the password completely with no option to reveal it. Users cannot verify what they typed, leading to errors and frustration.
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.8\textwidth]{practo_password.png}}
+    \caption{Practo's login --- password fully masked with no reveal option}
+\end{figure}
+
+\begin{hcibox}{Stop Password Masking (Lecture 5), Norman's Feedback, Nielsen \#5 (Error Prevention)}
+\textbf{Stop Password Masking}: masking causes more harm (typos, frustration) than good (shoulder surfing is rare). \textbf{Norman's Feedback}: users need to see effect of actions. \textbf{Nielsen \#5}: letting users see their password prevents typos.
+\end{hcibox}
+
+\begin{solutionbox}
+My login has a \textbf{show/hide password toggle} (eye icon). Default: masked. Click eye to reveal. Balances security with usability.
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.9\textwidth]{our_login_b.png}}
+    \caption{Better Practo --- Show/hide password toggle (password ``password123'' visible)}
+\end{figure}
+
+\newpage
+
+% ================================================================
+% V10
+% ================================================================
+\subsection{V10: Important Content Not Left-Loaded}
+
+\begin{violationbox}
+On several Practo pages, important actions are placed on the right (e.g., ``Book Clinic Visit'' CTA, map sidebar), competing with the primary content scanning path.
+\end{violationbox}
+
+\begin{hcibox}{Horizontal Attention (69\% Left), F-Pattern, Above the Fold}
+Research shows \textbf{69\% of viewing time} is on the left half. The \textbf{F-Pattern} describes how users scan: across top, then down the left. \textbf{Above the Fold}: 80\% of time spent above the fold.
+\end{hcibox}
+
+\begin{solutionbox}
+All pages follow the \textbf{F-Pattern}: primary content left-aligned. Doctor profile: main info takes 2/3 width (left), booking CTA on right 1/3. Search bar and hero cards are centered/left-loaded. Key info always above the fold.
+
+\textit{This is a global layout principle applied across all pages --- see any page in my prototype for verification.}
+\end{solutionbox}
+
+\newpage
+
+% ================================================================
+% V11
+% ================================================================
+\subsection{V11: Reset Buttons on Forms}
+
+\begin{violationbox}
+Traditional form patterns include ``Reset'' or ``Clear All'' buttons that can accidentally destroy all user input, causing frustration.
+\end{violationbox}
+
+\begin{hcibox}{Reset Must Die (Lecture 6), Shneiderman \#5 (Easy Reversal), Asimov's 1st Law}
+\textbf{Reset Must Die}: reset buttons are destructive and rarely desired. \textbf{Shneiderman \#5}: reversal should be granular, not all-or-nothing. \textbf{Asimov's 1st Law}: don't harm the user (data loss = harm).
+\end{hcibox}
+
+\begin{solutionbox}
+My forms have \textbf{no reset button}. Instead: individual \textbf{clear buttons ($\times$)} per field, ``$\leftarrow$ Change Slot'' for granular step reversal, and form data preserved between steps.
+
+\textit{See the booking flow (Figures for V5+V14) for verification --- no reset button anywhere in the form.}
+\end{solutionbox}
+
+\newpage
+
+% ================================================================
+% V12
+% ================================================================
+\subsection{V12: Default Sort is Alphabetical / Unclear}
+
+\begin{violationbox}
+Practo's search sorting criteria is opaque and inconsistent. Alphabetical ordering reflects system convenience, not the user's mental model.
+\end{violationbox}
+
+\begin{hcibox}{Alphabetical Sorting Must Die (Lecture 6), Hick's Law}
+\textbf{Alphabetical Must Die}: users think in terms of ``best rated'' or ``cheapest,'' not alphabetical. \textbf{Hick's Law}: clear sort options reduce decision time.
+\end{hcibox}
+
+\begin{solutionbox}
+I offer \textbf{explicit sort pills}: Relevance (default), Rating, Experience, Fee. Active sort is visually highlighted. Default is \textbf{Relevance} (rating $\times$ reviews). No alphabetical option.
+
+\textit{See the Find Doctors page (Figure for V8 navbar) --- sort pills visible at top of results.}
+\end{solutionbox}
+
+\newpage
+
+% ================================================================
+% V13
+% ================================================================
+\subsection{V13: Forced City Selection Modal}
+
+\begin{violationbox}
+Practo's Lab Tests page forces a \textbf{city selection modal} before showing any content. Users cannot browse without selecting a city first.
+\end{violationbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.6\textwidth]{practo_city_selection.png}}
+    \caption{Practo forces city selection before showing content}
+\end{figure}
+
+\begin{hcibox}{Asimov's 2nd Law (Don't Waste Time), Zipf's Law (Least Effort)}
+\textbf{Asimov's 2nd Law}: don't waste user's time --- auto-detect if possible. \textbf{Zipf's Law}: users follow the path of minimal effort.
+\end{hcibox}
+
+\begin{solutionbox}
+My app \textbf{auto-detects the city} (shown as a chip in the search bar) and lets users change with a single tap. No blocking modals. Content loads immediately.
+\end{solutionbox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{our_home_b.png}}
+    \caption{Better Practo --- Auto-detected ``Chennai'' chip in search bar, no forced modal}
+\end{figure}
+
+% \newpage
+
+% ================================================================
+\section{Complete HCI Concept Coverage}
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|l|l|X|}
+\hline
+\textbf{Lecture} & \textbf{Concept} & \textbf{Where Applied} \\
+\hline
+L1--2 & Affordance, Visibility & Buttons look clickable, inputs look typeable \\
+L1--2 & Mental Models, Jakob's Law & Familiar health-app layout \\
+\hline
+L3 & Shneiderman \#1: Consistency & Uniform colors, spacing, components \\
+L3 & Shneiderman \#3: Feedback & Loaders, progress bars, toasts \\
+L3 & Shneiderman \#4: Closure & Booking confirmation animation \\
+L3 & Shneiderman \#5: Easy Reversal & Back buttons, undo, field clear \\
+L3 & Shneiderman \#8: Reduce STM & $\leq$5 nav items, chunked forms \\
+\hline
+L3 & Nielsen \#1: Visibility & Active nav, loaders, progress bar \\
+L3 & Nielsen \#5: Error Prevention & Form validation, confirmations \\
+L3 & Nielsen \#6: Recognition > Recall & Doctor photos, specialty icons \\
+L3 & Nielsen \#8: Aesthetic Minimalism & Clean cards, whitespace \\
+L3 & Nielsen \#9: Error Recovery & Plain-language error messages \\
+L3 & Nielsen \#10: Help \& Docs & In-app searchable FAQ \\
+\hline
+L3 & Norman: Constraints & Unavailable slots greyed out \\
+L3 & Norman: Mapping & $\leftarrow$ back, $\rightarrow$ next \\
+\hline
+L4 & Learnability: Predictability & Consistent layouts across pages \\
+L4 & Learnability: Synthesizability & Breadcrumbs, step indicators \\
+L4 & Flexibility: Substitutivity & Search by text OR browse category \\
+L4 & Robustness: Observability & System state always visible \\
+L4 & Robustness: Recoverability & Undo/cancel at every step \\
+L4 & Fitts's Law & Large CTAs, small destructive buttons \\
+\hline
+L5 & Password Masking & Show/hide toggle (V9) \\
+L5 & Horizontal Attention & Key content left-aligned (V10) \\
+\hline
+L6 & F-Pattern, Above Fold & Important info top-left, above fold \\
+L6 & Alphabetical Must Die & Default sort: relevance (V12) \\
+L6 & Reset Must Die & No reset button (V11) \\
+L6 & Headline Usability & Concise headings in FAQ \\
+\hline
+L7--8 & Miller's 7$\pm$2 & $\leq$5 nav items, $\leq$7 footer items \\
+L7--8 & Serial Position Effect & Important items first/last in nav \\
+L7--8 & Pareto / Vital Few & 4 hero cards = critical 20\% \\
+L7--8 & Zipf's / Least Effort & Most-used = fewest clicks \\
+L7--8 & Asimov's 1st (No Harm) & Confirm destructive actions \\
+L7--8 & Asimov's 2nd (No Waste) & Auto-detect location (V13) \\
+L7--8 & Asimov's 3rd (Humane) & Respect cognitive limits \\
+L7--8 & Tesler's Law & System absorbs complexity \\
+\hline
+\end{tabularx}
+\caption{Complete HCI concept mapping from Lectures 1--8}
+\end{table}
+
+\newpage
+
+% ================================================================
+\section{Summary}
+
+\begin{table}[H]
+\centering
+\small
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{|c|X|X|X|}
+\hline
+\textbf{V\#} & \textbf{Practo Violation} & \textbf{HCI Principles} & \textbf{My Fix} \\
+\hline
+V1 & Footer 50+ links & Miller's 7$\pm$2, Hick's, Tesler's & Collapsible, $\leq$7/group \\
+V2 & Dual search bar & Tesler's, Zipf's, Asimov's 2nd & Unified + auto-location \\
+V3 & Cluttered doctor cards & Inverted Pyramid, Nielsen \#8 & Progressive disclosure \\
+V4 & No onboarding & Learnability, Power Law & 3-step guided tour \\
+V5 & Weak booking feedback & Closure, Shneiderman \#3/\#4 & Progress bar + animation \\
+V6 & No contextual help & Nielsen \#10, Shneiderman \#8 & In-app searchable FAQ \\
+V7 & Small secondary text & Accessibility, Observability & Min 14px, contrast \\
+V8 & Inconsistent active nav & Nielsen \#1, Shneiderman \#1 & Consistent indicators \\
+V9 & Password masked & Password Masking case study & Show/hide toggle \\
+V10 & Not left-loaded & Horizontal Attention, F-Pattern & Left-aligned content \\
+V11 & Reset buttons & Reset Must Die, Shneiderman \#5 & No reset; field clear \\
+V12 & Alphabetical sort & Alphabetical Must Die & Default: relevance \\
+V13 & Forced city modal & Asimov's 2nd, Zipf's & Auto-detect location \\
+V14 & No progress bar & Closure, Synthesizability & 3-step indicator \\
+\hline
+\end{tabularx}
+\caption{Summary of all 14 violations and solutions}
+\end{table}
+
+% ================================================================
+\section{Additional Links}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Source Code}: \url{https://github.com/R-Abinav/hci-mid-design-activity}
+    \item \textbf{Tech Stack}: React + Tailwind CSS (Vite build system)
+    \item \textbf{Demo Credentials}: \texttt{user@betterpracto.com} / \texttt{password123}
+\end{itemize}
+
 \end{document}
