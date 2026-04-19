@@ -492,7 +492,25 @@ This contrasts sharply with Practo's help page (violation V6) which has no Quick
 \begin{figure}[H]
     \centering
     \imgborder{\includegraphics[width=\textwidth]{user_support_quickref.png}}
-    \caption{Help page with E1 Quick Reference card (dark blue header + 2×2 action grid) placed above the FAQ search. Experienced users can find common tasks without scrolling. Also visible: FAQ categories below. \textit{Block E.}}
+    \caption{Help page: E1 Quick Reference card (dark blue header + 2\texttimes{}2 action grid) above the Jump-to-section pills, FAQ search bar, and FAQ accordion. Experienced users find common tasks instantly; novices use the FAQ. \textit{Block E.}}
+\end{figure}
+
+\subsection{E2 --- Tips \& Best Practices (Proactive Help)}
+
+\begin{featurebox}{Proactive Help --- Tips \& Warnings Panel}
+Dix et al.\ (2004) describe proactive help as assistance that anticipates user problems \emph{before} they occur, rather than waiting for errors. The Help page now includes a 2\texttimes{}2 ``Tips \& Best Practices'' grid with actionable warnings: book 24h in advance, bring test reports, ensure stable internet for video, enable reminders. Each tip uses a coloured icon (blue=info, green=health, purple=tech, orange=action) matching the rest of the app's colour system (Block D).
+\end{featurebox}
+
+\subsection{E3 --- Emergency Contact Card (Always Visible System Support)}
+
+\begin{featurebox}{Emergency Contacts --- Safety Net for Critical Situations}
+A red-themed ``Emergency Contacts'' card is always visible near the bottom of the Help page, showing: Ambulance (108), National Health Helpline (104), and 24/7 in-app support chat. This implements the \textbf{Tolerance for Error} principle (Universal Design, Block I) at the information architecture level: a user in a health emergency who accidentally navigates to the Help page is immediately shown the correct exit path. This can be life-critical --- the design ensures it is unmissable (red background, prominent number).
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{help_emergency.png}}
+    \caption{Bottom of Help page: E2 Tips \& Best Practices (2\texttimes{}2 coloured grid) and E3 Emergency Contacts card (red, with 108/104 numbers). Couldn't find help? → Chat or Email buttons below. \textit{Block E.}}
 \end{figure}
 
 \vspace{0.5cm}
@@ -503,31 +521,52 @@ This contrasts sharply with Practo's help page (violation V6) which has no Quick
 
 \begin{hcibox}{Navigation Design Guidelines}
 Key navigation principles (Web Usability lecture): every page must show the user \emph{where they are}, \emph{where they can go}, and \emph{where they have been}. Breadcrumbs satisfy all three. Skip navigation links allow keyboard and screen-reader users to bypass the repeated nav bar and jump directly to main content --- required by WCAG 2.1 Success Criterion 2.4.1.
-\end{hcibox}
+\end{hcibox}\subsection{F1 --- Keyboard Navigation Toast}
 
-\subsection{F1 --- Skip Navigation Link (WCAG 2.4.1)}
+\begin{featurebox}{Keyboard Navigation Toast --- Non-Intrusive Keyboard Mode Indicator}
+The previous implementation used a full-width banner that covered the navbar --- a poor design choice that obstructed the primary navigation. The redesigned F1 feature works as follows:
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item A \texttt{useEffect} in \texttt{Navbar.jsx} listens for the first \texttt{Tab} keydown event on the window.
+  \item On first Tab press, a dark-blue toast appears in the \textbf{bottom-right corner} (\texttt{fixed bottom-6 right-6 z-[200]}), reading: ``Keyboard navigation active --- use Tab to move between elements''.
+  \item The toast auto-dismisses after 3 seconds and has an \texttt{\texttimes} button for immediate dismissal.
+  \item A \texttt{role="status" aria-live="polite"} attribute ensures screen readers announce it without interrupting other content.
+  \item Mouse users never see it. It fires only once per session.
+\end{itemize}
 
-\begin{featurebox}{Skip Navigation --- WCAG 2.1 SC 2.4.1: Bypass Blocks}
-A skip navigation link is the \textbf{first focusable element} in the page (before the logo). It is \textbf{visually hidden} by default (\texttt{sr-only}) and becomes visible \emph{only} when the keyboard focus lands on it (Tab key). When clicked or activated, it scrolls the page to \texttt{\#main-content}, bypassing all 3 navigation links.
-
-\textbf{Why this matters:} A sighted mouse user never sees the navbar's nav links as an obstacle. But a keyboard-only user (motor disability, power user, screen-reader user) must Tab through every nav link on every page load before reaching content. With 3 nav links + logo + user name + logout = 6 tabs to skip on every page. The skip link reduces this to 1 Tab.
-
-\textit{Implementation:} \texttt{src/components/Navbar.jsx} --- \texttt{<a href="\#main-content" className="sr-only focus:not-sr-only ...">}
+\textit{Why a toast, not a banner?} A banner that covers the navbar is an Anti-Pattern --- it obstructs the primary navigation while trying to help keyboard users navigate. A bottom-right toast follows the Notification UX convention (familiar from Gmail, Figma, VS Code) and does not block any content.
 \end{featurebox}
 
-\subsection{F2, F3 --- ARIA Labels + Keyboard-Navigable Logo}
+\subsection{F2 --- In-Page Jump Navigation on Help Page}
+
+\begin{featurebox}{In-Page Jump Navigation --- Visible Skip-Link Concept}
+The Help page implements a visible, interactive ``Jump to section'' pill row below the Quick Reference card. Six section pills (Booking, Consultations, Payments, Account, Emergency, Tips) allow users to:\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item Jump directly to any section with \texttt{scrollIntoView\{behavior: smooth\}} --- bypassing all content in between (the visible equivalent of a skip link).
+  \item The active section pill changes to a filled primary style, giving location feedback (Nielsen \#1: Visibility of System Status / navigation principle ``Where am I?'').
+  \item Each section card has \texttt{id} attributes matching the pills, and \texttt{scroll-mt-20} to offset the sticky navbar.
+\end{itemize}
+
+This is the \textbf{visible, user-friendly implementation} of the skip-link concept. While WCAG skip links are invisible by default (keyboard-only), the Jump Navigation makes the same concept accessible to all users.
+\end{featurebox}
+
+\subsection{F3, F4 --- ARIA Labels + Keyboard-Navigable Logo}
 
 \begin{featurebox}{ARIA Labels + Keyboard Navigation}
-\textbf{F2 --- \texttt{aria-label} on \texttt{<nav>}:} The navbar element now has \texttt{aria-label="Primary navigation"}, which allows screen-readers to identify this landmark region and let users jump directly to it using landmark navigation (common screen-reader shortcut).
+\textbf{F3 --- \texttt{aria-label} on \texttt{\textless{}nav\textgreater{}:}} The navbar element has \texttt{aria-label="Primary navigation"}, allowing screen-readers to identify this landmark region.
 
-\textbf{F3 --- Logo keyboard-navigable:} The logo div (which acts as a link to home) now has \texttt{role="link"}, \texttt{tabIndex=\{0\}}, \texttt{aria-label="Go to home page"}, and \texttt{onKeyDown} Enter handler. Previously, keyboard users could not activate the logo at all --- it was only clickable.
+\textbf{F4 --- Logo keyboard-navigable:} The logo has \texttt{role="link"}, \texttt{tabIndex=\{0\}}, \texttt{aria-label="Go to home page"}, and \texttt{onKeyDown} Enter handler. The mobile menu button has \texttt{aria-expanded} set dynamically.
 \end{featurebox}
 
-\subsection{F4 --- Breadcrumb Navigation (already implemented in mid-sem)}
+\subsection{F5 --- Breadcrumb Navigation}
 
 \begin{featurebox}{Breadcrumb Navigation --- Synthesizability}
-The DoctorProfile and Booking pages show a breadcrumb: \texttt{Home › Find Doctors › Dr. [Name]} and \texttt{Home › [Doctor] › Book Appointment}. This satisfies the navigation principle that every page must show the user \textit{where they are} and \textit{where they have been}. The breadcrumb also provides an escape hatch for users who arrived via search but want to go back to browsing.
+The DoctorProfile and Booking pages show breadcrumbs: \texttt{Home \textrightarrow{} Find Doctors \textrightarrow{} Dr. [Name]} and \texttt{Home \textrightarrow{} [Doctor] \textrightarrow{} Book Appointment}. Satisfies: \textit{where am I? where have I been? where can I go?}
 \end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{navigation_skip_link.png}}
+    \caption{Help page showing F2 Jump-to-section pill row (``Booking'' active, filled blue; others outlined) and F1 keyboard toast appearing in bottom-right after Tab key press: ``Keyboard navigation active --- use Tab to move between elements''. \textit{Block F.}}
+\end{figure}
 
 \vspace{0.5cm}
 
