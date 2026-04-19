@@ -7,6 +7,13 @@ import * as LucideIcons from 'lucide-react'
  * V10: F-Pattern — key info left, CTA right
  * V5: Strong CTA — Fitts's Law (large button)
  * Inverted Pyramid: most important info first
+ *
+ * END-SEM ADDITIONS:
+ *   B5 — Visual Design Hierarchy: 3-level strict typographic scale
+ *         name=text-2xl  >  specialty=text-base  >  metadata=text-sm
+ *         Previously specialty was text-lg (same as the rating row), breaking the hierarchy.
+ *   C1 — Persuasion Authority: Awards & Recognition section with credential badges.
+ *   C2 — Persuasion Social Proof: "X people viewed today" live indicator.
  */
 export default function DoctorProfile() {
     const { id } = useParams()
@@ -43,6 +50,7 @@ export default function DoctorProfile() {
                         <div className="flex items-start gap-5">
                             <img src={doctor.avatar} alt={doctor.name} className="w-24 h-24 rounded-2xl bg-white border border-primary-100 shrink-0 shadow-sm" />
                             <div className="flex-1">
+                                {/* B5 — Level 1: Doctor name (largest, boldest) */}
                                 <h1 className="text-2xl font-bold text-trust-900 flex items-center gap-2">
                                     {doctor.name}
                                     {doctor.verified && (
@@ -51,8 +59,10 @@ export default function DoctorProfile() {
                                         </span>
                                     )}
                                 </h1>
-                                <p className="text-lg text-trust-500 mt-1">{doctor.specialty}</p>
-                                <p className="text-base text-trust-400">{doctor.education}</p>
+                                {/* B5 — Level 2: Specialty (text-base, one step below name) */}
+                                <p className="text-base text-trust-500 mt-1">{doctor.specialty}</p>
+                                {/* B5 — Level 3: Education (text-sm, smallest tier) */}
+                                <p className="text-sm text-trust-400">{doctor.education}</p>
 
                                 <div className="flex flex-wrap items-center gap-4 mt-4">
                                     <div className="flex items-center gap-1.5">
@@ -65,6 +75,11 @@ export default function DoctorProfile() {
                                     <div className="w-px h-5 bg-trust-200"></div>
                                     <span className="text-base text-trust-600 flex items-center gap-1.5"><LucideIcons.MapPin className="w-4 h-4 text-trust-500" /> {doctor.location}</span>
                                 </div>
+                                {/* C2 — Persuasion Social Proof: people viewed today */}
+                                <div className="flex items-center gap-1.5 text-xs text-trust-500 mt-1">
+                                    <span className="w-2 h-2 rounded-full bg-accent-400 animate-pulse inline-block" />
+                                    {((doctor.id * 7 + 3) % 12) + 2} people viewed today
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -75,7 +90,23 @@ export default function DoctorProfile() {
                         <p className="text-base text-trust-600 leading-relaxed">{doctor.about}</p>
                     </div>
 
+                    {/* C1 — Persuasion Authority: Awards & Recognition — Cialdini */}
+                    <div className="card">
+                        <h2 className="text-xl font-semibold text-trust-900 mb-3">Awards &amp; Recognition</h2>
+                        <div className="space-y-2">
+                            <div className="flex items-center gap-2 text-sm text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 rounded-xl">
+                                <LucideIcons.Award className="w-4 h-4 text-amber-500 shrink-0" />
+                                <span className="font-medium">Top Doctor 2025 — Apollo Network</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-sm text-amber-700 bg-amber-50 border border-amber-200 px-3 py-2 rounded-xl">
+                                <LucideIcons.Award className="w-4 h-4 text-amber-500 shrink-0" />
+                                <span className="font-medium">Best {doctor.specialty} — Chennai Medical Awards</span>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Hospital info */}
+
                     <div className="card">
                         <h2 className="text-xl font-semibold text-trust-900 mb-3">Clinic & Hospital</h2>
                         <div className="flex items-center gap-3">

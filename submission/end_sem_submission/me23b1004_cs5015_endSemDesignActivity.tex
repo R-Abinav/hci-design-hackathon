@@ -298,7 +298,53 @@ When the search bar is empty (no query entered), a row of ``Popular searches:'' 
 Visual design principles (End-Sem Lecture, lines 118--158) govern how a layout directs attention, creates meaning through size and placement, and communicates importance without words. Key principles applied: \textbf{Dominance} (one element is clearly the most visually prominent, anchoring the page), \textbf{Scale} (relative size communicates priority), \textbf{Balance} (visual weight distributed evenly), \textbf{Hierarchy} (typographic sizing creates 3-level reading order), \textbf{Negative Space} (breathing room prevents cognitive overload).
 \end{hcibox}
 
-\textit{[Screenshots and detailed implementation to be added after Block B code is implemented.]}
+\subsection{B1 --- Dominance: Hero Stethoscope Icon}
+
+\begin{featurebox}{Dominance --- Single Focal Point Above the Search Bar}
+The Home page previously had no dominant focal point --- every element competed equally for attention. The redesign adds a large stethoscope icon (80$\times$80px, gradient rounded square, with a pulsing live indicator dot) as the \textbf{single most visually prominent element} above the search bar.
+
+Visual Design Principle: \textit{``One element must be clearly primary. Without a dominant element, the eye has nowhere to land and the layout feels chaotic.''} The stethoscope icon (domain icon) instantly communicates ``healthcare'' pre-attentively, before the user reads a word. The pulsing dot micro-animation signals ``live / active'' service --- adding dynamism without distraction.
+\end{featurebox}
+
+\subsection{B2 --- Scale: Oversized Search Bar}
+
+\begin{featurebox}{Scale --- Search Bar Larger Than All Other Inputs}
+The search bar uses \texttt{py-5} (significantly taller than the \texttt{py-3} default on other inputs). Scale communicates priority: the largest interactive element is the most important one. This is the same principle Google uses --- the search bar dominates the entire home page because Google's primary task is search.
+\end{featurebox}
+
+\subsection{B3, B4 --- Balance \& Negative Space}
+
+\begin{featurebox}{Balance + Negative Space}
+\textbf{Balance:} The 4 hero action cards (Video Consult, Find Doctors, Lab Tests, Surgeries) use a symmetric 4-column grid with \texttt{gap-4 md:gap-6}, creating equal visual weight across the horizontal axis. Symmetrical balance communicates professionalism and trustworthiness.
+
+\textbf{Negative Space:} Each major section uses \texttt{py-12} (48px vertical padding), giving breathing room between the hero, specialties, symptom chips, and trust stats sections. The heading and subtitle have \texttt{mb-2} separation between them --- not \texttt{mb-6} which would make them feel unrelated. Negative space is a design tool, not wasted space.
+\end{featurebox}
+
+\subsection{B5 --- Typographic Hierarchy: Doctor Profile}
+
+\begin{featurebox}{3-Level Typographic Hierarchy on Doctor Profile}
+The Doctor Profile page previously broken the visual hierarchy by using \texttt{text-lg} for both the specialty line and the rating row, creating two equally-sized elements in competition. The end-sem fix enforces a strict 3-level hierarchy:
+
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \textbf{Level 1 --- Doctor Name:} \texttt{text-2xl font-bold} --- the single most prominent element
+  \item \textbf{Level 2 --- Specialty:} \texttt{text-base} --- one clear step below the name
+  \item \textbf{Level 3 --- Education/Metadata:} \texttt{text-sm} --- supporting information, least prominent
+\end{itemize}
+
+This creates a scannable F-pattern reading order: the user's eye jumps from name $\to$ specialty $\to$ details, without needing to read linearly.
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{visual_design_home.png}}
+    \caption{Home page showing: B1 Dominance (stethoscope hero icon with pulse dot), B2 Scale (oversized search bar), B3 Balance (symmetric 4-card grid), B4 Negative Space (generous section padding). \textit{Block B.}}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{visual_design_doctor_profile.png}}
+    \caption{Doctor Profile page showing: B5 Typographic Hierarchy (name $>$ specialty $>$ education, 3-level scale); C2 Social Proof (``12 people viewed today'' with pulse dot); C1 Authority (Awards \& Recognition amber badge cards). \textit{Blocks B + C.}}
+\end{figure}
 
 \vspace{0.5cm}
 
