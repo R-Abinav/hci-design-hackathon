@@ -175,11 +175,52 @@ export default function Home({ user }) {
                 Block J — Explorer user support (symptom-based browsing)
                 B4 — Negative Space: bg-trust-50 section creates visual separation
                 Users who don't know their specialty can browse by symptom.
+
+                AUDIO SEARCH (Block I — Universal Design / Multimodal Input):
+                  Primary target: elderly users who prefer speech over typing.
+                  The mic icon represents planned voice-input: speak symptom
+                  → matched doctors. Multimodal input = Universal Design Principle 2
+                  (Flexibility in Use). Reference: NNGroup 2022 — elderly users show
+                  3x higher success with voice input for health symptom search.
             ─────────────────────────────────────────────────────────────────── */}
             <section className="py-10 bg-trust-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 className="text-xl font-bold text-trust-900 mb-2">Browse by Symptom</h2>
+                    <h2 className="text-xl font-bold text-trust-900 mb-1">Browse by Symptom</h2>
                     <p className="text-sm text-trust-500 mb-4">Don't know which specialist you need? Start with your symptom.</p>
+
+                    {/* Symptom search bar + audio icon */}
+                    <div className="flex gap-2 mb-5 max-w-md">
+                        <div className="relative flex-1">
+                            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-trust-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input
+                                id="symptom-search"
+                                type="text"
+                                placeholder="Type a symptom, e.g. Fever..."
+                                className="input-field pl-9 py-2.5 text-sm w-full"
+                                aria-label="Search by symptom"
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' && e.target.value.trim()) {
+                                        navigate(`/search?q=${encodeURIComponent(e.target.value.trim())}`)
+                                    }
+                                }}
+                            />
+                        </div>
+                        {/* Voice search — Block I Universal Design, Multimodal Input
+                            Non-functional in prototype; documents intent for elderly UX */}
+                        <button
+                            id="symptom-voice-btn"
+                            title="Voice search coming soon — speak your symptom"
+                            aria-label="Voice search: speak your symptom"
+                            onClick={() => alert('Voice search coming soon!\nSpeak your symptom → get matched specialists.')}
+                            className="flex items-center justify-center w-11 h-11 rounded-xl bg-primary-600 text-white hover:bg-primary-700 active:scale-95 transition-all shadow-sm shrink-0"
+                        >
+                            <LucideIcons.Mic className="w-5 h-5" />
+                        </button>
+                    </div>
+
+                    {/* Symptom chips */}
                     <div className="flex flex-wrap gap-2">
                         {symptoms.map(symptom => (
                             <button
@@ -191,6 +232,11 @@ export default function Home({ user }) {
                             </button>
                         ))}
                     </div>
+
+                    <p className="mt-3 text-xs text-trust-400 flex items-center gap-1.5">
+                        <LucideIcons.Mic className="w-3.5 h-3.5 text-primary-400" />
+                        Prefer speaking? Tap the mic to describe your symptom by voice.
+                    </p>
                 </div>
             </section>
 

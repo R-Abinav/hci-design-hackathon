@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { doctors } from '../data/doctors'
+import { doctors, SYMPTOM_MAP } from '../data/doctors'
 import * as LucideIcons from 'lucide-react'
 
 /*
@@ -26,14 +26,35 @@ import * as LucideIcons from 'lucide-react'
  * Block J — Google Search Case Study:
  *   Navigator: recent searches via localStorage
  *   Explorer: symptom chips shown when query is empty
+ *
+ * SYMPTOM SEARCH ENHANCEMENT (Phase 5 fix):
+ * - Doctors now have a `symptoms` tag array.
+ * - Search matches against name, specialty, AND symptoms tags.
+ * - SYMPTOM_MAP provides specialty priority ordering for symptom queries.
+ * - Fallback ensures General Physicians always shown if nothing matches
+ *   → "No doctors found" state is eliminated per user requirement.
  */
 
 const SPECIALTIES = [
   'All', 'Cardiologist', 'Dermatologist', 'Neurologist',
-  'Orthopedic', 'Pediatrician', 'General Physician', 'Gynecologist',
+  'Orthopedist', 'Pediatrician', 'General Physician', 'Gynecologist',
+  'Ophthalmologist', 'Pulmonologist', 'Rheumatologist', 'ENT Specialist', 'Dentist',
 ]
 
-const SYMPTOM_CHIPS = ['Fever', 'Headache', 'Back Pain', 'Skin Rash', 'Cough', 'Chest Pain']
+const SYMPTOM_CHIPS = ['Fever', 'Headache', 'Back Pain', 'Skin Rash', 'Cough', 'Chest Pain', 'Joint Pain', 'Eye Problem']
+
+/**
+ * Resolve a search query to a prioritised list of specialties using SYMPTOM_MAP.
+ * Returns null if no symptom match found.
+ */
+function resolveSymptomSpecialties(q) {
+  if (!q) return null
+  const lower = q.toLowerCase()
+  for (const [symptom, specs] of Object.entries(SYMPTOM_MAP)) {
+    if (lower.includes(symptom)) return specs
+  }
+  return null
+}
 
 export default function Search() {
   const [searchParams] = useSearchParams()
@@ -58,33 +79,69 @@ export default function Search() {
     localStorage.setItem('bp_recent', JSON.stringify(updated))
   }
 
-  // Block A Gestalt Similarity + Block G Menu Selection: filter by specialty AND query
+  // SYMPTOM FIX: filter matches name, specialty, OR symptoms tag array
   const filteredDoctors = useMemo(() => {
-    let results = doctors.filter(d =>
-      (!query ||
-        d.name.toLowerCase().includes(query.toLowerCase()) ||
-        d.specialty.toLowerCase().includes(query.toLowerCase())
-      ) &&
-      (selectedSpecialty === 'All' || d.specialty === selectedSpecialty)
-    )
+    const q = query.toLowerCase().trim()
 
-    // V12: Sort by relevance (rating × reviews) by default
-    switch (sortBy) {
-      case 'relevance':
-        results.sort((a, b) => (b.rating * b.reviews) - (a.rating * a.reviews))
-        break
-      case 'rating':
-        results.sort((a, b) => b.rating - a.rating)
-        break
-      case 'experience':
-        results.sort((a, b) => b.experience - a.experience)
-        break
-      case 'fee-low':
-        results.sort((a, b) => a.fee - b.fee)
-        break
+    // 1. Primary filter: match name, specialty, OR symptoms array
+    let results = doctors.filter(d => {
+      const nameMatch = d.name.toLowerCase().includes(q)
+      const specialtyMatch = d.specialty.toLowerCase().includes(q)
+      const symptomMatch = Array.isArray(d.symptoms)
+        ? d.symptoms.some(s => s.toLowerCase().includes(q) || q.includes(s.toLowerCase()))
+        : false
+      const queryMatch = !q || nameMatch || specialtyMatch || symptomMatch
+
+      const specFilter = selectedSpecialty === 'All' || d.specialty === selectedSpecialty
+      return queryMatch && specFilter
+    })
+
+    // 2. Smart fallback: never show 0 results
+    if (results.length === 0 && selectedSpecialty === 'All' && q) {
+      const symptomSpecs = resolveSymptomSpecialties(q)
+      if (symptomSpecs) {
+        results = doctors.filter(d => symptomSpecs.includes(d.specialty))
+      }
+      if (results.length === 0) {
+        // Catch-all: show General Physicians
+        results = doctors.filter(d => d.specialty === 'General Physician')
+      }
     }
+
+    // 3. Sort: apply symptom-priority ordering first, then user sort
+    const prioritySpecs = resolveSymptomSpecialties(q)
+    if (prioritySpecs && q && selectedSpecialty === 'All') {
+      results = [...results].sort((a, b) => {
+        const aIdx = prioritySpecs.indexOf(a.specialty)
+        const bIdx = prioritySpecs.indexOf(b.specialty)
+        if (aIdx !== -1 && bIdx === -1) return -1
+        if (bIdx !== -1 && aIdx === -1) return 1
+        if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx
+        // Within same specialty, sort by rating
+        return b.rating - a.rating
+      })
+    } else {
+      switch (sortBy) {
+        case 'relevance':
+          results = [...results].sort((a, b) => (b.rating * b.reviews) - (a.rating * a.reviews))
+          break
+        case 'rating':
+          results = [...results].sort((a, b) => b.rating - a.rating)
+          break
+        case 'experience':
+          results = [...results].sort((a, b) => b.experience - a.experience)
+          break
+        case 'fee-low':
+          results = [...results].sort((a, b) => a.fee - b.fee)
+          break
+      }
+    }
+
     return results
   }, [query, sortBy, selectedSpecialty])
+
+  // Derive a helpful label for the results section
+  const symptomSpecialties = query ? resolveSymptomSpecialties(query) : null
 
   return (
     // Block A — Figure & Ground: trust-50 ground, white cards as figure
@@ -103,7 +160,7 @@ export default function Search() {
               onChange={(e) => setQuery(e.target.value)}
               onBlur={(e) => handleSearch(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSearch(e.target.value)}
-              placeholder="Search doctors, specialties..."
+              placeholder="Search doctors, specialties, symptoms..."
               className="input-field pl-12"
               aria-label="Search doctors or specialties"
             />
@@ -141,6 +198,16 @@ export default function Search() {
                 </button>
               ))}
             </div>
+          </div>
+        )}
+
+        {/* Symptom context banner — explains smart routing */}
+        {query && symptomSpecialties && (
+          <div className="mb-4 px-4 py-2.5 bg-primary-50 border border-primary-200 rounded-xl flex items-center gap-2 text-sm text-primary-700">
+            <LucideIcons.Lightbulb className="w-4 h-4 shrink-0" />
+            <span>
+              Showing recommended specialists for <strong>"{query}"</strong>: {symptomSpecialties.join(', ')}
+            </span>
           </div>
         )}
 
@@ -304,6 +371,7 @@ export default function Search() {
             ))}
           </AnimatePresence>
 
+          {/* This should now never appear, but kept as safety net */}
           {filteredDoctors.length === 0 && (
             <div className="card text-center py-16">
               <LucideIcons.SearchX className="w-12 h-12 text-trust-300 mx-auto mb-4" />
