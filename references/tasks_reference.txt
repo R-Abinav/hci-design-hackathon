@@ -1,6 +1,6 @@
 # End-Sem HCI Implementation Tasks
 
-## Phase 0 — Pre-requisite Fixes
+## Phase 0 — Pre-requisite Fixes ✅ DONE
 - [x] Fix `index.html`: Add Poppins font to Google Fonts link
 - [x] Fix `index.html`: Add SEO meta tags (og:title, og:description, twitter:card)
 - [x] Fix `src/index.css`: Remove invalid `min-font-size` property, add shape psychology comment
@@ -8,19 +8,33 @@
 - [x] Fix `README.md`: Update project structure to reflect new folder layout
 - [x] Create `submission/end_sem_submission/` folder (with .gitkeep)
 
-## Phase 1 — Block A: Gestalt Laws
-- [ ] Modify `src/pages/Search.jsx`: Gestalt proximity/similarity/figure+ground/continuity
-- [ ] Modify `src/pages/Search.jsx`: framer-motion Common Fate sort animation
-- [ ] Screenshot: `gestalt_search_cards.png`
-- [ ] Screenshot: `gestalt_sort_animation.png`
-- [ ] Update `.tex` with Block A content
+## Phase 1 — Block A: Gestalt Laws ✅ DONE
+- [x] Modify `src/pages/Search.jsx`: Gestalt proximity/similarity/figure+ground/continuity + Common Fate animation
+- [x] Also in Search.jsx: Block G specialty filter pills, Block I aria-labels, Block J recent+symptom chips
+- [x] Fix `src/App.jsx`: sessionStorage auth persistence (fixed login loop bug)
+- [x] Screenshot: `gestalt_search_cards.png`
+- [x] Screenshot: `gestalt_sort_animation.png`
+- [x] Screenshot: `interaction_menu_filter.png` (Block G)
+- [x] Screenshot: `search_explorer_symptoms.png` (Block J)
+- [x] Screenshot: `search_navigator_recent.png` (Block J)
+- [x] Created end-sem `.tex` with Blocks A, G, J written; D table; placeholders for B,C,E,F,H,I,K,L
+- [x] Git commit: `chore: implemented gestalt laws`
 
-## Phase 2 — Block B: Visual Design Principles
-- [ ] Modify `src/pages/Home.jsx`: Dominance hero icon, Scale search bar, Negative space
-- [ ] Modify `src/pages/DoctorProfile.jsx`: 3-level typographic hierarchy fix
-- [ ] Screenshot: `visual_design_home.png`
-- [ ] Screenshot: `visual_design_doctor_profile.png`
-- [ ] Update `.tex` with Block B content
+## Phase 2 — Block B: Visual Design Principles ✅ DONE
+- [x] Modify `src/pages/Home.jsx`: B1 Dominant hero icon, B2 Scale search bar, B3 balanced grid, B4 negative space, Browse-by-Symptom
+- [x] Modify `src/pages/DoctorProfile.jsx`: B5 3-level typographic hierarchy + C1 Awards (Authority) + C2 Social Proof
+- [x] Screenshot: `visual_design_home.png`
+- [x] Screenshot: `visual_design_doctor_profile.png`
+- [x] Screenshot: `persuasion_authority.png` (bonus — also covers Block C)
+- [x] Updated `.tex` Block B section with all content + screenshots
+- [x] Git commit: `chore: implemented visual design principles (Block B)`
+
+## Phase 3 — Block C: Persuasion Psychology (🔄 IN PROGRESS)
+- [/] Already have C1 Authority (Awards) + C2 Social Proof from DoctorProfile
+- [ ] Add C3 Scarcity badge on Booking Step 1
+- [ ] Add C4 Social Proof counter on Search cards (reviews count emphasis)
+- [ ] Screenshot: `persuasion_scarcity.png`
+- [ ] Update `.tex` Block C section
 
 ## Phase 3 — Block C: Persuasion Psychology
 - [ ] Create `src/components/PersuasionLayer.jsx`

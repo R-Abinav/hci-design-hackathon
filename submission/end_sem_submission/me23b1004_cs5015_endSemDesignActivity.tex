@@ -358,7 +358,62 @@ Robert Cialdini (1984) identified 6 universal principles of persuasion: \textbf{
 \textit{Reference: End-Sem HCI Lecture Notes, lines 161--168.}
 \end{hcibox}
 
-\textit{[Screenshots and detailed implementation to be added after Block C code is implemented.]}
+\subsection{C1 --- Authority: Awards \& Recognition}
+
+\begin{featurebox}{Authority --- Credential Badges on Doctor Profile}
+Cialdini's Authority principle: \textit{``We are more likely to follow those with expertise and credentials.''} The Doctor Profile page now displays two amber award badges (``Top Doctor 2025 --- Apollo Network'' and ``Best [Specialty] --- Chennai Medical Awards'') in a dedicated ``Awards \& Recognition'' card section. These act as third-party endorsements, increasing the user's confidence before they book. Even if the user is price-sensitive, an award badge can override hesitation.
+
+\textit{Implementation:} \texttt{LucideIcons.Award} icon in amber themed \texttt{bg-amber-50 border-amber-200} pill cards on \texttt{src/pages/DoctorProfile.jsx}.
+\end{featurebox}
+
+\subsection{C2 --- Social Proof: Live Viewer Count}
+
+\begin{featurebox}{Social Proof --- ``X people viewed today'' indicator}
+Cialdini's Social Proof: \textit{``We look to the behaviour of others to determine the correct course of action.''} A small pulse-dot indicator below the doctor's rating line shows ``12 people viewed today'' (deterministic pseudo-random per doctor ID). This signals that others are currently considering this doctor --- reducing decision friction and building confidence. The pulsing dot visually reinforces the ``live'' nature of the data.
+
+\textit{Implementation:} \texttt{<span className="w-2 h-2 rounded-full bg-accent-400 animate-pulse" />} in DoctorProfile header.
+\end{featurebox}
+
+\subsection{C3 --- Scarcity: Slot Availability Urgency}
+
+\begin{featurebox}{Scarcity --- Slot Count Urgency Badge}
+Cialdini's Scarcity: \textit{``We assign more value to opportunities when they are less available.''} On Booking Step 1, the ``Available Slots'' header shows a contextual urgency badge:
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item $\leq 3$ slots: red pulsing badge --- ``Only N slot(s) left!'' with a flame icon
+  \item 4--6 slots: amber static badge --- ``Filling up fast'' with a clock icon
+  \item $>6$ slots: no badge (no false urgency when not needed)
+\end{itemize}
+This avoids the dark pattern of \emph{fake} scarcity (which erodes trust) by only showing the badge when the slot count genuinely warrants it.
+\end{featurebox}
+
+\subsection{C5 --- Commitment: Health Reminder Opt-In}
+
+\begin{featurebox}{Commitment \& Consistency --- Health Reminder Checkbox}
+Cialdini's Commitment: \textit{``Once we commit to something, we feel compelled to honour that commitment.''} On the Booking success page (Step 3), after the appointment is confirmed, a checkbox reads: ``Enable appointment reminders and health tips --- I'll take care of my health.'' The checkbox works on two mechanisms:
+\begin{itemize}[leftmargin=1.5em, itemsep=0pt]
+  \item \textbf{Active commitment:} Ticking the box is a micro-commitment to their own health, increasing the likelihood of attending the appointment and following through on treatment.
+  \item \textbf{Positive reinforcement:} On check, a ``\checkmark Great choice!'' confirmation appears inline --- encouraging the small behaviour.
+\end{itemize}
+This is shown \emph{after} the booking is confirmed (not before), ensuring it never blocks the primary task.
+\end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{persuasion_scarcity.png}}
+    \caption{Booking Step 1 --- C3 Scarcity: ``Filling up fast'' amber badge next to ``Available Slots'' header. Red pulsing badge appears when $\leq$3 slots remain. \textit{Block C.}}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{persuasion_commitment.png}}
+    \caption{Booking Step 3 Success --- C5 Commitment: ``Enable appointment reminders'' checkbox below the booking summary. Booking is confirmed \emph{before} the checkbox appears, so it is never a blocker. \textit{Block C.}}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{persuasion_authority.png}}
+    \caption{Doctor Profile --- C1 Authority (amber award badges) and C2 Social Proof (``X people viewed today'' pulse dot). \textit{Block C.}}
+\end{figure}
 
 \vspace{0.5cm}
 

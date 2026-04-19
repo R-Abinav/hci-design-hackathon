@@ -1,24 +1,32 @@
 import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { doctors } from '../data/doctors'
+import * as LucideIcons from 'lucide-react'
 
 /*
  * V5 FIX: Weak booking feedback → Progress bar + success animation
  * V14 FIX: No progress indicator → Step indicator (1/3, 2/3, 3/3)
  * V11 FIX: Reset buttons → No reset; individual clear + undo
  * Closure (Shneiderman #4): User knows when booking is complete
+ *
+ * END-SEM ADDITIONS (Block C — Cialdini's Persuasion):
+ *   C3 — Scarcity: "Only N slots left!" badge on Step 1 slot grid header
+ *   C5 — Commitment: Health reminder checkbox on Step 3 success page
+ *   (C1 Authority — on DoctorProfile)
+ *   (C2 Social Proof — on DoctorProfile)
  */
 export default function Booking() {
     const { id } = useParams()
     const navigate = useNavigate()
     const doctor = doctors.find(d => d.id === parseInt(id))
 
-    const [step, setStep] = useState(1) // V14: step tracking
+    const [step, setStep] = useState(1)
     const [selectedDay, setSelectedDay] = useState('today')
     const [selectedSlot, setSelectedSlot] = useState(null)
     const [patientName, setPatientName] = useState('')
     const [patientPhone, setPatientPhone] = useState('')
     const [loading, setLoading] = useState(false)
+    const [remindersEnabled, setRemindersEnabled] = useState(false) // C5: Commitment
 
     if (!doctor) {
         return (
@@ -114,10 +122,26 @@ export default function Booking() {
                         ))}
                     </div>
 
-                    {/* Time slots — Constraints: only available slots clickable */}
+                    {/* Time slots */}
                     {slots.length > 0 ? (
                         <>
-                            <p className="text-sm font-semibold text-trust-600 mb-3">Available Slots</p>
+                            {/* C3 — SCARCITY: Cialdini — rare things appear more valuable.
+                                If ≤3 slots remain, show urgent red badge. */}
+                            <div className="flex items-center justify-between mb-3">
+                                <p className="text-sm font-semibold text-trust-600">Available Slots</p>
+                                {slots.length <= 3 && (
+                                    <span className="flex items-center gap-1 text-xs font-bold text-red-600 bg-red-50 border border-red-200 px-2.5 py-1 rounded-full animate-pulse">
+                                        <LucideIcons.Flame className="w-3 h-3" />
+                                        Only {slots.length} slot{slots.length === 1 ? '' : 's'} left!
+                                    </span>
+                                )}
+                                {slots.length > 3 && slots.length <= 6 && (
+                                    <span className="flex items-center gap-1 text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-1 rounded-full">
+                                        <LucideIcons.Clock className="w-3 h-3" />
+                                        Filling up fast
+                                    </span>
+                                )}
+                            </div>
                             <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
                                 {slots.map(slot => (
                                     <button
@@ -285,6 +309,24 @@ export default function Booking() {
                                 <span className="font-bold text-primary-600 text-lg">₹{doctor.fee}</span>
                             </div>
                         </div>
+                    </div>
+
+                    {/* C5 — COMMITMENT: Cialdini — once we commit, we honour it.
+                         A simple health reminder opt-in makes users commit to
+                         follow-through. Even ticking a box raises follow-up adherence. */}
+                    <div className="max-w-sm mx-auto mb-6">
+                        <label className="flex items-start gap-3 cursor-pointer group">
+                            <input
+                                type="checkbox"
+                                checked={remindersEnabled}
+                                onChange={(e) => setRemindersEnabled(e.target.checked)}
+                                className="mt-0.5 w-5 h-5 rounded accent-primary-600 cursor-pointer shrink-0"
+                            />
+                            <span className="text-sm text-trust-600 group-hover:text-trust-800 transition-colors">
+                                Enable appointment reminders and health tips — I'll take care of my health
+                                {remindersEnabled && <span className="ml-1 text-accent-600 font-medium">✓ Great choice!</span>}
+                            </span>
+                        </label>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
