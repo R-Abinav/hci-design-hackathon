@@ -243,6 +243,12 @@ Clicking a sort pill is a textbook \textbf{Direct Manipulation} interaction: (1)
     \caption{``Cardiologist'' specialty pill selected (Menu Selection paradigm). Only cardiologists appear --- no typing required. The active pill is visually distinguished (dark blue, white text). \textit{Block G.}}
 \end{figure}
 
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=\textwidth]{interaction_direct_manipulation.png}}
+    \caption{Direct Manipulation (Block G): Instantly visualised sort animation avoiding page reloads, satisfying Shneiderman's direct manipulation criteria.}
+\end{figure}
+
 \vspace{0.5cm}
 
 % =================================================================
@@ -474,6 +480,22 @@ Red & \#DC2626 & Energy, danger, urgency (Coca-Cola, YouTube) \\
 
 \vspace{0.3cm}
 
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{color_psychology_1.png}}
+        \caption{Amber slots signal ``Filling up fast'' (urgency/caution).}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.47\textwidth}
+        \imgborder{\includegraphics[width=\textwidth]{color_psychology_2.png}}
+        \caption{Green slots signal ``Available'' (health/safe).}
+    \end{subfigure}
+    \caption{Color Psychology (Block D) in action on the Booking page. Meaning is conveyed through color before text is even read.}
+\end{figure}
+
+\vspace{0.3cm}
+
 \subsubsection{Shape Psychology Rationale}
 
 \begin{center}
@@ -594,6 +616,12 @@ The DoctorProfile and Booking pages show breadcrumbs: \texttt{Home \textrightarr
 
 \begin{figure}[H]
     \centering
+    \imgborder{\includegraphics[width=\textwidth]{navigation_breadcrumb.png}}
+    \caption{Breadcrumb navigation providing synthesizability: the user knows their location, path, and can step backwards. \textit{Block F.}}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
     \imgborder{\includegraphics[width=\textwidth]{navigation_skip_link.png}}
     \caption{Help page showing F2 Jump-to-section pill row (``Booking'' active, filled blue; others outlined) and F1 keyboard toast appearing in bottom-right after Tab key press: ``Keyboard navigation active --- use Tab to move between elements''. \textit{Block F.}}
 \end{figure}
@@ -698,6 +726,12 @@ Universal Design Principle 1 (Equitable Use): ``provide the same means of use fo
 \begin{featurebox}{Tolerance for Error --- Review Before Confirm}
 Universal Design Principle 5 (Tolerance for Error): ``minimize hazards and the adverse consequences of accidental or unintended actions.'' The Booking flow enforces a 3-step flow --- Select Slot $\to$ Fill Details $\to$ Confirm --- where Step 2 shows all entered information before submission, giving the user an opportunity to review and correct before the irreversible ``Confirm Booking'' action. This mirrors Gmail's ``Undo Send'' pattern: a pre-commit checkpoint, not a post-error recovery.
 \end{featurebox}
+
+\begin{figure}[H]
+    \centering
+    \imgborder{\includegraphics[width=0.8\textwidth]{universal_design_tolerance_error.png}}
+    \caption{Tolerance for Error (Block I): Step 2 of the booking flow acts as a confirmation checkpoint, forcing a review of details before committing the data.}
+\end{figure}
 
 \subsection{I3 --- Size \& Space for Approach and Use: Touch Targets}
 
